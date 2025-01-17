@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
+import 'package:povedi_me_app/screens/home/home_screen.dart';
 import 'package:povedi_me_app/screens/registration/registration_screen.dart';
+//import 'package:povedi_me_app/services/auth_service.dart';
+import 'package:sign_in_button/sign_in_button.dart';
+import 'package:povedi_me_app/constants/instances.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,15 +18,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
   var _enteredEmail = '';
   var _enteredPassword = '';
+  bool isLoading = false;
 
-  void _submit() {
+  void _submit() async {
     final isValid = _loginFormKey.currentState!.validate();
 
-    if (isValid) {
-      _loginFormKey.currentState!.save();
-      print(_enteredEmail);
-      print(_enteredPassword);
+    if (!isValid) {
+      return;
     }
+
+    _loginFormKey.currentState!.save();
+
+    await firebaseAuth.signInUser(_enteredEmail, _enteredPassword);
   }
 
   @override
@@ -150,13 +157,58 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
+
+                  //button za odlazak na registraciju
                   TextButton(
-                      onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const RegistrationScreen(),
-                            ),
+                    onPressed: () {},
+                    // onPressed: () => Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const RegistrationScreen(),
+                    //   ),
+                    // ),
+                    child: const Text('Kreiraj novi korisnički račun'),
+                  ),
+                  SizedBox(height: 10),
+
+                  const Divider(
+                    color: AppColors.accentLight,
+                  ),
+
+                  //google sign in button
+                  isLoading
+                      ? const CircularProgressIndicator()
+                      : SignInButton(
+                          Buttons.google,
+                          onPressed: () async {
+                            try {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              await firebaseAuth.signInWithGoogle();
+                              setState(() {
+                                isLoading = false;
+                              });
+                              // Navigator.of(context).pushReplacement(
+                              //     MaterialPageRoute(
+                              //         builder: (context) => HomeScreen()));
+                              // Navigator.of(context).pushAndRemoveUntil(
+                              //   MaterialPageRoute(
+                              //       builder: (context) => const HomeScreen()),
+                              //   (route) => false,
+                              // );
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).clearSnackBars();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content: Text('Google Sign-in failed: $e')),
+                              );
+                            }
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                      child: const Text('Kreiraj novi korisnički račun')),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                        ),
                 ],
               ),
             ),

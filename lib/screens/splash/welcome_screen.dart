@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
 import 'package:povedi_me_app/screens/login/login_screen.dart';
+import 'package:povedi_me_app/screens/registration/registration_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -20,6 +21,7 @@ class WelcomeScreen extends StatelessWidget {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                //login button
                 SizedBox(
                   width: buttonWidth,
                   child: ElevatedButton(
@@ -33,7 +35,7 @@ class WelcomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 20), //Visina gumba
                     ),
-                    child: Text(
+                    child: const Text(
                       "PRIJAVA",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
@@ -41,10 +43,16 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 40),
+
+                //registration button
                 SizedBox(
                   width: buttonWidth,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => RegistrationScreen(),
+                      ),
+                    ),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius:

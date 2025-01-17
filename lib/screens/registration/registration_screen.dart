@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/constants/instances.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
 import 'package:povedi_me_app/screens/login/login_screen.dart';
+import 'package:povedi_me_app/screens/registration/registration_screen_success.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -18,17 +21,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   var _enteredEmail = '';
   var _enteredPassword = '';
 
-  void _submit() {
+  void _submit() async {
     final isValid = _registrationFormKey.currentState!.validate();
 
-    if (isValid) {
-      _registrationFormKey.currentState!.save();
-      print(_enteredEmail);
-      print(_enteredPassword);
-      print(_enteredName);
-      print(_enteredUsername);
-      print(_enteredPhoneNumber);
+    if (!isValid) {
+      return;
     }
+
+    _registrationFormKey.currentState!.save();
+
+    firebaseAuth.signUp(email: _enteredEmail, password: _enteredPassword);
+
+    // Navigator.of(context).pushAndRemoveUntil(
+    //   MaterialPageRoute(
+    //     builder: (context) => const RegistrationScreenSuccess(),
+    //   ),
+    //   (route) => false,
+    // );
   }
 
   @override
@@ -240,13 +249,61 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                     ),
                   ),
-                  TextButton(
-                      onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
-                            ),
-                          ),
-                      child: const Text('Već imam korisnički račun...')),
+                  // TextButton(
+                  //   onPressed: () => Navigator.of(context).push(
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const LoginScreen(),
+                  //     ),
+                  //   ),
+                  //   child: const Text('Već imam korisnički račun...'),
+                  // ),
+
+                  SizedBox(height: 30),
+
+                  const Divider(
+                    color: AppColors.accentLight,
+                  ),
+                  SignInButton(
+                    Buttons.google,
+                    onPressed: () {},
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                  ),
+
+                  SizedBox(height: 10),
+
+                  SignInButtonBuilder(
+                    text: 'Prijavi se putem Google',
+                    icon: Icons.email,
+                    onPressed: () async {
+                      try {
+                        // setState(() {
+                        //   isLoading = true;
+                        // });
+                        await firebaseAuth.signInWithGoogle();
+                        // setState(() {
+                        //   isLoading = false;
+                        // });
+                        ScaffoldMessenger.of(context).clearSnackBars();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text('Uspješno prijavljeno!')),
+                        );
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).clearSnackBars();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Google Sign-in failed: $e')),
+                        );
+                      }
+                    },
+                    backgroundColor: AppColors.accentLight,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                  )
                 ],
               ),
             ),

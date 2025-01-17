@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "28876351137",
+    "project_id": "flutter-povedi-me-app",
+    "storage_bucket": "flutter-povedi-me-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28876351137:android:424fee6af1c9a9682472e0",
+        "android_client_info": {
+          "package_name": "com.example.povedi_me_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL_MCEteGtpV1P7htI3RmMe64ruZB-Yko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

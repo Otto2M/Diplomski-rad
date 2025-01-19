@@ -70,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             //E-mail
                             TextFormField(
+                              //controller: ,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.email,
                                     color: AppColors.accentLight),

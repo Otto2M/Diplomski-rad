@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/assets.dart';
 //import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
 import 'package:povedi_me_app/screens/splash/onboarding_screen.dart';
@@ -33,8 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.flash_on, size: 80, color: Colors.blue),
-            // Image.asset(Assets.logoImage),
+            Image.asset(Assets.logo),
             const SizedBox(height: 20),
             const Text(
               'POVEDI.ME',

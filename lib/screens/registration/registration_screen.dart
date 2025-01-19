@@ -30,7 +30,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     _registrationFormKey.currentState!.save();
 
-    firebaseAuth.signUp(email: _enteredEmail, password: _enteredPassword);
+    firebaseAuth.signUp(
+      email: _enteredEmail,
+      password: _enteredPassword,
+      username: _enteredUsername,
+      name: _enteredName,
+      phoneNumber: _enteredPhoneNumber,
+    );
 
     // Navigator.of(context).pushAndRemoveUntil(
     //   MaterialPageRoute(

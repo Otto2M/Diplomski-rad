@@ -1,7 +1,7 @@
 class Assets {
   //-images
-  static const logoImage = 'assets/images/logo.png';
-  //--logo
 
+  //--logo
+  static const logo = 'assets/images/povedi_me_logo.png';
   //-icons
 }

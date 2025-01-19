@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:povedi_me_app/constants/errors.dart';
+import 'package:povedi_me_app/constants/firestore_collections.dart';
 
 class AuthService {
   final _firebaseAuth = FirebaseAuth.instance;
+  final _firebaseFirestore = FirebaseFirestore
+      .instance; //for "talking" to remote database (upload/fetch data)
 
   //Log in user
   Future<void> signInUser(String email, String password) async {
@@ -18,10 +22,29 @@ class AuthService {
   }
 
   //Register new user
-  Future<void> signUp({required String email, required String password}) async {
+  Future<void> signUp({
+    required String email,
+    required String password,
+    required String username,
+    required String name,
+    required String phoneNumber,
+  }) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
+
+      _firebaseFirestore
+          .collection(FirestoreCollections.userCollection)
+          .doc(userCredential.user!.uid)
+          .set({
+        'id': userCredential.user!.uid,
+        'name ': name,
+        'username': username,
+        'phoneNumber': phoneNumber,
+        'email': email,
+        'image_url': null,
+        'createdAt': Timestamp.now(),
+      });
     } on FirebaseAuthException catch (error) {
       if (error.code == Errors.emailAlreadyInUse) {
         //TO DO error message print

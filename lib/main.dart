@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/screens/home/home_screen.dart';
 import 'package:povedi_me_app/screens/splash/loading_screen.dart';
-//import 'package:povedi_me_app/screens/splash/splash_screen.dart';
+import 'package:povedi_me_app/screens/splash/splash_screen.dart';
 import 'package:povedi_me_app/screens/splash/welcome_screen.dart';
 import 'package:povedi_me_app/theme.dart';
 import 'package:firebase_core/firebase_core.dart';

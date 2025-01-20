@@ -82,6 +82,7 @@ const availablePlaces = [
       'latitude': 45.123456,
       'longitude': 12.654321,
     },
+    type: 'basic',
   ),
   Place(
     id: 'p11',
@@ -95,6 +96,7 @@ const availablePlaces = [
       'latitude': 45.123456,
       'longitude': 12.654321,
     },
+    type: 'basic',
   ),
   Place(
     id: 'p1',
@@ -108,6 +110,7 @@ const availablePlaces = [
       'latitude': 45.123456,
       'longitude': 12.654321,
     },
+    type: 'basic',
   ),
   Place(
     id: 'p2',
@@ -121,6 +124,7 @@ const availablePlaces = [
       'latitude': 45.123456,
       'longitude': 12.654321,
     },
+    type: 'basic',
   ),
   Place(
     id: 'p3',
@@ -134,6 +138,7 @@ const availablePlaces = [
       'latitude': 45.123456,
       'longitude': 12.654321,
     },
+    type: 'basic',
   ),
   Place(
     id: 'p4',
@@ -147,6 +152,7 @@ const availablePlaces = [
       'latitude': 45.123456,
       'longitude': 12.654321,
     },
+    type: 'basic',
   ),
   Place(
     id: 'p5',
@@ -160,6 +166,7 @@ const availablePlaces = [
       'latitude': 45.123456,
       'longitude': 12.654321,
     },
+    type: 'basic',
   ),
   Place(
     id: 'p6',
@@ -173,6 +180,7 @@ const availablePlaces = [
       'latitude': 45.123456,
       'longitude': 12.654321,
     },
+    type: 'basic',
   ),
 ];
 

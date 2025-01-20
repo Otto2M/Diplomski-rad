@@ -12,6 +12,7 @@ class Place {
     required this.imageUrl,
     required this.address,
     required this.coordinates,
+    required this.type,
   });
 
   final String id;
@@ -23,6 +24,7 @@ class Place {
   final String imageUrl;
   final String address;
   final Map<String, double> coordinates;
+  final String type; //"type": "details" ili "basic" ili "shop"
 }
 
 //klasa za katgorije: gastronomija, smještaj i OPG
@@ -38,18 +40,17 @@ class PlaceWithDetails extends Place {
     required super.imageUrl,
     required super.address,
     required super.coordinates,
+    required super.type,
     required this.workingHours,
     required this.reviews,
     this.contactNumber,
     this.email,
-    required this.type,
   });
 
   final Map<String, String>? workingHours; // Npr. {"ponedjeljak": "8:00-16:00"}
   final List<String>? reviews;
   final String? contactNumber;
   final String? email;
-  final String type; //"type": "details" ili "basic"
 }
 
 //klasa za kategoriju: trgovački centri
@@ -63,6 +64,7 @@ class ShoppingPlace extends Place {
     required super.imageUrl,
     required super.address,
     required super.coordinates,
+    required super.type,
     required this.workingHours,
   });
 

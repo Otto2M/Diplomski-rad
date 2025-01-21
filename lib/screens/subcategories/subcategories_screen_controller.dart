@@ -6,6 +6,10 @@ import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/providers/places_provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+//
+// ---------------- NE KORISTI SE -----------------------
+//
+
 class SubcategoriesScreenController extends ConsumerWidget {
   const SubcategoriesScreenController({
     super.key,

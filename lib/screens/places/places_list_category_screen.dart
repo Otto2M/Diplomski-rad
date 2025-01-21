@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/providers/places_provider.dart';
+import 'package:povedi_me_app/widgets/places_by_category.dart';
 
 class PlacesListCategoryScreen extends ConsumerWidget {
   const PlacesListCategoryScreen({
@@ -17,9 +18,7 @@ class PlacesListCategoryScreen extends ConsumerWidget {
     final placesAsyncValue = ref.watch(placesProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
+      appBar: AppBar(),
       body: placesAsyncValue.when(
         data: (places) {
           final filteredPlaces =
@@ -40,24 +39,34 @@ class PlacesListCategoryScreen extends ConsumerWidget {
             );
           }
 
-          return ListView.builder(
-            itemCount: filteredPlaces.length,
-            itemBuilder: (context, index) {
-              final place = filteredPlaces[index];
-              return ListTile(
-                leading: Image.network(
-                  place.imageUrl,
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.cover,
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 0,
+                  left: 20,
+                  right: 20,
+                  top: 20,
                 ),
-                title: Text(place.title),
-                subtitle: Text(place.description),
-                onTap: () {
-                  // Možete dodati navigaciju na detaljni ekran mjesta
-                },
-              );
-            },
+                child: Text(
+                  title.toUpperCase(),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: filteredPlaces.length,
+                  itemBuilder: (context, index) {
+                    final place = filteredPlaces[index];
+
+                    return PlacesByCategory(
+                      place: place,
+                    );
+                  },
+                ),
+              ),
+            ],
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),

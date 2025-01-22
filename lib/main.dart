@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/screens/home/home_screen.dart';
+import 'package:povedi_me_app/screens/home/home_screen_2.dart';
 import 'package:povedi_me_app/screens/splash/loading_screen.dart';
 import 'package:povedi_me_app/screens/splash/splash_screen.dart';
 import 'package:povedi_me_app/screens/splash/welcome_screen.dart';
@@ -31,7 +32,8 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: appTheme,
       //home: SplashScreen(), //fix this at open app
-      home: const DrawerMenu(),
+      //home: const DrawerMenu(),
+      home: const HomeScreen2(),
       // home: StreamBuilder(
       //     stream: FirebaseAuth.instance.authStateChanges(),
       //     builder: (ctx, snapshot) {

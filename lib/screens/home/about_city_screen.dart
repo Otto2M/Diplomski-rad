@@ -18,9 +18,6 @@ class AboutCityScreen extends ConsumerWidget {
             return const Center(child: Text('Grad nije pronađen.'));
           }
 
-// Podjela opisa na odlomke prema točkama
-          final paragraphs = place.description.split('.');
-
           return Container(
             padding: const EdgeInsets.only(
               bottom: 30,

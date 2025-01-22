@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/services/favorite_place_service.dart';
 import 'package:povedi_me_app/models/place.dart';
+import 'package:povedi_me_app/providers/favorites_provider.dart';
 
 class PlaceItemDetailsScreen extends ConsumerWidget {
   const PlaceItemDetailsScreen({
@@ -12,28 +14,24 @@ class PlaceItemDetailsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //final favoritePlaces = ref.watch(favoritePlacesProvider);
-    //final isFavorite = favoritePlaces.contains(place);
+    final favoritePlaces = ref.watch(favoritePlacesProvider);
+    final isFavorite = favoritePlaces.contains(placeWithDetails);
 
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
             onPressed: () {
-              // final wasAdded = ref
-              //     .read(favoritePlacesProvider.notifier)
-              //     .togglePlaceFavoriteStatus(place);
-              // ScaffoldMessenger.of(context).clearSnackBars();
-              // ScaffoldMessenger.of(context).showSnackBar(
-              //   SnackBar(
-              //     content: Text(
-              //       wasAdded ? 'Place added as a favorite' : 'Place removed!',
-              //     ),
-              //   ),
-              // );
+              FavoritePlacesService.toggleFavoriteStatus(
+                context: context,
+                ref: ref,
+                place: placeWithDetails,
+              );
             },
-            icon: Icon(Icons.heart_broken),
-            //Icon(isFavorite ? Icons.star : Icons.star_border),
+            icon: Icon(
+              isFavorite ? Icons.star : Icons.star_border,
+              key: ValueKey(isFavorite),
+            ),
           )
         ],
       ),

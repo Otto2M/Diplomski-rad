@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:povedi_me_app/constants/firestore_collections.dart';
 import 'package:povedi_me_app/models/category.dart';
+import 'package:povedi_me_app/models/place.dart';
 
 class FirestoreDatabaseService {
   final _firebaseFirestore = FirebaseFirestore
@@ -46,31 +47,25 @@ class FirestoreDatabaseService {
     }
   }
 
-//
-// --- AKO DOHVACANJE MJESTA I OBRADA U places_provider.dart NECE ISPROBATI OVO ISPOD
-// --- POTREBNO JE KOD PRILAGODITI
+  // Get data about city
+  Future<List<AboutCity>> getDataAboutCity() async {
+    try {
+      final aboutCitySnapshot = await _firebaseFirestore
+          .collection(FirestoreCollections.aboutCityCollection)
+          .get();
 
-  // Fetch places
-  // Future<List<Place>> fetchPlaces() async {
-  //   try {
-  //     final snapshot = await _firebaseFirestore
-  //         .collection(FirestoreCollections.placesCollection)
-  //         .get();
-  //     return snapshot.docs
-  //         .map((doc) => Place(
-  //               id: doc['id'],
-  //               categoryId: doc['categoryId'],
-  //               subcategoryId: doc['subcategoryId'],
-  //               title: doc['title'],
-  //               description: doc['description'],
-  //               imageUrl: doc['imageUrl'],
-  //               adress: doc['adress'],
-  //               coordinates: Map<String, double>.from(doc['coordinates']),
-  //             ))
-  //         .toList();
-  //   } catch (e) {
-  //     print('Error fetching places: $e');
-  //     rethrow;
-  //   }
-  // }
+      return aboutCitySnapshot.docs
+          .map((doc) => AboutCity(
+                id: doc['id'],
+                title: doc['title'],
+                subtitle: doc['subtitle'],
+                description: doc['description'],
+                imageUrl: doc['imageUrl'],
+              ))
+          .toList();
+    } catch (e) {
+      print('Error fetching data about city: $e');
+      rethrow;
+    }
+  }
 }

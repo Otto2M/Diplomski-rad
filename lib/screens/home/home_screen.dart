@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/constants/instances.dart';
 import 'package:povedi_me_app/screens/help_screen.dart';
+import 'package:povedi_me_app/screens/home/about_city_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,19 +20,28 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Logged in!"),
-            // ElevatedButton(
-            //   onPressed: () => Navigator.of(context).push(
-            //     MaterialPageRoute(
-            //       builder: (context) => HelpScreen(),
-            //     ),
-            //   ),
-            //   child: Text("Go to - logout"),
-            // ),
+            const Text("Logged in!"),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => HelpScreen(),
+                ),
+              ),
+              child: const Text("Go to - logout"),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const AboutCityScreen(),
+                ),
+              ),
+              child: const Text("O KOPRIVNICI"),
+            ),
           ],
         ),
       ),

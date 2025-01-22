@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/models/place.dart';
-import 'package:povedi_me_app/screens/subcategories/place_item_details_screen.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class CardItems extends StatelessWidget {
-  const CardItems({
+class ShoppingPlacesScreen extends StatelessWidget {
+  const ShoppingPlacesScreen({
     super.key,
     required this.place,
-    required this.isInteractive,
   });
 
-  final PlaceWithDetails place;
-  final bool isInteractive;
+  final ShoppingPlace place;
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +17,7 @@ class CardItems extends StatelessWidget {
       margin: const EdgeInsets.all(20),
       shape: const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
       elevation: 5,
-      child: isInteractive
-          ? InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => PlaceItemDetailsScreen(
-                      placeWithDetails: place,
-                    ),
-                  ),
-                );
-              },
-              child: _buildCardContent(),
-            )
-          : _buildCardContent(),
+      child: _buildCardContent(),
     );
   }
 
@@ -46,7 +30,7 @@ class CardItems extends StatelessWidget {
               placeholder: MemoryImage(kTransparentImage),
               image: NetworkImage(place.imageUrl),
               fit: BoxFit.cover,
-              height: 150,
+              height: 160,
               width: 150,
             ),
             Container(
@@ -62,8 +46,23 @@ class CardItems extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(color: Colors.white, fontSize: 15),
                   ),
-                  const Text('Recenzija'),
-                  // const PlaceItemInfoReview(icon: Icons.star),
+                  Text(
+                    place.address,
+                    textAlign: TextAlign.start,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const Text('Radno vrijeme:'),
+                  Text(
+                    place.workingHours != null
+                        ? place.workingHours!.entries
+                            .map((entry) => '${entry.key}: ${entry.value}')
+                            .join('\n')
+                        : 'No working hours available',
+                    //textAlign: TextAlign.start,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ),

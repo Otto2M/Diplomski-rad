@@ -1,22 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:povedi_me_app/providers/bottom_navigation_provider.dart';
 import 'package:povedi_me_app/providers/categories_provider.dart';
+import 'package:povedi_me_app/providers/favorites_provider.dart';
+import 'package:povedi_me_app/widgets/bottom_navigation.dart';
+import 'package:povedi_me_app/screens/favorite_places/favorite_places_screen.dart';
+import 'package:povedi_me_app/screens/google_map/map_screen.dart';
+import 'package:povedi_me_app/screens/home/home_screen.dart';
 import 'package:povedi_me_app/screens/places/places_list_category_screen.dart';
 import 'package:povedi_me_app/screens/subcategories/subcategories_screen.dart';
 
-class DrawerMenu extends StatelessWidget {
+class DrawerMenu extends ConsumerWidget {
   const DrawerMenu({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
+
+    Widget activePage = const HomeScreen();
+
+    if (indexBottomNavbar == 0) {
+      activePage = MapScreen();
+    }
+
+    if (indexBottomNavbar == 2) {
+      final favoritePlaces = ref.watch(favoritePlacesProvider);
+      activePage = FavoritePlacesTabScreen(
+        title: 'My Favorites',
+        favoritePlaces: favoritePlaces,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Drawer Menu Test'),
       ),
-      body: Center(
-        child: Text('Glavni sadržaj aplikacije'),
-      ),
+      body: activePage,
       drawer: AppDrawer(),
+      bottomNavigationBar: BottomNavigation(),
     );
   }
 }
@@ -65,6 +87,7 @@ class AppDrawer extends ConsumerWidget {
                         title: Text(category.title),
                         onTap: () {
                           Navigator.pop(context);
+
                           if (hasSubcategories) {
                             // Ako kategorija ima podkategorije, otvoriti ekran za podkategorije
                             Navigator.of(context).push(

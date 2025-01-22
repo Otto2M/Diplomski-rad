@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/services/favorite_place_service.dart';
 import 'package:povedi_me_app/models/place.dart';
+import 'package:povedi_me_app/providers/favorites_provider.dart';
 
-class PlaceDetailsCategoryScreen extends StatelessWidget {
+class PlaceDetailsCategoryScreen extends ConsumerWidget {
   const PlaceDetailsCategoryScreen({
     super.key,
     required this.place,
@@ -10,7 +13,10 @@ class PlaceDetailsCategoryScreen extends StatelessWidget {
   final Place place;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final favoritePlaces = ref.watch(favoritePlacesProvider);
+    final isFavorite = favoritePlaces.contains(place);
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(
@@ -37,9 +43,16 @@ class PlaceDetailsCategoryScreen extends StatelessWidget {
                       iconSize: 50,
                     ),
                     IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.heart_broken,
+                      onPressed: () {
+                        FavoritePlacesService.toggleFavoriteStatus(
+                          context: context,
+                          ref: ref,
+                          place: place,
+                        );
+                      },
+                      icon: Icon(
+                        isFavorite ? Icons.star : Icons.star_border,
+                        key: ValueKey(isFavorite),
                       ),
                       iconSize: 40,
                     ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/providers/places_provider.dart';
+import 'package:povedi_me_app/screens/places/shopping_places_screen.dart';
 import 'package:povedi_me_app/widgets/places_by_category.dart';
 
 class PlacesListCategoryScreen extends ConsumerWidget {
@@ -60,6 +62,9 @@ class PlacesListCategoryScreen extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     final place = filteredPlaces[index];
 
+                    if (place is ShoppingPlace) {
+                      return ShoppingPlacesScreen(place: place);
+                    }
                     return PlacesByCategory(
                       place: place,
                     );

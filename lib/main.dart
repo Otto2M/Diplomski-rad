@@ -49,7 +49,7 @@ class App extends StatelessWidget {
       //       }
 
       //       print("-------------- NEMA PODATAKA --------------------");
-      //       return const HomeScreen();
+      //       return const WelcomeScreen();
       //     }),
     );
   }

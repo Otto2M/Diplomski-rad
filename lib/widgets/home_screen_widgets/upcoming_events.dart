@@ -11,12 +11,16 @@ class UpcomingEvents extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: const EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 0,
           ),
           child: Text('Nadolazeće manifestacije'),
         ),
+        //
+        //ovdje bi trebalo pozvati sva mjesta place u bazu dodati atribut
+        //datum i filtrirati odmah SAMO manifestacije prema datumu te ih prikazati
+        //
         PlacesByCategory(place: availablePlaces[0]),
       ],
     );

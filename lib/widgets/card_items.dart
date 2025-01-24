@@ -15,6 +15,8 @@ class CardItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> images = place.imageUrl;
+
     return Card(
       color: Colors.blueGrey,
       margin: const EdgeInsets.all(20),
@@ -31,24 +33,28 @@ class CardItems extends StatelessWidget {
                   ),
                 );
               },
-              child: _buildCardContent(),
+              child: _buildCardContent(images),
             )
-          : _buildCardContent(),
+          : _buildCardContent(images),
     );
   }
 
-  Widget _buildCardContent() {
+  Widget _buildCardContent(List<String> images) {
     return Column(
       children: [
         Row(
           children: [
-            FadeInImage(
-              placeholder: MemoryImage(kTransparentImage),
-              image: NetworkImage(place.imageUrl),
-              fit: BoxFit.cover,
-              height: 150,
-              width: 150,
-            ),
+            for (var imageUrl in images)
+              FadeInImage(
+                placeholder: MemoryImage(kTransparentImage),
+                image: NetworkImage(
+                  //imageUrl,
+                  imageUrl.isNotEmpty ? imageUrl : '',
+                ),
+                fit: BoxFit.cover,
+                height: 150,
+                width: 150,
+              ),
             Container(
               color: Colors.black54,
               padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),

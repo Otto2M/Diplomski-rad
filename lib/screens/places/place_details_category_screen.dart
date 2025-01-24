@@ -73,11 +73,11 @@ class PlaceDetailsCategoryScreen extends ConsumerWidget {
                   ),
                   itemCount: place.imageUrl.length, // Broj slika
                   itemBuilder: (context, index) {
-                    final imageUrl = place.imageUrl[index];
+                    final imagesUrl = place.imageUrl[index];
                     return ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.network(
-                        imageUrl,
+                        imagesUrl,
                         fit: BoxFit.cover,
                         height: 120,
                         width: 150,

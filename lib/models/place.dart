@@ -21,7 +21,7 @@ class Place {
       subcategoryId; //Potrebno za kateogriju smještaj i gastronomski kutak
   final String title;
   final String description;
-  final String imageUrl;
+  final List<String> imageUrl;
   final String address;
   final Map<String, double> coordinates;
   final String type; //"type": "details" ili "basic" ili "shop"

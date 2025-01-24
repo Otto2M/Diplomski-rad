@@ -26,7 +26,8 @@ class WelcomeScreen extends StatelessWidget {
                   width: buttonWidth,
                   child: ElevatedButton(
                     onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => LoginScreen())),
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreen())),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius:
@@ -50,7 +51,7 @@ class WelcomeScreen extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () => Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => RegistrationScreen(),
+                        builder: (context) => const RegistrationScreen(),
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
@@ -60,7 +61,7 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 20),
                     ),
-                    child: Text(
+                    child: const Text(
                       "REGISTRACIJA",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 25),

@@ -17,7 +17,7 @@ class HomeScreen2 extends StatelessWidget {
             children: [
               GeneralAi(),
               SizedBox(height: 10),
-              //WeatherForecast(),
+              WeatherForecast(),
               SizedBox(height: 10),
               UpcomingEvents(),
               PerfectDay(),

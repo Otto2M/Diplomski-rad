@@ -33,9 +33,9 @@ class DrawerMenu extends ConsumerWidget {
     }
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Drawer Menu Test'),
-      // ),
+      appBar: AppBar(
+        title: Text('Drawer Menu Test'),
+      ),
       body: activePage,
       drawer: AppDrawer(),
       bottomNavigationBar: BottomNavigation(),

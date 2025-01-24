@@ -16,6 +16,7 @@ class PlaceItemDetailsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final favoritePlaces = ref.watch(favoritePlacesProvider);
     final isFavorite = favoritePlaces.contains(placeWithDetails);
+    final List<String> images = placeWithDetails.imageUrl;
 
     return Scaffold(
       appBar: AppBar(
@@ -38,12 +39,16 @@ class PlaceItemDetailsScreen extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.network(
-              placeWithDetails.imageUrl,
-              width: double.infinity,
-              height: 250,
-              fit: BoxFit.cover,
-            ),
+            for (var imageUrl in images)
+              Image.network(
+                //
+                // ---POPRAVITI KASNIJE ----
+                //
+                imageUrl,
+                width: double.infinity,
+                height: 250,
+                fit: BoxFit.cover,
+              ),
             Text(placeWithDetails.title),
             const SizedBox(height: 20),
             Text(placeWithDetails.address),

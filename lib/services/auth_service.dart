@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:povedi_me_app/constants/errors.dart';
 import 'package:povedi_me_app/constants/firestore_collections.dart';
-import 'package:povedi_me_app/models/category.dart';
 
 class AuthService {
   final _firebaseAuth = FirebaseAuth.instance;
@@ -17,7 +16,7 @@ class AuthService {
           email: email, password: password);
     } on FirebaseAuthException catch (error) {
       if (error.code == Errors.emailAlreadyInUse) {
-        //TO DO error message print
+        //TODO error message print
       }
     }
   }
@@ -48,7 +47,7 @@ class AuthService {
       });
     } on FirebaseAuthException catch (error) {
       if (error.code == Errors.emailAlreadyInUse) {
-        //TO DO error message print
+        //TODO error message print
       }
     }
   }
@@ -87,43 +86,43 @@ class AuthService {
     await _firebaseAuth.signOut();
   }
 
-  // Get all categories
-  Future<List<Category>> getCategories() async {
-    try {
-      final categoriesSnapshot = await _firebaseFirestore
-          .collection(FirestoreCollections.categoriesCollection)
-          .get();
+  // // Get all categories
+  // Future<List<Category>> getCategories() async {
+  //   try {
+  //     final categoriesSnapshot = await _firebaseFirestore
+  //         .collection(FirestoreCollections.categoriesCollection)
+  //         .get();
 
-      return categoriesSnapshot.docs
-          .map((doc) => Category(
-                id: doc['id'],
-                title: doc['title'],
-                icon: doc['icon'],
-              ))
-          .toList();
-    } catch (e) {
-      print('Error fetching categories: $e');
-      rethrow;
-    }
-  }
+  //     return categoriesSnapshot.docs
+  //         .map((doc) => Category(
+  //               id: doc['id'],
+  //               title: doc['title'],
+  //               icon: doc['icon'],
+  //             ))
+  //         .toList();
+  //   } catch (e) {
+  //     print('Error fetching categories: $e');
+  //     rethrow;
+  //   }
+  // }
 
-  // Get all subcategories
-  Future<List<Subcategory>> getSubcategories() async {
-    try {
-      final subcategoriesSnapshot = await _firebaseFirestore
-          .collection(FirestoreCollections.subcategoriesCollection)
-          .get();
+  // // Get all subcategories
+  // Future<List<Subcategory>> getSubcategories() async {
+  //   try {
+  //     final subcategoriesSnapshot = await _firebaseFirestore
+  //         .collection(FirestoreCollections.subcategoriesCollection)
+  //         .get();
 
-      return subcategoriesSnapshot.docs
-          .map((doc) => Subcategory(
-                id: doc['id'],
-                categoryId: doc['categoryId'],
-                title: doc['title'],
-              ))
-          .toList();
-    } catch (e) {
-      print('Error fetching subcategories: $e');
-      rethrow;
-    }
-  }
+  //     return subcategoriesSnapshot.docs
+  //         .map((doc) => Subcategory(
+  //               id: doc['id'],
+  //               categoryId: doc['categoryId'],
+  //               title: doc['title'],
+  //             ))
+  //         .toList();
+  //   } catch (e) {
+  //     print('Error fetching subcategories: $e');
+  //     rethrow;
+  //   }
+  // }
 }

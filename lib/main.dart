@@ -32,17 +32,17 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: appTheme,
       //home: SplashScreen(), //fix this at open app
-      //home: const DrawerMenu(),
-      home: const HomeScreen2(),
+      home: const DrawerMenu(),
+      //home: const HomeScreen2(),
       // home: StreamBuilder(
       //     stream: FirebaseAuth.instance.authStateChanges(),
       //     builder: (ctx, snapshot) {
       //       print(
       //           'Auth state changed: ${snapshot.connectionState}, User: ${snapshot.data}');
       //       //like splash screen
-      //       // if (snapshot.connectionState == ConnectionState.waiting) {
-      //       //   return const LoadingScreen();
-      //       // }
+      //       if (snapshot.connectionState == ConnectionState.waiting) {
+      //         return const LoadingScreen();
+      //       }
       //       print("-------------- ULAZIM U METODU: --------------------");
 
       //       if (snapshot.hasData) {

@@ -48,13 +48,14 @@ class PlacesByCategory extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: place.imageUrl.length,
                 itemBuilder: (context, index) {
+                  final imagesUrl = place.imageUrl[index];
                   return Padding(
                     padding:
                         const EdgeInsets.only(right: 10), // Razmak između slika
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        place.imageUrl[index],
+                      child: Image.network(
+                        imagesUrl,
                         fit: BoxFit.cover,
                         width: 150, // Širina slike
                         height: 150, // Visina slike

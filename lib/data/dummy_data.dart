@@ -76,7 +76,7 @@ const availablePlaces = [
     subcategoryId: 'sc1',
     title: 'Hotel Podravina',
     description: 'Hotel u Koprivnici.',
-    imageUrl: 'https://example.com/hotel-esplanade.jpg',
+    imageUrl: ['https://example.com/hotel-esplanade.jpg'],
     address: 'Zagreb, Hrvatska',
     coordinates: {
       'latitude': 45.123456,
@@ -90,7 +90,7 @@ const availablePlaces = [
     subcategoryId: null,
     title: 'Dioklecijanova palača',
     description: 'Jedna od najbolje očuvanih građevina iz rimskog doba.',
-    imageUrl: 'https://enciklopedija.hr/slike/he/slike/HEW_096.jpg',
+    imageUrl: ['https://enciklopedija.hr/slike/he/slike/HEW_096.jpg'],
     address: 'Split, Hrvatska',
     coordinates: {
       'latitude': 45.123456,
@@ -104,7 +104,7 @@ const availablePlaces = [
     subcategoryId: null,
     title: 'Dioklecijanova palača',
     description: 'Jedna od najbolje očuvanih građevina iz rimskog doba.',
-    imageUrl: 'https://enciklopedija.hr/slike/he/slike/HEW_096.jpg',
+    imageUrl: ['https://enciklopedija.hr/slike/he/slike/HEW_096.jpg'],
     address: 'Split, Hrvatska',
     coordinates: {
       'latitude': 45.123456,
@@ -118,7 +118,7 @@ const availablePlaces = [
     subcategoryId: 'sc3',
     title: 'Konoba Mate',
     description: 'Tradicionalna dalmatinska konoba s domaćim specijalitetima.',
-    imageUrl: 'https://example.com/konoba-mate.jpg',
+    imageUrl: ['https://example.com/konoba-mate.jpg'],
     address: 'Korčula, Hrvatska',
     coordinates: {
       'latitude': 45.123456,
@@ -132,7 +132,7 @@ const availablePlaces = [
     subcategoryId: null,
     title: 'Plitvička jezera',
     description: 'Najstariji i najveći nacionalni park u Hrvatskoj.',
-    imageUrl: 'https://example.com/plitvice.jpg',
+    imageUrl: ['https://example.com/plitvice.jpg'],
     address: 'Plitvička jezera, Hrvatska',
     coordinates: {
       'latitude': 45.123456,
@@ -146,7 +146,7 @@ const availablePlaces = [
     subcategoryId: 'sc1',
     title: 'Hotel Esplanade',
     description: 'Luksuzni hotel s pet zvjezdica u centru Zagreba.',
-    imageUrl: 'https://example.com/hotel-esplanade.jpg',
+    imageUrl: ['https://example.com/hotel-esplanade.jpg'],
     address: 'Zagreb, Hrvatska',
     coordinates: {
       'latitude': 45.123456,
@@ -160,7 +160,7 @@ const availablePlaces = [
     subcategoryId: null,
     title: 'Dubrovačke ljetne igre',
     description: 'Kultura, glazba i kazalište u povijesnom Dubrovniku.',
-    imageUrl: 'https://example.com/dubrovacke-igre.jpg',
+    imageUrl: ['https://example.com/dubrovacke-igre.jpg'],
     address: 'Dubrovnik, Hrvatska',
     coordinates: {
       'latitude': 45.123456,
@@ -174,7 +174,7 @@ const availablePlaces = [
     subcategoryId: null,
     title: 'OPG Ivanić',
     description: 'Proizvodnja domaćeg meda i prirodnih proizvoda.',
-    imageUrl: 'https://example.com/opg-ivanic.jpg',
+    imageUrl: ['https://example.com/opg-ivanic.jpg'],
     address: 'Ivanić Grad, Hrvatska',
     coordinates: {
       'latitude': 45.123456,
@@ -191,7 +191,7 @@ const placeWithDetails = [
     subcategoryId: 'restorani',
     title: 'Restoran Podravka',
     description: 'Izvrstan restoran s lokalnim specijalitetima.',
-    imageUrl: 'https://example.com/podravka.jpg',
+    imageUrl: ['https://example.com/podravka.jpg'],
     address: 'Ulica Podravska 12',
     coordinates: {'lat': 46.1635, 'lng': 16.8342},
     workingHours: {'ponedjeljak': '9:00-22:00', 'utorak': '9:00-22:00'},

@@ -57,12 +57,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     size: 200,
                     color: AppColors.accentLight,
                   ),
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
 
                   //forma za prijavu
                   SingleChildScrollView(
                     child: Padding(
-                      padding: EdgeInsets.all(24),
+                      padding: const EdgeInsets.all(24),
                       child: Form(
                         key: _loginFormKey,
                         child: Column(
@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             ),
 
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
 
                             //Password
                             TextFormField(
@@ -135,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
 
                   //button za prijavu
                   SizedBox(
@@ -161,15 +161,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   //button za odlazak na registraciju
                   TextButton(
-                    onPressed: () {},
-                    // onPressed: () => Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const RegistrationScreen(),
-                    //   ),
-                    // ),
+                    //onPressed: () {},
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const RegistrationScreen(),
+                      ),
+                    ),
                     child: const Text('Kreiraj novi korisnički račun'),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
                   const Divider(
                     color: AppColors.accentLight,

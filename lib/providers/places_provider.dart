@@ -21,7 +21,13 @@ final placesProvider = StreamProvider<List<dynamic>>((ref) async* {
             subcategoryId: data['subcategoryId'],
             title: data['title'],
             description: data['description'],
-            imageUrl: data['imageUrl'],
+            imageUrl: data['imageUrl'] is String
+                ? [
+                    data['imageUrl']
+                  ] // Ako je imageUrl String, stvori listu s jednim elementom
+                : List<String>.from(
+                    data['imageUrl'] ?? []), // Inače pretvori u List<String>
+
             address: data['address'],
             coordinates: Map<String, double>.from(data['coordinates']),
             workingHours: data['workingHours'] != null
@@ -40,7 +46,11 @@ final placesProvider = StreamProvider<List<dynamic>>((ref) async* {
             subcategoryId: data['subcategoryId'],
             title: data['title'],
             description: data['description'],
-            imageUrl: data['imageUrl'],
+            imageUrl: data['imageUrl'] is String
+                ? [
+                    data['imageUrl']
+                  ] // Ako je imageUrl String, stvori listu s jednim elementom
+                : List<String>.from(data['imageUrl'] ?? []),
             address: data['address'],
             coordinates: Map<String, double>.from(data['coordinates']),
             workingHours: data['workingHours'] != null
@@ -56,7 +66,11 @@ final placesProvider = StreamProvider<List<dynamic>>((ref) async* {
             subcategoryId: data['subcategoryId'],
             title: data['title'],
             description: data['description'],
-            imageUrl: data['imageUrl'],
+            imageUrl: data['imageUrl'] is String
+                ? [
+                    data['imageUrl']
+                  ] // Ako je imageUrl String, stvori listu s jednim elementom
+                : List<String>.from(data['imageUrl'] ?? []),
             address: data['address'],
             coordinates: Map<String, double>.from(data['coordinates']),
             type: data['type'],

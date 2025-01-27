@@ -12,28 +12,23 @@ class ShoppingPlacesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //
-    // ---POPRAVITI KASNIJE ----
-    //
-    final List<String> images = [];
-
     return Card(
       color: Colors.blueGrey,
       margin: const EdgeInsets.all(20),
       shape: const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
       elevation: 5,
-      child: _buildCardContent(images),
+      child: _buildCardContent(),
     );
   }
 
-  Widget _buildCardContent(List<String> images) {
+  Widget _buildCardContent() {
     return Column(
       children: [
         Row(
           children: [
             FadeInImage(
               placeholder: MemoryImage(kTransparentImage),
-              image: NetworkImage(images.isNotEmpty ? images[0] : ''),
+              image: NetworkImage(place.imageUrl[0]),
               fit: BoxFit.cover,
               height: 160,
               width: 150,

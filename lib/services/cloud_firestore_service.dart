@@ -99,20 +99,20 @@ class FirestoreDatabaseService {
     }
   }
 
-  // Future<void> saveImageUrlsToPlace(
-  //     String placeId, List<String> imageUrls) async {
-  //   try {
-  //     final placeRef = _firebaseFirestore
-  //         .collection(FirestoreCollections.placesCollection)
-  //         .doc(placeId);
+  Future<void> saveImageUrlsToPlace(
+      String placeId, List<String> imageUrls) async {
+    try {
+      final placeRef = _firebaseFirestore
+          .collection(FirestoreCollections.placesCollection)
+          .doc(placeId);
 
-  //     await placeRef.update({
-  //       'imageUrl': FieldValue.arrayUnion(imageUrls),
-  //     });
+      await placeRef.update({
+        'imageUrl': FieldValue.arrayUnion(imageUrls),
+      });
 
-  //     print("URL-ovi uspješno pohranjeni!");
-  //   } catch (e) {
-  //     print("Greška pri spremanju URL-ova: $e");
-  //   }
-  // }
+      print(" ---- URL-ovi uspješno pohranjeni! ---- ");
+    } catch (e) {
+      print(" !!!! Greška pri spremanju URL-ova: $e !!!! ");
+    }
+  }
 }

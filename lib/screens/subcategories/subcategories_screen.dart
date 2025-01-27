@@ -22,53 +22,86 @@ class SubcategoriesScreen extends ConsumerWidget {
         ref.watch(filteredSubcategoriesProvider(category.id));
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('subactegories'),
-      ),
-      bottomNavigationBar: BottomNavigation(),
-      body: filteredSubcategories.isEmpty
-          ? const Center(child: Text('Nema podkategorija za ovu kategoriju'))
-          : ListView.builder(
-              itemCount: filteredSubcategories.length,
-              itemBuilder: (context, index) {
-                final subcategory = filteredSubcategories[index];
-
-                // Filtriraj mjesta prema subcategoryId
-                final filteredPlaces = ref.watch(
-                    filteredPlacesBySubcategoriesProvider(subcategory.id));
-
-                return SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  SubcategoriesListItemsScreen(
-                                subcategory: subcategory,
-                              ),
-                            ),
-                          );
-                        },
-                        child: Text(subcategory.title),
-                      ),
-                      const SizedBox(height: 30),
-                      // Prikaz filtriranih mjesta za tu podkategoriju
-                      ...filteredPlaces.map(
-                        (place) {
-                          return CardItems(
-                            place: place,
-                            isInteractive: false,
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                );
-              },
+        appBar: AppBar(
+          title: Text(category.title),
+        ),
+        bottomNavigationBar: BottomNavigation(),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(
+                top: 30,
+                left: 20,
+                bottom: 10,
+                right: 20,
+              ),
+              child: Text(
+                category.title.toUpperCase(),
+              ),
             ),
-    );
+            Expanded(
+              child: filteredSubcategories.isEmpty
+                  ? const Center(
+                      child: Text('Nema podkategorija za ovu kategoriju'))
+                  : ListView.builder(
+                      itemCount: filteredSubcategories.length,
+                      itemBuilder: (context, index) {
+                        final subcategory = filteredSubcategories[index];
+
+                        // Filtriraj mjesta prema subcategoryId
+                        final filteredPlaces = ref.watch(
+                            filteredPlacesBySubcategoriesProvider(
+                                subcategory.id));
+
+                        return SingleChildScrollView(
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 10),
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            SubcategoriesListItemsScreen(
+                                          subcategory: subcategory,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(subcategory.title),
+                                ),
+
+                                // Prikaz filtriranih mjesta za tu podkategoriju
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: filteredPlaces.map(
+                                      (place) {
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                              right:
+                                                  10.0), // Razmak između kartica
+                                          child: CardItems(
+                                            place: place,
+                                            isInteractive: false,
+                                          ),
+                                        );
+                                      },
+                                    ).toList(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+            ),
+          ],
+        ));
   }
 }

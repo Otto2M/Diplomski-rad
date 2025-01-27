@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/providers/image_storage_provider.dart';
 import 'package:povedi_me_app/services/favorite_place_service.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/providers/favorites_provider.dart';
@@ -16,6 +17,8 @@ class PlaceDetailsCategoryScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final favoritePlaces = ref.watch(favoritePlacesProvider);
     final isFavorite = favoritePlaces.contains(place);
+
+    final imagesAsyncValue = ref.watch(folder1ImagesProvider);
 
     return Scaffold(
       body: Container(

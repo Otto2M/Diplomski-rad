@@ -15,65 +15,67 @@ class CardItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> images = place.imageUrl;
+    final List<String> imagesUrl = place.imageUrl;
 
     return Card(
       color: Colors.blueGrey,
-      margin: const EdgeInsets.all(20),
+      margin: isInteractive
+          ? const EdgeInsets.all(20)
+          : const EdgeInsets.only(top: 20, left: 3),
       shape: const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
-      elevation: 5,
-      child: isInteractive
-          ? InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => PlaceItemDetailsScreen(
-                      placeWithDetails: place,
+      elevation: 10,
+      child: SizedBox(
+        width: 350,
+        child: isInteractive
+            ? InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PlaceItemDetailsScreen(
+                        placeWithDetails: place,
+                      ),
                     ),
-                  ),
-                );
-              },
-              child: _buildCardContent(images),
-            )
-          : _buildCardContent(images),
+                  );
+                },
+                child: _buildCardContent(imagesUrl),
+              )
+            : _buildCardContent(imagesUrl),
+      ),
     );
   }
 
-  Widget _buildCardContent(List<String> images) {
-    return Column(
+  Widget _buildCardContent(List<String> imagesUrl) {
+    return Row(
       children: [
-        Row(
-          children: [
-            for (var imageUrl in images)
-              FadeInImage(
-                placeholder: MemoryImage(kTransparentImage),
-                image: NetworkImage(
-                  //imageUrl,
-                  imageUrl.isNotEmpty ? imageUrl : '',
-                ),
-                fit: BoxFit.cover,
-                height: 150,
-                width: 150,
+        FadeInImage(
+          placeholder: MemoryImage(kTransparentImage),
+          image: NetworkImage(
+            imagesUrl.isNotEmpty ? imagesUrl[0] : '',
+          ),
+          fit: BoxFit.cover,
+          height: 160,
+          width: 160,
+        ),
+        Container(
+          width: 190,
+          color: Colors.black54,
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                place.title,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(color: Colors.white, fontSize: 15),
               ),
-            Container(
-              color: Colors.black54,
-              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-              child: Column(
-                children: [
-                  Text(
-                    place.title,
-                    maxLines: 2,
-                    textAlign: TextAlign.start,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.white, fontSize: 15),
-                  ),
-                  const Text('Recenzija'),
-                  // const PlaceItemInfoReview(icon: Icons.star),
-                ],
-              ),
-            ),
-          ],
+              const Text('Recenzija'),
+              // const PlaceItemInfoReview(icon: Icons.star),
+            ],
+          ),
         ),
       ],
     );

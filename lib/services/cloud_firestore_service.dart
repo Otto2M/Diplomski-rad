@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:povedi_me_app/constants/firestore_collections.dart';
 import 'package:povedi_me_app/models/category.dart';
-import 'package:povedi_me_app/models/place.dart';
+import 'package:povedi_me_app/models/city.dart';
 
 class FirestoreDatabaseService {
   final _firebaseFirestore = FirebaseFirestore
@@ -65,6 +65,36 @@ class FirestoreDatabaseService {
           .toList();
     } catch (e) {
       print('Error fetching data about city: $e');
+      rethrow;
+    }
+  }
+
+  // Get data about perfect day in city
+  Future<List<PerfectDay>> getAllPerfectDaysData() async {
+    try {
+      final perfectDaySnapshot = await _firebaseFirestore
+          .collection(FirestoreCollections.perfectDaysCollection)
+          .get();
+
+      return perfectDaySnapshot.docs
+          .map(
+            (doc) => PerfectDay(
+              title: doc['title'],
+              description: doc['description'],
+              imageUrl: doc['imageUrl'],
+              sections: (doc['sections'] as List).map((section) {
+                return Section(
+                  timeOfDay: section['timeOfDay'],
+                  content: section['content'],
+                );
+              }).toList(),
+              additionalTips: doc['additionalTips'] ?? '',
+              conclusion: doc['conclusion'],
+            ),
+          )
+          .toList();
+    } catch (e) {
+      print('Error fetching data about perfect day in city: $e');
       rethrow;
     }
   }

@@ -70,24 +70,3 @@ class ShoppingPlace extends Place {
 
   final Map<String, String>? workingHours;
 }
-
-//klasa za: opcenito o gradu - pocetni zasloni
-class AboutCity {
-  AboutCity({
-    required this.id,
-    required this.title,
-    required this.subtitle,
-    required this.description,
-    required this.imageUrl,
-  });
-
-  final String id;
-  final String title;
-  final String? subtitle;
-  final String description;
-  final String imageUrl;
-}
-
-
-//TO DO
-//Dodati potrebne ostale objekte/zasebne klase za pojedine kategorije/zaslone u aplikaciji koje imaju dodatne informacije

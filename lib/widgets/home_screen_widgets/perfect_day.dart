@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:povedi_me_app/screens/home/about_city_screen.dart';
 import 'package:transparent_image/transparent_image.dart';
+
+import 'package:povedi_me_app/screens/home/perfect_day_list_screen.dart';
 
 class PerfectDay extends StatelessWidget {
   const PerfectDay({super.key});
@@ -29,7 +30,7 @@ class PerfectDay extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const AboutCityScreen(),
+                  builder: (context) => const PerfectDayListScreen(),
                 ),
               ),
               style: ElevatedButton.styleFrom(

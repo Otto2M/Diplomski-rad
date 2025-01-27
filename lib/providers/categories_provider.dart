@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/models/category.dart';
-import 'package:povedi_me_app/models/place.dart';
+import 'package:povedi_me_app/models/city.dart';
 import 'package:povedi_me_app/services/cloud_firestore_service.dart';
 
 final firestoreDatabaseService =

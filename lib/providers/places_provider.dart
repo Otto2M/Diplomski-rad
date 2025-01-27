@@ -47,9 +47,7 @@ final placesProvider = StreamProvider<List<dynamic>>((ref) async* {
             title: data['title'],
             description: data['description'],
             imageUrl: data['imageUrl'] is String
-                ? [
-                    data['imageUrl']
-                  ] // Ako je imageUrl String, stvori listu s jednim elementom
+                ? [data['imageUrl']]
                 : List<String>.from(data['imageUrl'] ?? []),
             address: data['address'],
             coordinates: Map<String, double>.from(data['coordinates']),

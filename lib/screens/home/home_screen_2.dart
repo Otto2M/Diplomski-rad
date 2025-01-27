@@ -19,7 +19,7 @@ class HomeScreen2 extends StatelessWidget {
               SizedBox(height: 10),
               WeatherForecast(),
               SizedBox(height: 10),
-              UpcomingEvents(),
+              //UpcomingEvents(),
               PerfectDay(),
             ],
           ),

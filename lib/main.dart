@@ -32,8 +32,8 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: appTheme,
       //home: SplashScreen(), //fix this at open app
-      home: const DrawerMenu(),
-      //home: const HomeScreen2(),
+      //home: const DrawerMenu(),
+      home: const HomeScreen2(),
       // home: StreamBuilder(
       //     stream: FirebaseAuth.instance.authStateChanges(),
       //     builder: (ctx, snapshot) {

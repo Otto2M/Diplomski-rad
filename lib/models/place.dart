@@ -13,6 +13,7 @@ class Place {
     required this.address,
     required this.coordinates,
     required this.type,
+    this.date,
   });
 
   final String id;
@@ -25,6 +26,7 @@ class Place {
   final String address;
   final Map<String, double> coordinates;
   final String type; //"type": "details" ili "basic" ili "shop"
+  final DateTime? date;
 }
 
 //klasa za katgorije: gastronomija, smještaj i OPG

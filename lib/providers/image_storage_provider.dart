@@ -13,8 +13,12 @@ final firestoreDatabaseService =
 //Kulturne i povijesne znamenitosti
 final folder1ImagesProvider = FutureProvider<List<String>>((ref) async {
   final firebaseStorageService = ref.watch(firebaseStorage);
+  // final imagesUrl = await firebaseStorageService.fetchImagesFromFolder(
+  //     'kulturnePovijesneZnamenitosti/muzejKc/'); // ----------- putanju mogu postaviti u folder za konstante -----------
+  // print("----------- URL slika : ------> ${imagesUrl} <-----------");
+
   final imagesUrl = await firebaseStorageService.fetchImagesFromFolder(
-      'kulturnePovijesneZnamenitosti/muzejKc/'); // ----------- putanju mogu postaviti u folder za konstante -----------
+      '/manifestacije/podravskiMotivi/'); // ----------- putanju mogu postaviti u folder za konstante -----------
   print("----------- URL slika : ------> ${imagesUrl} <-----------");
 
   final firebaseFirestoreService = ref.watch(firestoreDatabaseService);

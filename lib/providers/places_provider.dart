@@ -70,8 +70,16 @@ final placesProvider = StreamProvider<List<dynamic>>((ref) async* {
                   ] // Ako je imageUrl String, stvori listu s jednim elementom
                 : List<String>.from(data['imageUrl'] ?? []),
             address: data['address'],
-            coordinates: Map<String, double>.from(data['coordinates']),
+            coordinates: data['coordinates'] != null
+                ? (data['coordinates'] as Map<String, dynamic>).map(
+                    (key, value) =>
+                        MapEntry(key, double.tryParse(value.toString()) ?? 0.0),
+                  )
+                : {},
             type: data['type'],
+            date: data['date'] != null
+                ? (data['date'] as Timestamp).toDate()
+                : null,
           );
       }
     }).toList();

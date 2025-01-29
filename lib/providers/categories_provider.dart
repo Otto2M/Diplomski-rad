@@ -18,6 +18,15 @@ final subcategoriesProvider = FutureProvider<List<Subcategory>>((ref) async {
   return await firebaseFirestoreService.getSubcategories();
 });
 
+final combinedCategoriesAndSubcategroiesProvider = FutureProvider((ref) async {
+  final categories = await ref.watch(categoriesProvider.future);
+  final subcategories = await ref.watch(subcategoriesProvider.future);
+  return {
+    'categories': categories,
+    'subcategories': subcategories,
+  };
+});
+
 // AboutCity Provider
 final aboutCityDataProvider = FutureProvider<List<AboutCity>>((ref) async {
   final firebaseFirestoreService = ref.watch(firestoreDatabaseService);

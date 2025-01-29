@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/screens/home/about_city_screen.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -19,8 +20,7 @@ class _GeneralAiState extends State<GeneralAi> {
         children: [
           FadeInImage(
             placeholder: MemoryImage(kTransparentImage),
-            image: const NetworkImage(
-                "https://komunalac-kc.hr/wp-content/uploads/2023/08/14-scaled.jpg"),
+            image: const AssetImage(Assets.homeScreenBackgroundImage),
             fit: BoxFit.cover,
             height: double.infinity,
             width: double.infinity,
@@ -56,6 +56,35 @@ class _GeneralAiState extends State<GeneralAi> {
           Positioned(
             top: 20,
             right: 20,
+            //   child: FloatingActionButton(
+            //     onPressed: () {
+            //       ScaffoldMessenger.of(context).clearSnackBars();
+            //       ScaffoldMessenger.of(context).showSnackBar(
+            //         SnackBar(
+            //           content: Text('ChatBot pressed'),
+            //           backgroundColor: Colors.deepPurple,
+            //           elevation: 5,
+            //           duration: const Duration(seconds: 3),
+            //           shape: RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(20),
+            //           ),
+            //           padding: const EdgeInsets.symmetric(
+            //             vertical: 15,
+            //             horizontal: 10,
+            //           ),
+            //         ),
+            //       );
+            //     },
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(50),
+            //     ),
+            //     backgroundColor: Colors.blue,
+            //     child: const Icon(
+            //       Icons.chat_rounded,
+            //       size: 30,
+            //     ),
+            //   ),
+            // ),
             child: CircleAvatar(
               radius: 40,
               //backgroundImage: AssetImage(Assets.aiButton),

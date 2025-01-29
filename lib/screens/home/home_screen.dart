@@ -1,58 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:povedi_me_app/constants/instances.dart';
-import 'package:povedi_me_app/screens/help_screen.dart';
-import 'package:povedi_me_app/screens/home/about_city_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+import 'package:povedi_me_app/screens/search_bar/filtered_places_list.dart';
+import 'package:povedi_me_app/screens/search_bar/search_bar.dart';
+import 'package:povedi_me_app/widgets/home_screen_widgets/general_ai.dart';
+import 'package:povedi_me_app/widgets/home_screen_widgets/perfect_day.dart';
+import 'package:povedi_me_app/widgets/home_screen_widgets/upcoming_events/upcoming_events.dart';
+import 'package:povedi_me_app/widgets/home_screen_widgets/weather_forecast_v2.dart';
+
+class HomeScreen extends ConsumerWidget {
+  const HomeScreen({
+    super.key,
+    this.scaffoldKey,
+  });
+
+  final GlobalKey<ScaffoldState>? scaffoldKey;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home screen"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              firebaseAuth.signOut();
-            },
-            icon: const Icon(Icons.exit_to_app),
+  Widget build(BuildContext context, WidgetRef ref) {
+    return SafeArea(
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.menu, size: 40),
+                    padding: const EdgeInsets.all(12.0),
+                    onPressed: () {
+                      scaffoldKey!.currentState?.openDrawer();
+                    },
+                  ),
+                  const Expanded(
+                    child: CustomSearchBar(),
+                  ),
+                ],
+              ),
+              const FilteredPlacesList(),
+              const GeneralAi(),
+              const SizedBox(height: 10),
+              //const WeatherForecast(),
+              const WeatherForecastVersion2(),
+              const SizedBox(height: 10),
+              const UpcomingEvents(),
+              const PerfectDay(),
+            ],
           ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("Logged in!"),
-            ElevatedButton(
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const HelpScreen(),
-                ),
-              ),
-              child: const Text("Go to - logout"),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const AboutCityScreen(),
-                ),
-              ),
-              child: const Text("O KOPRIVNICI"),
-            ),
-          ],
         ),
       ),
     );

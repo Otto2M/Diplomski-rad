@@ -23,7 +23,7 @@ class FavoritePlacesList extends ConsumerWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(
-            bottom: 0,
+            bottom: 20,
             left: 20,
             right: 20,
             top: 20,

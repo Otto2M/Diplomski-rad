@@ -60,7 +60,9 @@ class FirestoreDatabaseService {
                 title: doc['title'],
                 subtitle: doc['subtitle'],
                 description: doc['description'],
-                imageUrl: doc['imageUrl'],
+                imageUrl: doc['imageUrl'] is String
+                    ? [doc['imageUrl']]
+                    : List<String>.from(doc['imageUrl'] ?? []),
               ))
           .toList();
     } catch (e) {

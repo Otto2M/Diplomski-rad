@@ -12,7 +12,7 @@ class AboutCity {
   final String title;
   final String? subtitle;
   final String description;
-  final String imageUrl;
+  final List<String> imageUrl;
 }
 
 class PerfectDay {

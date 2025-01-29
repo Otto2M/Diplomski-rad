@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
-import 'package:povedi_me_app/screens/home/home_screen.dart';
+import 'package:povedi_me_app/screens/home/demo/demo_home_screen.dart';
 import 'package:povedi_me_app/screens/registration/registration_screen.dart';
 //import 'package:povedi_me_app/services/auth_service.dart';
 import 'package:sign_in_button/sign_in_button.dart';

@@ -46,7 +46,7 @@ class AboutCityScreen extends ConsumerWidget {
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
                           ),
-                          itemCount: place.imageUrl.length, // Broj slika
+                          itemCount: place.imageUrl.length,
                           itemBuilder: (context, index) {
                             final imageUrl = place.imageUrl[index];
                             return ClipRRect(

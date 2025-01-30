@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/widgets/favorite_places_list.dart';
@@ -17,13 +18,19 @@ class FavoritePlacesTabScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Widget content = const Center(
+    Widget content = Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Oh ne...'),
-          SizedBox(height: 16),
-          Text('Još nemate popis omiljenih mjesta.'),
+          Text(
+            'Oh ne...',
+            style: AppTextStyles.description(context),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Još nemate popis omiljenih mjesta.',
+            style: AppTextStyles.description(context),
+          ),
         ],
       ),
     );
@@ -37,7 +44,7 @@ class FavoritePlacesTabScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       body: SafeArea(
         child: content,
       ),

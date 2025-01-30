@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/providers/image_storage_provider.dart';
-import 'package:povedi_me_app/services/favorite_place_service.dart';
 import 'package:povedi_me_app/models/place.dart';
-import 'package:povedi_me_app/providers/favorites_provider.dart';
+import 'package:povedi_me_app/widgets/custom_app_bar_with_favorite.dart';
 
 class PlaceDetailsCategoryScreen extends ConsumerWidget {
   const PlaceDetailsCategoryScreen({
@@ -15,56 +16,34 @@ class PlaceDetailsCategoryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final favoritePlaces = ref.watch(favoritePlacesProvider);
-    final isFavorite = favoritePlaces.contains(place);
-
     final imagesAsyncValue = ref.watch(folder1ImagesProvider);
 
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(
-          bottom: 30,
-          left: 30,
-          right: 30,
-          top: 15,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 30,
+          vertical: 10,
         ),
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.keyboard_arrow_left_rounded,
-                      ),
-                      iconSize: 50,
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        FavoritePlacesService.toggleFavoriteStatus(
-                          context: context,
-                          ref: ref,
-                          place: place,
-                        );
-                      },
-                      icon: Icon(
-                        isFavorite ? Icons.star : Icons.star_border,
-                        key: ValueKey(isFavorite),
-                      ),
-                      iconSize: 40,
-                    ),
-                  ],
+                CustomAppBarWithFavorite(
+                  onBack: () {
+                    Navigator.pop(context);
+                  },
+                  place: place,
+                ),
+                Text(
+                  place.title,
+                  style: AppTextStyles.placeHeadline2(context),
                 ),
                 const SizedBox(height: 20),
-                Text(place.title),
-                const SizedBox(height: 20),
-                Text(place.description),
+                Text(
+                  place.description,
+                  style: AppTextStyles.description(context),
+                ),
                 const SizedBox(height: 20),
                 GridView.builder(
                   shrinkWrap: true,

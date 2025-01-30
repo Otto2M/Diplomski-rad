@@ -5,7 +5,7 @@ import 'package:povedi_me_app/models/category.dart';
 import 'package:povedi_me_app/providers/filer_places_provider.dart';
 import 'package:povedi_me_app/providers/filter_subcategories_provider.dart';
 import 'package:povedi_me_app/screens/subcategories/subcategories_list_items_screen.dart';
-import 'package:povedi_me_app/widgets/bottom_navigation.dart';
+//import 'package:povedi_me_app/widgets/bottom_navigation.dart';
 import 'package:povedi_me_app/widgets/card_items.dart';
 
 class SubcategoriesScreen extends ConsumerWidget {
@@ -25,7 +25,7 @@ class SubcategoriesScreen extends ConsumerWidget {
         appBar: AppBar(
           title: Text(category.title),
         ),
-        bottomNavigationBar: BottomNavigation(),
+        //bottomNavigationBar: BottomNavigation(),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

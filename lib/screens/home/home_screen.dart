@@ -26,20 +26,23 @@ class HomeScreen extends ConsumerWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.menu, size: 40),
-                    padding: const EdgeInsets.all(12.0),
-                    onPressed: () {
-                      scaffoldKey!.currentState?.openDrawer();
-                    },
-                  ),
-                  const Expanded(
-                    child: CustomSearchBar(),
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.menu, size: 40),
+                      padding: const EdgeInsets.all(12.0),
+                      onPressed: () {
+                        scaffoldKey!.currentState?.openDrawer();
+                      },
+                    ),
+                    const Expanded(
+                      child: CustomSearchBar(),
+                    ),
+                  ],
+                ),
               ),
               const FilteredPlacesList(),
               const GeneralAi(),

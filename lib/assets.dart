@@ -5,4 +5,9 @@ class Assets {
   //--logo
   static const logo = 'assets/images/povedi_me_logo.png';
   //-icons
+  static const iBorderRedHeart = 'assets/icons/border_red_heart.png';
+  static const iRedHeart = 'assets/icons/red_heart.png';
+  static const iHome = 'assets/icons/home.png';
+  static const iMap = 'assets/icons/map.png';
+  static const iFavorite = 'assets/icons/favorite.png';
 }

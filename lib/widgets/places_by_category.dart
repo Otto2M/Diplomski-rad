@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/screens/places/place_details_category_screen.dart';
 
@@ -23,7 +24,10 @@ class PlacesByCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 10,
+      ),
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,6 +36,7 @@ class PlacesByCategory extends StatelessWidget {
               onPressed: () => goToDetailScreen(context, place),
               label: Text(
                 place.title,
+                style: AppTextStyles.placeButtonTitle(context),
               ),
               icon: const Icon(Icons.keyboard_arrow_right_rounded),
             ),
@@ -40,6 +45,7 @@ class PlacesByCategory extends StatelessWidget {
               place.description,
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
+              style: AppTextStyles.categoryPlaceDescription(context),
             ),
             const SizedBox(height: 20),
             SizedBox(

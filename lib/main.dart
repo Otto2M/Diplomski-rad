@@ -30,7 +30,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: appTheme,
+      theme: lightAppTheme,
+      darkTheme: darkAppTheme,
+      //themeMode: ,
       //home: SplashScreen(), //fix this at open app
       home: const TabScreen(),
       //home: const HomeScreen(),
@@ -53,6 +55,8 @@ class App extends StatelessWidget {
       //       print("-------------- NEMA PODATAKA --------------------");
       //       return const WelcomeScreen();
       //     }),
+      //initialRoute: ,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

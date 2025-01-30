@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Icon(
                     Icons.person,
                     size: 200,
-                    color: AppColors.accentLight,
+                    color: AppColors.darkBlue,
                   ),
                   const SizedBox(height: 50),
 
@@ -73,14 +73,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               //controller: ,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.email,
-                                    color: AppColors.accentLight),
+                                    color: AppColors.darkBlue),
                                 labelText: 'Email',
-                                labelStyle: const TextStyle(
-                                    color: AppColors.accentLight),
+                                labelStyle:
+                                    const TextStyle(color: AppColors.darkBlue),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(
-                                      color: AppColors.accentLight),
+                                      color: AppColors.darkBlue),
                                 ),
                               ),
                               keyboardType: TextInputType.emailAddress,
@@ -106,14 +106,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               obscureText: true,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.lock,
-                                    color: AppColors.accentLight),
+                                    color: AppColors.darkBlue),
                                 labelText: 'Lozinka',
-                                labelStyle: const TextStyle(
-                                    color: AppColors.accentLight),
+                                labelStyle:
+                                    const TextStyle(color: AppColors.darkBlue),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(
-                                      color: AppColors.accentLight),
+                                      color: AppColors.darkBlue),
                                 ),
                                 // focusedBorder: const UnderlineInputBorder(
                                 //   borderSide: BorderSide(
@@ -153,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.accentLight,
+                          color: AppColors.darkBlue,
                         ),
                       ),
                     ),
@@ -172,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 10),
 
                   const Divider(
-                    color: AppColors.accentLight,
+                    color: AppColors.darkBlue,
                   ),
 
                   //google sign in button

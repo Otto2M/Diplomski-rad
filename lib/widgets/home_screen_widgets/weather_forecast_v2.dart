@@ -103,7 +103,7 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 3),
                           child: Container(
-                            padding: EdgeInsets.all(4.0),
+                            padding: const EdgeInsets.all(4.0),
                             decoration: BoxDecoration(
                               color: Colors.black.withOpacity(0.6),
                               borderRadius: BorderRadius.circular(12),

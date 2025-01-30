@@ -9,7 +9,7 @@ class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
   @override
-  _OnboardingScreenState createState() => _OnboardingScreenState();
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
@@ -43,7 +43,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryLight,
+      backgroundColor: AppColors.lightBlue,
       body: PageView.builder(
         controller: _pageController,
         onPageChanged: (index) {
@@ -62,17 +62,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ? TextButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const WelcomeScreen()),
                 );
               },
-              child: Text("Kreni dalje", style: TextStyle(fontSize: 18)),
+              child: const Text("Kreni dalje", style: TextStyle(fontSize: 18)),
             )
           : Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
                   onPressed: () => _pageController.jumpToPage(2),
-                  child: Text("Preskoči"),
+                  child: const Text("Preskoči"),
                 ),
                 Row(
                   children: List.generate(
@@ -82,10 +83,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 TextButton(
                   onPressed: () => _pageController.nextPage(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 200),
                     curve: Curves.ease,
                   ),
-                  child: Text("Dalje"),
+                  child: const Text("Dalje"),
                 ),
               ],
             ),
@@ -97,7 +98,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Container(
       height: 10,
       width: _currentPage == index ? 20 : 10,
-      margin: EdgeInsets.symmetric(horizontal: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
         color: _currentPage == index ? Colors.blue : Colors.grey,
         borderRadius: BorderRadius.circular(10),
@@ -122,16 +123,16 @@ class OnboardingContent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(image, height: 300),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Text(
           title,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
           description,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 16),
         ),
       ],
     );

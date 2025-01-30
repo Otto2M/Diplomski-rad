@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryLight,
+      backgroundColor: AppColors.lightBlue,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -47,8 +47,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 MaterialPageRoute(
                     builder: (context) => const OnboardingScreen()),
               ),
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.secondaryLight),
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: AppColors.yellow),
               child: const Icon(Icons.navigate_next_rounded),
             ),
           ],

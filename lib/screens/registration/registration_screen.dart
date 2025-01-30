@@ -38,12 +38,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       phoneNumber: _enteredPhoneNumber,
     );
 
-    // Navigator.of(context).pushAndRemoveUntil(
-    //   MaterialPageRoute(
-    //     builder: (context) => const RegistrationScreenSuccess(),
-    //   ),
-    //   (route) => false,
-    // );
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (context) => const RegistrationScreenSuccess(),
+      ),
+      (route) => false,
+    );
   }
 
   @override
@@ -69,9 +69,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   const Icon(
                     Icons.person,
                     size: 150,
-                    color: AppColors.accentLight,
+                    color: AppColors.darkBlue,
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
                   //forma za REGISTRACIJU
                   SingleChildScrollView(
@@ -86,14 +86,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             TextFormField(
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.person,
-                                    color: AppColors.accentLight),
+                                    color: AppColors.darkBlue),
                                 labelText: 'Ime i prezime',
-                                labelStyle: const TextStyle(
-                                    color: AppColors.accentLight),
+                                labelStyle:
+                                    const TextStyle(color: AppColors.darkBlue),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(
-                                      color: AppColors.accentLight),
+                                      color: AppColors.darkBlue),
                                 ),
                               ),
                               autocorrect: false,
@@ -107,20 +107,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 _enteredName = value!;
                               },
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
 
                             //Username
                             TextFormField(
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.person_outline,
-                                    color: AppColors.accentLight),
+                                    color: AppColors.darkBlue),
                                 labelText: 'Korisničko ime',
-                                labelStyle: const TextStyle(
-                                    color: AppColors.accentLight),
+                                labelStyle:
+                                    const TextStyle(color: AppColors.darkBlue),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(
-                                      color: AppColors.accentLight),
+                                      color: AppColors.darkBlue),
                                 ),
                               ),
                               autocorrect: false,
@@ -134,20 +134,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 _enteredUsername = value!;
                               },
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
 
                             //Phone number
                             TextFormField(
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.phone,
-                                    color: AppColors.accentLight),
+                                    color: AppColors.darkBlue),
                                 labelText: 'Broj mobitela',
-                                labelStyle: const TextStyle(
-                                    color: AppColors.accentLight),
+                                labelStyle:
+                                    const TextStyle(color: AppColors.darkBlue),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(
-                                      color: AppColors.accentLight),
+                                      color: AppColors.darkBlue),
                                 ),
                               ),
                               keyboardType: TextInputType.number,
@@ -164,20 +164,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 _enteredPhoneNumber = value!;
                               },
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
 
                             //E-mail
                             TextFormField(
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.email,
-                                    color: AppColors.accentLight),
+                                    color: AppColors.darkBlue),
                                 labelText: 'Email',
-                                labelStyle: const TextStyle(
-                                    color: AppColors.accentLight),
+                                labelStyle:
+                                    const TextStyle(color: AppColors.darkBlue),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(
-                                      color: AppColors.accentLight),
+                                      color: AppColors.darkBlue),
                                 ),
                               ),
                               keyboardType: TextInputType.emailAddress,
@@ -196,21 +196,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               },
                             ),
 
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
 
                             //Password
                             TextFormField(
                               obscureText: true,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.lock,
-                                    color: AppColors.accentLight),
+                                    color: AppColors.darkBlue),
                                 labelText: 'Lozinka',
-                                labelStyle: const TextStyle(
-                                    color: AppColors.accentLight),
+                                labelStyle:
+                                    const TextStyle(color: AppColors.darkBlue),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(
-                                      color: AppColors.accentLight),
+                                      color: AppColors.darkBlue),
                                 ),
                                 // focusedBorder: const UnderlineInputBorder(
                                 //   borderSide: BorderSide(
@@ -232,7 +232,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
                   //button za registraciju
                   SizedBox(
@@ -250,24 +250,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.accentLight,
+                          color: AppColors.darkBlue,
                         ),
                       ),
                     ),
                   ),
-                  // TextButton(
-                  //   onPressed: () => Navigator.of(context).push(
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const LoginScreen(),
-                  //     ),
-                  //   ),
-                  //   child: const Text('Već imam korisnički račun...'),
-                  // ),
+                  TextButton(
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    ),
+                    child: const Text('Već imam korisnički račun...'),
+                  ),
 
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
                   const Divider(
-                    color: AppColors.accentLight,
+                    color: AppColors.darkBlue,
                   ),
                   SignInButton(
                     Buttons.google,
@@ -278,7 +278,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                   ),
 
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
                   SignInButtonBuilder(
                     text: 'Prijavi se putem Google',
@@ -304,7 +304,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         );
                       }
                     },
-                    backgroundColor: AppColors.accentLight,
+                    backgroundColor: AppColors.darkBlue,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),

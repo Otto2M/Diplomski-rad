@@ -14,47 +14,53 @@
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
 
-final appTheme = ThemeData(
+final lightAppTheme = ThemeData(
   colorScheme: ColorScheme(
-    primary: AppColors.primaryLight,
-    primaryContainer: AppColors.accentLight,
-    secondary: AppColors.secondaryLight,
-    secondaryContainer: AppColors.primaryLight.withOpacity(0.2),
+    primary: AppColors.lightBlue,
+    primaryContainer: AppColors.darkBlue,
+    secondary: AppColors.yellow,
+    secondaryContainer: AppColors.lightBlue.withOpacity(0.2),
     surface: AppColors.backgroundLight,
-    error: AppColors.errorLight,
+    error: AppColors.errorLightRed,
     onPrimary: AppColors.white,
-    onSecondary: AppColors.black,
-    onSurface: AppColors.black,
+    onSecondary: AppColors.darkBlue,
+    onSurface: AppColors.darkBlue,
     onError: AppColors.white,
     brightness: Brightness.light,
   ),
   scaffoldBackgroundColor: AppColors.backgroundLight,
   appBarTheme: const AppBarTheme(
-    backgroundColor: AppColors.primaryLight,
+    backgroundColor: AppColors.lightBlue,
     foregroundColor: AppColors.white,
     elevation: 0,
   ),
   textTheme: const TextTheme(
-    bodyLarge: TextStyle(color: AppColors.black),
-    bodyMedium: TextStyle(color: AppColors.black),
-    titleLarge: TextStyle(color: AppColors.primaryLight),
+    bodyMedium: TextStyle(color: AppColors.darkBlue),
+    bodyLarge: TextStyle(color: AppColors.darkBlue),
+    titleSmall: TextStyle(color: AppColors.errorLightRed),
+    titleMedium: TextStyle(color: AppColors.darkBlue),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: AppColors.secondaryLight, // Dodamo crvenu za gumbe
-      foregroundColor: AppColors.accentLight, // Tekst na gumbima
+      backgroundColor: AppColors.yellow, // Dodamo crvenu za gumbe
+      foregroundColor: AppColors.darkBlue, // Tekst na gumbima
     ),
+  ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: Color.fromARGB(137, 47, 121, 211),
+    selectedItemColor: AppColors.white,
+    unselectedItemColor: AppColors.yellow,
   ),
 );
 
-final darkTheme = ThemeData(
+final darkAppTheme = ThemeData(
   colorScheme: ColorScheme(
     primary: AppColors.primaryDark,
     primaryContainer: AppColors.accentDark,
     secondary: AppColors.secondaryDark,
     secondaryContainer: AppColors.primaryDark.withOpacity(0.2),
     surface: AppColors.backgroundDark,
-    error: AppColors.errorDark,
+    error: AppColors.errorDarkRed,
     onPrimary: AppColors.white,
     onSecondary: AppColors.black,
     onSurface: AppColors.white,
@@ -71,11 +77,12 @@ final darkTheme = ThemeData(
     bodyLarge: TextStyle(color: AppColors.white),
     bodyMedium: TextStyle(color: AppColors.white),
     titleLarge: TextStyle(color: AppColors.secondaryDark),
+    titleSmall: TextStyle(color: AppColors.errorDarkRed),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: AppColors.secondaryLight, // Dodamo crvenu za gumbe
-      foregroundColor: AppColors.accentLight, // Tekst na gumbima
+      backgroundColor: AppColors.secondaryDark, // Dodamo crvenu za gumbe
+      foregroundColor: AppColors.accentDark, // Tekst na gumbima
     ),
   ),
 );

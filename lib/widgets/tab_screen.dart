@@ -7,6 +7,7 @@ import 'package:povedi_me_app/screens/home/home_screen.dart';
 import 'package:povedi_me_app/widgets/bottom_navigation.dart';
 import 'package:povedi_me_app/screens/favorite_places/favorite_places_screen.dart';
 import 'package:povedi_me_app/screens/google_map/map_screen.dart';
+import 'package:povedi_me_app/widgets/bottom_navigation/curved_bottom_navigation.dart';
 import 'package:povedi_me_app/widgets/menu/app_drawer_menu.dart';
 
 // GlobalKey za Scaffold
@@ -37,7 +38,7 @@ class TabScreen extends ConsumerWidget {
       key: _scaffoldKey,
       body: activePage,
       drawer: const AppDrawer(),
-      bottomNavigationBar: const BottomNavigation(),
+      bottomNavigationBar: const CurvedBottomNavigation(),
     );
   }
 }

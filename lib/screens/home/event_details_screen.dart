@@ -39,7 +39,7 @@ class EventDetailsScreen extends StatelessWidget {
             const SizedBox(height: 8),
             // Opis
             Text(
-              event.description ?? 'Nema opisa dostupnog.',
+              event.description,
               style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 16),
@@ -52,7 +52,7 @@ class EventDetailsScreen extends StatelessWidget {
               ),
             const SizedBox(height: 16),
             // Ostali podaci (adresa, kontakt...)
-            if (event.address != null) ...[
+            ...[
               Text('Adresa: ${event.address}',
                   style: const TextStyle(fontSize: 16)),
               const SizedBox(height: 8),

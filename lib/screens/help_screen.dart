@@ -8,14 +8,14 @@ class HelpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Help/Settings screen"),
+        title: const Text("Help/Settings screen"),
       ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
             firebaseAuth.signOut();
           },
-          child: Text("Log out"),
+          child: const Text("Log out"),
         ),
       ),
     );

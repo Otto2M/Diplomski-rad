@@ -12,7 +12,7 @@ class PerfectDay extends StatelessWidget {
       height: 250,
       width: double.infinity,
       color: Colors.blue,
-      margin: EdgeInsets.symmetric(vertical: 50),
+      margin: const EdgeInsets.symmetric(vertical: 50),
       child: Stack(
         children: [
           FadeInImage(

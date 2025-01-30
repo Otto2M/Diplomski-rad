@@ -35,7 +35,7 @@ class _RegistrationScreenSuccessState extends State<RegistrationScreenSuccess> {
             Text(
               "Registracija uspješna!",
               style: TextStyle(
-                color: AppColors.accentLight,
+                color: AppColors.darkBlue,
                 fontSize: 30,
               ),
             ),

@@ -48,8 +48,7 @@ class _MapScreenState extends State<MapScreen> {
         children: [
           _currentPosition == null
               ? const Center(
-                  child:
-                      CircularProgressIndicator(color: AppColors.primaryLight),
+                  child: CircularProgressIndicator(color: AppColors.lightBlue),
                 )
               : GoogleMap(
                   onMapCreated: (controller) {
@@ -108,7 +107,7 @@ class _MapScreenState extends State<MapScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primaryLight,
+        backgroundColor: AppColors.lightBlue,
         onPressed: () async {
           if (_currentPosition != null) {
             GoogleMapController controller = await _googleMapController.future;
@@ -209,7 +208,7 @@ class _MapScreenState extends State<MapScreen> {
     PolylineId id = const PolylineId("poly");
     Polyline polyline = Polyline(
         polylineId: id,
-        color: AppColors.accentLight,
+        color: AppColors.darkBlue,
         width: 5,
         points: polylineCoordinates);
     setState(() {

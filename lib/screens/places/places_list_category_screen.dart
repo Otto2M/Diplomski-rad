@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
-import 'package:povedi_me_app/providers/image_storage_provider.dart';
 import 'package:povedi_me_app/providers/places_provider.dart';
 import 'package:povedi_me_app/screens/places/shopping_places_screen.dart';
 import 'package:povedi_me_app/widgets/places_by_category.dart';
@@ -24,21 +24,31 @@ class PlacesListCategoryScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(),
+      //drawer: const AppDrawer(),
       body: placesAsyncValue.when(
         data: (places) {
           final filteredPlaces =
               places.where((place) => place.categoryId == categoryId).toList();
 
           if (filteredPlaces.isEmpty) {
-            return const Center(
+            return Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Oh ne...'),
-                  SizedBox(height: 16),
-                  Text('Nema dostupnih mjesta za ovu kategoriju.'),
-                  SizedBox(height: 16),
-                  Text('Odaberite drugu kategoriju!'),
+                  Text(
+                    'Oh ne...',
+                    style: AppTextStyles.description(context),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Nema dostupnih mjesta za ovu kategoriju.',
+                    style: AppTextStyles.description(context),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Odaberite drugu kategoriju!',
+                    style: AppTextStyles.description(context),
+                  ),
                 ],
               ),
             );
@@ -56,7 +66,8 @@ class PlacesListCategoryScreen extends ConsumerWidget {
                 ),
                 child: Text(
                   title.toUpperCase(),
-                  overflow: TextOverflow.ellipsis,
+                  overflow: TextOverflow.clip,
+                  style: AppTextStyles.categoryHeadline(context),
                 ),
               ),
               Expanded(
@@ -79,7 +90,10 @@ class PlacesListCategoryScreen extends ConsumerWidget {
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stackTrace) => Center(
-          child: Text('Došlo je do greške: $error'),
+          child: Text(
+            'Došlo je do greške: $error',
+            style: AppTextStyles.errorText(context),
+          ),
         ),
       ),
     );

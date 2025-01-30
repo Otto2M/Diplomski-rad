@@ -49,7 +49,10 @@ class _GeneralAiState extends State<GeneralAi> {
               ),
               child: const Text(
                 "O KOPRIVNICI",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
               ),
             ),
           ),
@@ -93,7 +96,7 @@ class _GeneralAiState extends State<GeneralAi> {
                   ScaffoldMessenger.of(context).clearSnackBars();
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('ChatBot pressed'),
+                      content: const Text('ChatBot pressed'),
                       backgroundColor: Colors.deepPurple,
                       elevation: 5,
                       duration: const Duration(seconds: 3),

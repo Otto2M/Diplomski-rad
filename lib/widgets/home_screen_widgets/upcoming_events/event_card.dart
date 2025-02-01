@@ -38,8 +38,8 @@ class _EventCardState extends State<EventCard> {
           ),
         );
       },
-      onLongPress: () => setState(() => isHovered = true),
-      onLongPressUp: () => setState(() => isHovered = false),
+      // onLongPress: () => setState(() => isHovered = true),
+      // onLongPressUp: () => setState(() => isHovered = false),
       child: MouseRegion(
         onHover: (_) => setState(() => isHovered = true),
         onExit: (_) => setState(() => isHovered = false),

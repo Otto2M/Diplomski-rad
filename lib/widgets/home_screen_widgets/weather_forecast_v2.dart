@@ -68,6 +68,7 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
 
     String weatherCondition = weatherData!.description.toLowerCase();
     String backgroundImage = getBackgroundImage(weatherCondition);
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return GestureDetector(
       onTap: () {
@@ -76,6 +77,7 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25),
           ),
+          isScrollControlled: true,
           builder: (context) {
             return Container(
               decoration: BoxDecoration(

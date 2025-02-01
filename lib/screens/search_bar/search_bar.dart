@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:povedi_me_app/constants/styles/app_colors.dart';
+
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/screens/search_bar/search_bar_provider.dart';
 
@@ -45,12 +45,12 @@ class _CustomSearchBarState extends ConsumerState<CustomSearchBar> {
               width: 2.0,
             ),
           ),
-          focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
+          focusedBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
               Radius.circular(40),
             ),
             borderSide: BorderSide(
-              color: Colors.blueAccent,
+              color: Theme.of(context).colorScheme.primary,
               width: 2.0,
             ),
           ),

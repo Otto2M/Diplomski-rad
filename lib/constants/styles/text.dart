@@ -18,9 +18,12 @@ class AppTextStyles {
 
   // Naslovni tekstovi za kategroije v2 - razlika u bold-u
   static placeHeadline2(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 18 : 24;
+
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium?.color,
-      fontSize: 24,
+      fontSize: fontSize,
       fontWeight: FontWeight.w700,
       height: 2,
     );
@@ -28,10 +31,13 @@ class AppTextStyles {
 
   // Opisni tekstovi
   static TextStyle description(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 11 : 15;
+
     return TextStyle(
       fontFamily: GoogleFonts.poppins().fontFamily,
       color: Theme.of(context).textTheme.bodyMedium?.color,
-      fontSize: 15,
+      fontSize: fontSize,
       fontWeight: FontWeight.w300,
       height: 1.5,
     );
@@ -39,11 +45,13 @@ class AppTextStyles {
 
   //Naslovi glavnih kategorija
   static TextStyle categoryHeadline(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 18 : 24;
     // return TextStyle(
     //   fontFamily: GoogleFonts.poppins().fontFamily,
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium?.color,
-      fontSize: 24,
+      fontSize: fontSize,
       fontWeight: FontWeight.w700,
       height: 1.5,
     );
@@ -51,9 +59,12 @@ class AppTextStyles {
 
   //Tekst na buttonima
   static TextStyle placeButtonTitle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 13 : 18;
+
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.titleMedium?.color,
-      fontSize: 18,
+      fontSize: fontSize,
       fontWeight: FontWeight.w400,
       height: 1.5,
     );
@@ -61,10 +72,13 @@ class AppTextStyles {
 
   // Opisni tekstovi
   static TextStyle categoryPlaceDescription(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 10 : 14;
+
     return TextStyle(
       fontFamily: GoogleFonts.poppins().fontFamily,
       color: Theme.of(context).textTheme.bodyMedium?.color,
-      fontSize: 14,
+      fontSize: fontSize,
       fontWeight: FontWeight.w300,
       height: 1.5,
     );
@@ -74,10 +88,13 @@ class AppTextStyles {
 
   //Opći opis - savrsen dan
   static TextStyle pdGeneralDescription(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 13 : 18;
+
     return TextStyle(
       fontFamily: GoogleFonts.poppins().fontFamily,
       color: Theme.of(context).textTheme.bodyMedium?.color,
-      fontSize: 18,
+      fontSize: fontSize,
       fontWeight: FontWeight.w300,
       height: 1.5,
     );
@@ -85,9 +102,12 @@ class AppTextStyles {
 
   //Naslovi sekcija - savrsen dan
   static TextStyle pdSectionTitle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 15 : 18;
+
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium?.color,
-      fontSize: 18,
+      fontSize: fontSize,
       fontWeight: FontWeight.w700,
       height: 3,
     );
@@ -119,18 +139,24 @@ class AppTextStyles {
 
   //Upcoming events - card date style
   static TextStyle ueDateStyle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 18 : 25;
+
     return GoogleFonts.poppins(
       color: Theme.of(context).colorScheme.onPrimary,
-      fontSize: 25,
+      fontSize: fontSize,
       fontWeight: FontWeight.w600,
     );
   }
 
   //Upcoming events - card text style
   static TextStyle ueTitleStyle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 10 : 15;
+
     return GoogleFonts.poppins(
       color: Theme.of(context).colorScheme.onPrimary,
-      fontSize: 15,
+      fontSize: fontSize,
       fontWeight: FontWeight.w600,
     );
   }
@@ -139,9 +165,12 @@ class AppTextStyles {
 
   // Naslov unutar kartice za naziv mjesta
   static subcategoryCardPlaceHeadline(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 15 : 24;
+
     return GoogleFonts.poppins(
       color: Theme.of(context).colorScheme.onPrimary,
-      fontSize: 24,
+      fontSize: fontSize,
       fontWeight: FontWeight.w400,
       height: 1.5,
     );
@@ -149,9 +178,12 @@ class AppTextStyles {
 
   // Opis unutar kartice
   static subcategoryDesc(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 11 : 16;
+
     return GoogleFonts.poppins(
       color: Theme.of(context).colorScheme.onPrimary,
-      fontSize: 16,
+      fontSize: fontSize,
       fontWeight: FontWeight.w300,
       height: 1.5,
     );
@@ -159,9 +191,12 @@ class AppTextStyles {
 
   // Naslov button-a podkategorije
   static subcategoryButtonTitle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 16 : 22;
+
     return GoogleFonts.poppins(
       color: Theme.of(context).colorScheme.onPrimary,
-      fontSize: 22,
+      fontSize: fontSize,
       fontWeight: FontWeight.w600,
       height: 1.5,
     );
@@ -169,18 +204,24 @@ class AppTextStyles {
 
   // Naslov za gumb unutar kartice
   static cardButtonTitle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 10 : 16;
+
     return GoogleFonts.poppins(
       color: Theme.of(context).colorScheme.onPrimary,
-      fontSize: 16,
+      fontSize: fontSize,
       fontWeight: FontWeight.w600,
     );
   }
 
   // Naslov mjesta podkategorije
   static subcategoryPlaceTitle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 18 : 24;
+
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
-      fontSize: 24,
+      fontSize: fontSize,
       fontWeight: FontWeight.w700,
       height: 2,
       decoration: TextDecoration.underline,
@@ -190,9 +231,12 @@ class AppTextStyles {
 
   // Detaljni podaci o mjestu
   static subcategoryPlaceDetailsStyle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 11 : 15;
+
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
-      fontSize: 15,
+      fontSize: fontSize,
       fontWeight: FontWeight.w500,
       height: 1.5,
     );
@@ -214,9 +258,12 @@ class AppTextStyles {
   );
 
   static TextStyle errorText(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 8 : 12;
+
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.titleSmall?.color,
-      fontSize: 10,
+      fontSize: fontSize,
       fontWeight: FontWeight.w500,
       height: 1.5,
     );

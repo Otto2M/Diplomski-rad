@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/screens/search_bar/search_bar_provider.dart';
 
 class CustomSearchBar extends ConsumerStatefulWidget {
@@ -29,14 +30,12 @@ class _CustomSearchBarState extends ConsumerState<CustomSearchBar> {
           ref.read(searchQueryProvider.notifier).state = value;
         },
         decoration: InputDecoration(
-          prefixIcon: const Icon(
+          prefixIcon: Icon(
             Icons.search,
-            color: AppColors.accentDark,
+            color: Theme.of(context).colorScheme.primaryContainer,
           ),
           hintText: 'Pretraživanje',
-          hintStyle: const TextStyle(
-            color: AppColors.accentDark,
-          ),
+          hintStyle: AppTextStyles.drawerMenuStyle(context),
           enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(30),

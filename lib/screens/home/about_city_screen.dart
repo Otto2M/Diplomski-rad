@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/providers/categories_provider.dart';
 import 'package:povedi_me_app/widgets/custom_app_bar.dart';
 
@@ -16,7 +17,12 @@ class AboutCityScreen extends ConsumerWidget {
           final place = aboutCityData.isNotEmpty ? aboutCityData[0] : null;
 
           if (place == null) {
-            return const Center(child: Text('Grad nije pronađen.'));
+            return Center(
+              child: Text(
+                'Grad nije pronađen.',
+                style: AppTextStyles.description(context),
+              ),
+            );
           }
 
           return SafeArea(
@@ -33,9 +39,16 @@ class AboutCityScreen extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(place.title),
+                        Text(
+                          place.title.toUpperCase(),
+                          style: AppTextStyles.categoryHeadline(context),
+                        ),
                         const SizedBox(height: 20),
-                        Text(place.description),
+                        Text(
+                          place.description,
+                          style: AppTextStyles.description(context),
+                          textAlign: TextAlign.justify,
+                        ),
                         const SizedBox(height: 20),
                         GridView.builder(
                           shrinkWrap: true,
@@ -67,12 +80,13 @@ class AboutCityScreen extends ConsumerWidget {
               ),
             ),
           );
-          //);
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stackTrace) => Center(
-          child:
-              Text('Došlo je do greške prilikom učitavanja podataka: $error'),
+          child: Text(
+            'Došlo je do greške prilikom učitavanja podataka: $error',
+            style: AppTextStyles.errorText(context),
+          ),
         ),
       ),
     );

@@ -23,37 +23,54 @@ class HomeScreen extends ConsumerWidget {
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.menu, size: 40),
-                      padding: const EdgeInsets.all(12.0),
-                      onPressed: () {
-                        scaffoldKey!.currentState?.openDrawer();
-                      },
-                    ),
-                    const Expanded(
-                      child: CustomSearchBar(),
-                    ),
-                  ],
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              backgroundColor: Colors.transparent,
+              expandedHeight: 80.0,
+              collapsedHeight: kToolbarHeight,
+              floating: false,
+              pinned: false,
+              flexibleSpace: FlexibleSpaceBar(
+                titlePadding: EdgeInsets.zero,
+                background: Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.menu_rounded,
+                          size: 40,
+                        ),
+                        padding: const EdgeInsets.all(12.0),
+                        onPressed: () {
+                          scaffoldKey!.currentState?.openDrawer();
+                        },
+                      ),
+                      const Expanded(
+                        child: CustomSearchBar(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              const FilteredPlacesList(),
-              const GeneralAi(),
-              const SizedBox(height: 10),
-              //const WeatherForecast(),
-              const WeatherForecastVersion2(),
-              const SizedBox(height: 10),
-              const UpcomingEvents(),
-              const PerfectDay(),
-            ],
-          ),
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  const FilteredPlacesList(),
+                  const GeneralAi(),
+                  const SizedBox(height: 10),
+                  //const WeatherForecast(),
+                  const WeatherForecastVersion2(),
+                  const SizedBox(height: 10),
+                  const UpcomingEvents(),
+                  const PerfectDay(),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

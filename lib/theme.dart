@@ -30,7 +30,7 @@ final lightAppTheme = ThemeData(
   ),
   scaffoldBackgroundColor: AppColors.backgroundLight,
   appBarTheme: const AppBarTheme(
-    backgroundColor: AppColors.lightBlue,
+    backgroundColor: AppColors.darkBlue,
     foregroundColor: AppColors.white,
     elevation: 0,
   ),
@@ -39,6 +39,7 @@ final lightAppTheme = ThemeData(
     bodyLarge: TextStyle(color: AppColors.darkBlue),
     titleSmall: TextStyle(color: AppColors.errorLightRed),
     titleMedium: TextStyle(color: AppColors.darkBlue),
+    titleLarge: TextStyle(color: AppColors.black),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -51,6 +52,9 @@ final lightAppTheme = ThemeData(
     selectedItemColor: AppColors.white,
     unselectedItemColor: AppColors.yellow,
   ),
+  drawerTheme: const DrawerThemeData(
+      //backgroundColor: AppColors.darkBlue,
+      ),
 );
 
 final darkAppTheme = ThemeData(

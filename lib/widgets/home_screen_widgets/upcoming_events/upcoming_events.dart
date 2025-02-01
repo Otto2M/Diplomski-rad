@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 
 import 'package:povedi_me_app/providers/upcoming_events_provider.dart';
 import 'package:povedi_me_app/widgets/home_screen_widgets/upcoming_events/event_card.dart';
@@ -14,17 +15,23 @@ class UpcomingEvents extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.all(20),
-          child: Text('Nadolazeće manifestacije'),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Text(
+            'Nadolazeće manifestacije',
+            style: AppTextStyles.placeHeadline2(context),
+          ),
         ),
         upcomingEventsAsync.when(
           data: (events) {
             if (events.isEmpty) {
-              return const Padding(
-                padding: EdgeInsets.all(20),
+              return Padding(
+                padding: const EdgeInsets.all(20),
                 child: Center(
-                  child: Text('Nema nadolazećih manifestacija.'),
+                  child: Text(
+                    'Nema nadolazećih manifestacija.',
+                    style: AppTextStyles.description(context),
+                  ),
                 ),
               );
             }
@@ -39,7 +46,6 @@ class UpcomingEvents extends ConsumerWidget {
                   return Padding(
                     padding: const EdgeInsets.only(left: 20, right: 10),
                     child: EventCard(event: event),
-                    // child: PlacesByCategory(place: event),
                   );
                 },
               ),
@@ -48,7 +54,12 @@ class UpcomingEvents extends ConsumerWidget {
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, _) => Padding(
             padding: const EdgeInsets.all(20),
-            child: Center(child: Text('Greška: $error')),
+            child: Center(
+              child: Text(
+                'Greška: $error',
+                style: AppTextStyles.errorText(context),
+              ),
+            ),
           ),
         ),
       ],

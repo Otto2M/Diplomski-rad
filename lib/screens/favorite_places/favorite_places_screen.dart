@@ -9,11 +9,9 @@ import 'package:povedi_me_app/widgets/menu/app_drawer_menu.dart';
 class FavoritePlacesTabScreen extends ConsumerWidget {
   const FavoritePlacesTabScreen({
     super.key,
-    required this.title,
     required this.favoritePlaces,
   });
 
-  final String title;
   final List<Place> favoritePlaces;
 
   @override
@@ -38,7 +36,6 @@ class FavoritePlacesTabScreen extends ConsumerWidget {
     if (favoritePlaces.isNotEmpty) {
       content = FavoritePlacesList(
         favoritePlaces: favoritePlaces,
-        title: title,
       );
     }
 

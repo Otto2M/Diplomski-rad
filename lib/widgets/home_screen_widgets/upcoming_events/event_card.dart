@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:povedi_me_app/assets.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/screens/places/place_details_category_screen.dart';
 
@@ -32,7 +33,8 @@ class _EventCardState extends State<EventCard> {
           context,
           MaterialPageRoute(
             builder: (context) => PlaceDetailsCategoryScreen(
-                place: widget.event), //EventDetailsScreen(event: widget.event),
+              place: widget.event,
+            ), //EventDetailsScreen(event: widget.event),
           ),
         );
       },
@@ -51,7 +53,7 @@ class _EventCardState extends State<EventCard> {
                     : Assets.logo,
 
                 //
-                // ----------- POSTAVITI SLIKU NA FIREBASE STORAGE DA SE OD TAMO DOHVAĆA,
+                // ----------- POSTAVITI SLIKU Assets.logo NA FIREBASE STORAGE DA SE OD TAMO DOHVAĆA,
                 //OVAKO NE RADI ZBOG METODE IMAGE.NETWORK ------------------
                 //
 
@@ -64,14 +66,17 @@ class _EventCardState extends State<EventCard> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: 180,
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(6.0),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
+                  color: Theme.of(context)
+                      .colorScheme
+                      .primaryContainer
+                      .withOpacity(0.7),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   widget.event.title,
-                  style: const TextStyle(color: Colors.white),
+                  style: AppTextStyles.ueTitleStyle(context),
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -90,11 +95,7 @@ class _EventCardState extends State<EventCard> {
                 alignment: Alignment.center,
                 child: Text(
                   _formatDate(widget.event.date),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: AppTextStyles.ueDateStyle(context),
                 ),
               ),
           ],

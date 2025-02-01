@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/assets.dart';
+import 'package:povedi_me_app/constants/styles/app_colors.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/screens/subcategories/place_item_details_screen.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -18,7 +21,7 @@ class CardItems extends StatelessWidget {
     final List<String> imagesUrl = place.imageUrl;
 
     return Card(
-      color: Colors.blueGrey,
+      color: Theme.of(context).colorScheme.primary,
       margin: isInteractive
           ? const EdgeInsets.all(20)
           : const EdgeInsets.only(top: 20, left: 3),
@@ -37,20 +40,20 @@ class CardItems extends StatelessWidget {
                     ),
                   );
                 },
-                child: _buildCardContent(imagesUrl),
+                child: _buildCardContent(imagesUrl, context),
               )
-            : _buildCardContent(imagesUrl),
+            : _buildCardContent(imagesUrl, context),
       ),
     );
   }
 
-  Widget _buildCardContent(List<String> imagesUrl) {
+  Widget _buildCardContent(List<String> imagesUrl, BuildContext context) {
     return Row(
       children: [
         FadeInImage(
           placeholder: MemoryImage(kTransparentImage),
           image: NetworkImage(
-            imagesUrl.isNotEmpty ? imagesUrl[0] : '',
+            imagesUrl.isNotEmpty ? imagesUrl.first : '',
           ),
           fit: BoxFit.cover,
           height: 160,
@@ -58,11 +61,14 @@ class CardItems extends StatelessWidget {
         ),
         Container(
           width: 190,
-          color: Colors.black54,
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+          height: 160,
+          padding: const EdgeInsets.symmetric(
+            vertical: 10,
+            horizontal: 10,
+          ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 place.title,
@@ -70,10 +76,68 @@ class CardItems extends StatelessWidget {
                 textAlign: TextAlign.center,
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(color: Colors.white, fontSize: 15),
+                style: AppTextStyles.subcategoryCardPlaceHeadline(context),
               ),
-              const Text('Recenzija'),
-              // const PlaceItemInfoReview(icon: Icons.star),
+              Text(
+                'Recenzije:',
+                style: AppTextStyles.subcategoryDesc(context),
+              ),
+              Row(
+                children: [
+                  Image.asset(
+                    Assets.iStar,
+                    width: 30,
+                    height: 30,
+                  ),
+                  Image.asset(
+                    Assets.iStar,
+                    width: 30,
+                    height: 30,
+                  ),
+                  Image.asset(
+                    Assets.iStar,
+                    width: 30,
+                    height: 30,
+                  ),
+                  Image.asset(
+                    Assets.iStar,
+                    width: 30,
+                    height: 30,
+                  ),
+                  Image.asset(
+                    Assets.iStarHalf,
+                    width: 30,
+                    height: 30,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  isInteractive
+                      ? ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => PlaceItemDetailsScreen(
+                                  placeWithDetails: place,
+                                ),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.buttonRed,
+                            minimumSize: const Size(1, 30),
+                            elevation: 10,
+                          ),
+                          child: Text(
+                            "Više".toUpperCase(),
+                            style: AppTextStyles.cardButtonTitle(context),
+                          ),
+                        )
+                      : const SizedBox(),
+                ],
+              ),
             ],
           ),
         ),

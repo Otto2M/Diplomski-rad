@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 
 import 'package:povedi_me_app/models/city.dart';
 import 'package:povedi_me_app/widgets/custom_app_bar.dart';
@@ -42,13 +43,16 @@ class PerfectDayDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Naslov
-                    Text(perfectDay.title),
+                    Text(
+                      perfectDay.title.toUpperCase(),
+                      style: AppTextStyles.categoryHeadline(context),
+                    ),
                     const SizedBox(height: 8.0),
 
                     // Opis
                     Text(
                       perfectDay.description,
-                      //style: Theme.of(context).textTheme.bodyText2,
+                      style: AppTextStyles.pdGeneralDescription(context),
                     ),
                     const SizedBox(height: 16.0),
 
@@ -56,31 +60,36 @@ class PerfectDayDetailsScreen extends StatelessWidget {
                     for (var section in perfectDay.sections) ...[
                       Text(
                         section.timeOfDay,
+                        style: AppTextStyles.pdSectionTitle(context),
                       ),
                       const SizedBox(height: 4.0),
-                      Text(section.content),
+                      Text(
+                        section.content,
+                        style: AppTextStyles.description(context),
+                      ),
                       const SizedBox(height: 16.0),
                     ],
 
                     // Dodatni savjeti
                     if (perfectDay.additionalTips?.isNotEmpty ?? false) ...[
                       const Divider(),
-                      const Text(
+                      Text(
                         'Dodatni savjeti',
-                        // style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                        //       fontWeight: FontWeight.bold,
-                        //     ),
+                        style: AppTextStyles.pdSectionTitle(context),
                       ),
                       const SizedBox(height: 4.0),
-                      Text(perfectDay.additionalTips!),
+                      Text(
+                        perfectDay.additionalTips!,
+                        style: AppTextStyles.description(context),
+                      ),
                     ],
-
+                    const SizedBox(height: 16.0),
                     const Divider(),
-
+                    const SizedBox(height: 16.0),
                     // Zaključak
                     Text(
                       perfectDay.conclusion,
-                      //style: Theme.of(context).textTheme.bodyText1,
+                      style: AppTextStyles.pdGeneralDescription(context),
                     ),
                   ],
                 ),

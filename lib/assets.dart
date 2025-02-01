@@ -10,4 +10,7 @@ class Assets {
   static const iHome = 'assets/icons/home.png';
   static const iMap = 'assets/icons/map.png';
   static const iFavorite = 'assets/icons/favorite.png';
+  static const iStar = 'assets/icons/star_full.png';
+  static const iStarHalf = 'assets/icons/star_half.png';
+  static const iStarRounded = 'assets/icons/star_rounded.png';
 }

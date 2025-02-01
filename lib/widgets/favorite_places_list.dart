@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/providers/filter_subcategories_provider.dart';
@@ -10,11 +11,9 @@ class FavoritePlacesList extends ConsumerWidget {
   const FavoritePlacesList({
     super.key,
     required this.favoritePlaces,
-    required this.title,
   });
 
   final List<Place> favoritePlaces;
-  final String title;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,8 +28,9 @@ class FavoritePlacesList extends ConsumerWidget {
             top: 20,
           ),
           child: Text(
-            title.toUpperCase(),
+            "Moji Favoriti".toUpperCase(),
             overflow: TextOverflow.ellipsis,
+            style: AppTextStyles.categoryHeadline(context),
           ),
         ),
         Expanded(

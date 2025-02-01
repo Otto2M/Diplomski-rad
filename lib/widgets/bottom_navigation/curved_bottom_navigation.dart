@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:povedi_me_app/providers/bottom_navigation_provider.dart';
 
 class CurvedBottomNavigation extends ConsumerStatefulWidget {
@@ -37,6 +38,7 @@ class _CurvedBottomNavigationState
               : Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
         ),
       ],
+      index: indexBottomNavbar,
       backgroundColor:
           Theme.of(context).bottomNavigationBarTheme.selectedItemColor!,
       color: Theme.of(context).colorScheme.primaryContainer, //primary,

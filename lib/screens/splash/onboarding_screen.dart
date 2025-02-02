@@ -1,18 +1,25 @@
+//
+//
 //za odabir jezika i objasnjena nekih dijelova aplikacije
+//
+//
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
+import 'package:povedi_me_app/providers/onboarding_status_provider.dart';
+import 'package:povedi_me_app/widgets/tab_screen.dart';
 import 'welcome_screen.dart';
 
-class OnboardingScreen extends StatefulWidget {
+class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
 
   @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
+  ConsumerState<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
@@ -40,6 +47,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     },
   ];
 
+  Future<void> _completeOnboarding() async {
+    await ref.read(onboardingUpdaterProvider).markOnboardingAsSeen();
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const WelcomeScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,12 +76,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
       bottomSheet: _currentPage == _onboardingData.length - 1
           ? TextButton(
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                      builder: (context) => const WelcomeScreen()),
-                );
-              },
+              onPressed: _completeOnboarding,
               child: const Text("Kreni dalje", style: TextStyle(fontSize: 18)),
             )
           : Row(

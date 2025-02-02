@@ -75,7 +75,11 @@ class PerfectDayListScreen extends ConsumerWidget {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.only(
+                                    left: 10.0,
+                                    right: 10.0,
+                                    bottom: 10.0,
+                                  ),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -86,7 +90,6 @@ class PerfectDayListScreen extends ConsumerWidget {
                                         style: AppTextStyles.pdSectionTitle(
                                             context),
                                       ),
-                                      const SizedBox(height: 8),
                                       // Opis
                                       Text(
                                         perfectDay.conclusion,

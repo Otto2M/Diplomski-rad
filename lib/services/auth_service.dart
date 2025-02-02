@@ -14,6 +14,7 @@ class AuthService {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
+      print('------ KORISNIK $email USPJEŠNO PRIJAVLJEN -----');
     } on FirebaseAuthException catch (error) {
       if (error.code == Errors.emailAlreadyInUse) {
         //TODO error message print
@@ -83,7 +84,12 @@ class AuthService {
 
   //Sign out user
   Future<void> signOut() async {
-    await _firebaseAuth.signOut();
+    try {
+      await _firebaseAuth.signOut();
+      print('---- KORISNIK ODJAVLJEN! -----');
+    } catch (e) {
+      print('Odjava nije uspjela: $e');
+    }
   }
 
   // // Get all categories

@@ -14,7 +14,7 @@ class SideDialog extends StatelessWidget {
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.platformDefault);
+      await launchUrl(uri);
     } else {
       throw 'Could not launch $url';
     }

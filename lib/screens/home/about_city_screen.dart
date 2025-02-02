@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/providers/categories_provider.dart';
+import 'package:povedi_me_app/screens/image_gallery.dart';
 import 'package:povedi_me_app/widgets/custom_app_bar.dart';
 
 class AboutCityScreen extends ConsumerWidget {
@@ -62,13 +63,30 @@ class AboutCityScreen extends ConsumerWidget {
                           itemCount: place.imageUrl.length,
                           itemBuilder: (context, index) {
                             final imageUrl = place.imageUrl[index];
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                imageUrl,
-                                fit: BoxFit.cover,
-                                height: 120,
-                                width: 150,
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        FullScreenImageGallery(
+                                      imageUrls: place.imageUrl,
+                                      initialIndex: index,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Hero(
+                                tag: place.imageUrl[index],
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.network(
+                                    imageUrl,
+                                    fit: BoxFit.cover,
+                                    height: 120,
+                                    width: 150,
+                                  ),
+                                ),
                               ),
                             );
                           },

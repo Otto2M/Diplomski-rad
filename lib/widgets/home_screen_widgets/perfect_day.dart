@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import 'package:povedi_me_app/screens/home/perfect_day_list_screen.dart';
@@ -11,7 +12,6 @@ class PerfectDay extends StatelessWidget {
     return Container(
       height: 250,
       width: double.infinity,
-      color: Colors.blue,
       margin: const EdgeInsets.symmetric(vertical: 50),
       child: Stack(
         children: [
@@ -26,7 +26,6 @@ class PerfectDay extends StatelessWidget {
           Positioned(
             bottom: 15,
             left: 20,
-            //definirati globalni izgled za te buttone
             child: ElevatedButton(
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute(
@@ -35,19 +34,18 @@ class PerfectDay extends StatelessWidget {
               ),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(20), // Manje zaobljeni rubovi
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 padding: const EdgeInsets.symmetric(
                   vertical: 8,
                   horizontal: 25,
-                ), //Visina gumba
+                ),
                 elevation: 20,
                 overlayColor: Colors.black26,
               ),
-              child: const Text(
+              child: Text(
                 "SAVRŠEN DAN U KC",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                style: AppTextStyles.homeScreenYellowButtons(context),
               ),
             ),
           ),

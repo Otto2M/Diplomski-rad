@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/screens/home/demo/demo_home_screen.dart';
 import 'package:povedi_me_app/screens/home/home_screen.dart';
+import 'package:povedi_me_app/screens/splash/initial_screen.dart';
 import 'package:povedi_me_app/screens/splash/loading_screen.dart';
 import 'package:povedi_me_app/screens/splash/splash_screen.dart';
 import 'package:povedi_me_app/screens/splash/welcome_screen.dart';
@@ -11,6 +12,7 @@ import 'package:povedi_me_app/widgets/tab_screen.dart';
 import 'firebase_options.dart';
 import 'package:povedi_me_app/constants/instances.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +24,10 @@ void main() async {
       child: App(),
     ),
   );
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: [SystemUiOverlay.top],
+  ); //ili SystemUiMode.edgeToEdge ili SystemUiMode.immersiveSticky
 }
 
 class App extends StatelessWidget {
@@ -33,9 +39,8 @@ class App extends StatelessWidget {
       theme: lightAppTheme,
       darkTheme: darkAppTheme,
       //themeMode: ,
-      //home: SplashScreen(), //fix this at open app
       home: const TabScreen(),
-      //home: const HomeScreen(),
+      //home: const SplashScreen(),
       // home: StreamBuilder(
       //     stream: FirebaseAuth.instance.authStateChanges(),
       //     builder: (ctx, snapshot) {

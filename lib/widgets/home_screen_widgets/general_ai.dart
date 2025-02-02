@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/assets.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/screens/home/about_city_screen.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -37,22 +38,18 @@ class _GeneralAiState extends State<GeneralAi> {
               ),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(20), // Manje zaobljeni rubovi
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 padding: const EdgeInsets.symmetric(
-                  vertical: 12,
+                  vertical: 8,
                   horizontal: 25,
                 ), //Visina gumba
                 elevation: 20,
                 overlayColor: Colors.black26,
               ),
-              child: const Text(
+              child: Text(
                 "O KOPRIVNICI",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
-                ),
+                style: AppTextStyles.homeScreenYellowButtons(context),
               ),
             ),
           ),

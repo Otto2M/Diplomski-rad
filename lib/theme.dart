@@ -39,7 +39,7 @@ final lightAppTheme = ThemeData(
     bodyLarge: TextStyle(color: AppColors.darkBlue),
     titleSmall: TextStyle(color: AppColors.errorLightRed),
     titleMedium: TextStyle(color: AppColors.darkBlue),
-    titleLarge: TextStyle(color: AppColors.black),
+    titleLarge: TextStyle(color: AppColors.white),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -52,9 +52,12 @@ final lightAppTheme = ThemeData(
     selectedItemColor: AppColors.white,
     unselectedItemColor: AppColors.yellow,
   ),
-  drawerTheme: const DrawerThemeData(
-      //backgroundColor: AppColors.darkBlue,
-      ),
+  pageTransitionsTheme: const PageTransitionsTheme(
+    builders: {
+      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+    },
+  ),
 );
 
 final darkAppTheme = ThemeData(
@@ -88,5 +91,11 @@ final darkAppTheme = ThemeData(
       backgroundColor: AppColors.secondaryDark, // Dodamo crvenu za gumbe
       foregroundColor: AppColors.accentDark, // Tekst na gumbima
     ),
+  ),
+  pageTransitionsTheme: const PageTransitionsTheme(
+    builders: {
+      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+    },
   ),
 );

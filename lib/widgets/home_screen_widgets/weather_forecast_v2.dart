@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 
 import 'package:povedi_me_app/models/weather_forecast.dart';
 import 'package:povedi_me_app/services/weather_service.dart';
@@ -68,7 +69,6 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
 
     String weatherCondition = weatherData!.description.toLowerCase();
     String backgroundImage = getBackgroundImage(weatherCondition);
-    double screenWidth = MediaQuery.of(context).size.width;
 
     return GestureDetector(
       onTap: () {
@@ -94,10 +94,9 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Prognoza za Koprivnicu",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: AppTextStyles.wfBottomModalTitle(context),
                     ),
                     const SizedBox(height: 16),
                     ...weatherData!.forecast.map(
@@ -115,7 +114,8 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
                               children: [
                                 Text(
                                   forecast.time,
-                                  style: TextStyle(color: Colors.white),
+                                  style:
+                                      AppTextStyles.wfBottomModalData(context),
                                 ),
                                 Image.network(
                                   'https://openweathermap.org/img/wn/${forecast.weatherIcon}@2x.png',
@@ -124,9 +124,8 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
                                 ),
                                 Text(
                                   '${forecast.temperature.toStringAsFixed(1)}°C',
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                                  style:
+                                      AppTextStyles.wfBottomModalData(context),
                                 ),
                               ],
                             ),
@@ -135,17 +134,13 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
                       },
                     ),
                     const SizedBox(height: 16),
-                    const Text(
+                    Text(
                       "Dodatne informacije:",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        //color: Colors.white,
-                      ),
+                      style: AppTextStyles.wfBottomModalAdditionalData(context),
                     ),
                     const SizedBox(height: 8),
                     Container(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.6),
                         borderRadius: BorderRadius.circular(12),
@@ -155,15 +150,15 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
                         children: [
                           Text(
                             "Osjećaj temperature: ${weatherData!.feelsLike.toStringAsFixed(1)}°C",
-                            style: TextStyle(color: Colors.white),
+                            style: AppTextStyles.wfBottomModalData(context),
                           ),
                           Text(
                             "Vlaga: ${weatherData!.humidity}%",
-                            style: TextStyle(color: Colors.white),
+                            style: AppTextStyles.wfBottomModalData(context),
                           ),
                           Text(
                             "Brzina vjetra: ${(weatherData!.windSpeed * 3.6).toStringAsFixed(1)} km/h",
-                            style: TextStyle(color: Colors.white),
+                            style: AppTextStyles.wfBottomModalData(context),
                           ),
                         ],
                       ),
@@ -199,7 +194,7 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.4),
                       borderRadius: BorderRadius.circular(12),
@@ -209,8 +204,7 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
                       children: [
                         Text(
                           weatherData!.cityName,
-                          style: const TextStyle(
-                              fontSize: 18, color: Colors.white),
+                          style: AppTextStyles.wfHomeTitle(context),
                         ),
                         const SizedBox(height: 8),
                         Row(
@@ -223,8 +217,7 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
                             const SizedBox(width: 8),
                             Text(
                               '${weatherData!.temperature.toStringAsFixed(1)}°',
-                              style: const TextStyle(
-                                  fontSize: 32, color: Colors.white),
+                              style: AppTextStyles.wfHomeTemperature(context),
                             ),
                           ],
                         ),
@@ -238,11 +231,13 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
                         children: [
                           Text(
                             'Max: ${weatherData!.maxTemp.toStringAsFixed(1)}°',
-                            style: TextStyle(color: Colors.white),
+                            style:
+                                AppTextStyles.wfHomeTemperatureMinMax(context),
                           ),
                           Text(
                             'Min: ${weatherData!.minTemp.toStringAsFixed(1)}°',
-                            style: TextStyle(color: Colors.white),
+                            style:
+                                AppTextStyles.wfHomeTemperatureMinMax(context),
                           ),
                         ],
                       ),
@@ -252,7 +247,7 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
               ),
               const SizedBox(height: 8),
               Container(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.4),
                   borderRadius: BorderRadius.circular(12),
@@ -264,7 +259,7 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
                       children: [
                         Text(
                           forecast.time,
-                          style: TextStyle(color: Colors.white, fontSize: 12),
+                          style: AppTextStyles.wfHomeHourly(context),
                         ),
                         Image.network(
                           'https://openweathermap.org/img/wn/${forecast.weatherIcon}@2x.png',
@@ -273,7 +268,7 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
                         ),
                         Text(
                           '${forecast.temperature.toStringAsFixed(1)}°',
-                          style: TextStyle(color: Colors.white, fontSize: 12),
+                          style: AppTextStyles.wfHomeHourly(context),
                         ),
                       ],
                     );

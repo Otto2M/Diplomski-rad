@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/constants/instances.dart';
 
 import 'package:povedi_me_app/providers/categories_provider.dart';
 import 'package:povedi_me_app/screens/places/places_list_category_screen.dart';
@@ -22,12 +23,22 @@ class AppDrawer extends ConsumerWidget {
             decoration: BoxDecoration(
               color: Colors.blue.shade900,
             ),
-            child: const Text(
-              'Kategorije',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
+            child: Column(
+              children: [
+                const Text(
+                  'Kategorije',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    firebaseAuth.signOut();
+                  },
+                  icon: const Icon(Icons.exit_to_app),
+                ),
+              ],
             ),
           ),
 

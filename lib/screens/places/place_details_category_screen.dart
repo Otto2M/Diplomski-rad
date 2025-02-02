@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/providers/image_storage_provider.dart';
 import 'package:povedi_me_app/models/place.dart';
+import 'package:povedi_me_app/screens/image_gallery.dart';
 import 'package:povedi_me_app/widgets/custom_app_bar_with_favorite.dart';
 
 class PlaceDetailsCategoryScreen extends ConsumerWidget {
@@ -56,13 +57,29 @@ class PlaceDetailsCategoryScreen extends ConsumerWidget {
                   itemCount: place.imageUrl.length, // Broj slika
                   itemBuilder: (context, index) {
                     final imagesUrl = place.imageUrl[index];
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.network(
-                        imagesUrl,
-                        fit: BoxFit.cover,
-                        height: 120,
-                        width: 150,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FullScreenImageGallery(
+                              imageUrls: place.imageUrl,
+                              initialIndex: index,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Hero(
+                        tag: place.imageUrl[index],
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.network(
+                            imagesUrl,
+                            fit: BoxFit.cover,
+                            height: 120,
+                            width: 150,
+                          ),
+                        ),
                       ),
                     );
                   },

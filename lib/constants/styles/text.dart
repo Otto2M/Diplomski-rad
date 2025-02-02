@@ -3,6 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTextStyles {
+  // Home screen - buttons
+  static TextStyle homeScreenYellowButtons(BuildContext context) {
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium?.color,
+      fontSize: 24,
+      fontWeight: FontWeight.w700,
+      height: 1.5,
+    );
+  }
+
 // --- GENERAL AND CATEGORIES SCREENS
 
   // Naslovni tekstovi za kategorije v1
@@ -236,6 +246,97 @@ class AppTextStyles {
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+    );
+  }
+
+  //Vremenska prognoza - modal bottom sheet - naslov
+  static wfBottomModalTitle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 12 : 18;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+    );
+  }
+
+  //Vremenska prognoza - modal bottom sheet - podaci
+  static wfBottomModalData(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 10 : 16;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.titleLarge!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w400,
+      height: 1.5,
+    );
+  }
+
+  //Vremenska prognoza - modal bottom sheet - podaci
+  static wfBottomModalAdditionalData(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 10 : 16;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+    );
+  }
+
+  //Vremenska prognoza - naslov grad
+  static wfHomeTitle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 12 : 18;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.titleLarge!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+    );
+  }
+
+  //Vremenska prognoza - temp.
+  static wfHomeTemperature(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 24 : 32;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.titleLarge!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w600,
+      height: 1.5,
+    );
+  }
+
+  //Vremenska prognoza - temp. min. max.
+  static wfHomeTemperatureMinMax(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 11 : 15;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.titleLarge!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w400,
+      height: 1.5,
+    );
+  }
+
+  //Vremenska prognoza - po satima
+  static wfHomeHourly(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 10 : 13;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.titleLarge!.color,
       fontSize: fontSize,
       fontWeight: FontWeight.w500,
       height: 1.5,

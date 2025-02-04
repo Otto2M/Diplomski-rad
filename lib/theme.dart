@@ -92,6 +92,11 @@ final darkAppTheme = ThemeData(
       foregroundColor: AppColors.accentDark, // Tekst na gumbima
     ),
   ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: Color.fromARGB(137, 47, 121, 211),
+    selectedItemColor: AppColors.black,
+    unselectedItemColor: AppColors.yellow,
+  ),
   pageTransitionsTheme: const PageTransitionsTheme(
     builders: {
       TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),

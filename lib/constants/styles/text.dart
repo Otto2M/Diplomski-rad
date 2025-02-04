@@ -343,6 +343,33 @@ class AppTextStyles {
     );
   }
 
+//MY PROFILE
+
+  //Selected theme
+  static profileSelectedTheme(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 12 : 15;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w500,
+    );
+  }
+
+  //Selected theme headline
+  static profileSelectedThemeHeadline(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 14 : 18;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w700,
+      height: 1.5,
+    );
+  }
+
   // Tekst za linkove
   static final linkDescription = GoogleFonts.poppins(
     color: AppColors.lightBlue, // Plava za linkove

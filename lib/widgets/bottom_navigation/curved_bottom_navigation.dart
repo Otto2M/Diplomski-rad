@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/constants/styles/app_colors.dart';
 
 import 'package:povedi_me_app/providers/bottom_navigation_provider.dart';
 
@@ -40,7 +41,8 @@ class _CurvedBottomNavigationState
       ],
       index: indexBottomNavbar,
       backgroundColor:
-          Theme.of(context).bottomNavigationBarTheme.selectedItemColor!,
+          Theme.of(context).bottomNavigationBarTheme.selectedItemColor ??
+              AppColors.white,
       color: Theme.of(context).colorScheme.primaryContainer, //primary,
       animationDuration: const Duration(milliseconds: 300),
       height: 65,

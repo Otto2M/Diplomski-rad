@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:povedi_me_app/constants/errors.dart';
 import 'package:povedi_me_app/constants/firestore_collections.dart';
+import 'package:povedi_me_app/models/user.dart' as user;
 
 class AuthService {
   final _firebaseAuth = FirebaseAuth.instance;
@@ -39,16 +40,20 @@ class AuthService {
           .doc(userCredential.user!.uid)
           .set({
         'id': userCredential.user!.uid,
-        'name ': name,
+        'name': name,
         'username': username,
         'phoneNumber': phoneNumber,
         'email': email,
-        'image_url': null,
+        'image_url':
+            "https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png",
         'createdAt': Timestamp.now(),
       });
     } on FirebaseAuthException catch (error) {
       if (error.code == Errors.emailAlreadyInUse) {
-        //TODO error message print
+        throw Exception('Email već postoji!');
+      } else {
+        throw Exception(
+            'Došlo je do greške pri registraciji: ${error.message}');
       }
     }
   }
@@ -92,6 +97,46 @@ class AuthService {
     }
   }
 
+  Future<user.User?> getUserProfile(String userId) async {
+    try {
+      final doc = await _firebaseFirestore
+          .collection(FirestoreCollections.userCollection)
+          .doc(userId)
+          .get();
+      if (doc.exists) {
+        return user.User.fromFirestore(doc.data()!);
+      } else {
+        //print("Dokument za korisnika ne postoji.");
+      }
+    } catch (e) {
+      print('Error fetching user profile data: $e');
+    }
+    return null;
+  }
+
+  Future<void> updateUserProfile(String userId, user.User updatedUser) async {
+    try {
+      await _firebaseFirestore
+          .collection(FirestoreCollections.userCollection)
+          .doc(userId)
+          .update(updatedUser.toFirestore());
+    } catch (e) {
+      print('Error updating user profile data: $e');
+    }
+  }
+
+  Future<User?> getCurrentUser() async {
+    try {
+      final user = _firebaseAuth.currentUser;
+      //print("Prijavljeni korisnik: $user");
+      return user;
+    } catch (e) {
+      //print("Greška pri dohvaćanju prijavljenog korisnika: $e");
+      return null;
+    }
+  }
+}
+
   // // Get all categories
   // Future<List<Category>> getCategories() async {
   //   try {
@@ -131,4 +176,3 @@ class AuthService {
   //     rethrow;
   //   }
   // }
-}

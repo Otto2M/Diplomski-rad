@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/constants/instances.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 
 import 'package:povedi_me_app/providers/categories_provider.dart';
 import 'package:povedi_me_app/screens/places/places_list_category_screen.dart';
+import 'package:povedi_me_app/screens/profile/my_profile.dart';
 import 'package:povedi_me_app/screens/subcategories/subcategories_screen.dart';
 
 class AppDrawer extends ConsumerWidget {
@@ -24,19 +26,31 @@ class AppDrawer extends ConsumerWidget {
               color: Colors.blue.shade900,
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Kategorije',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                  ),
+                  style: AppTextStyles.drawerMenuHeadline(context),
                 ),
                 IconButton(
                   onPressed: () {
                     firebaseAuth.signOut();
                   },
                   icon: const Icon(Icons.exit_to_app),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const MyProfile(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "Moj profil",
+                    style: AppTextStyles.drawerMenuStyle(context),
+                  ),
                 ),
               ],
             ),
@@ -57,7 +71,10 @@ class AppDrawer extends ConsumerWidget {
                       return ListTile(
                         leading:
                             Icon(Icons.category), // Ikona može biti dinamična
-                        title: Text(category.title),
+                        title: Text(
+                          category.title,
+                          style: AppTextStyles.drawerMenuStyle(context),
+                        ),
                         onTap: () {
                           Navigator.pop(context);
 

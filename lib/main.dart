@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/providers/theme_mode_option_provider.dart';
 import 'package:povedi_me_app/screens/home/demo/demo_home_screen.dart';
 import 'package:povedi_me_app/screens/home/home_screen.dart';
 import 'package:povedi_me_app/screens/splash/initial_screen.dart';
@@ -30,17 +31,19 @@ void main() async {
   ); //ili SystemUiMode.edgeToEdge ili SystemUiMode.immersiveSticky
 }
 
-class App extends StatelessWidget {
+class App extends ConsumerWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeProvider);
+
     return MaterialApp(
       theme: lightAppTheme,
       darkTheme: darkAppTheme,
-      //themeMode: ,
-      home: const TabScreen(),
-      //home: const SplashScreen(),
+      themeMode: themeMode,
+      //home: const TabScreen(),
+      home: const SplashScreen(),
       // home: StreamBuilder(
       //     stream: FirebaseAuth.instance.authStateChanges(),
       //     builder: (ctx, snapshot) {

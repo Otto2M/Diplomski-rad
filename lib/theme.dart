@@ -1,16 +1,3 @@
-// import 'package:flutter/material.dart';
-// //import 'package:google_fonts/google_fonts.dart';
-
-// final appTheme = ThemeData(
-//   colorScheme: const ColorScheme.light().copyWith(
-//     brightness: Brightness.light,
-//     surface: const Color.fromARGB(255, 119, 149, 175),
-//     onSurface: const Color.fromARGB(255, 87, 29, 133),
-//   ),
-//   scaffoldBackgroundColor: const Color.fromARGB(255, 41, 53, 56),
-//   //textTheme: GoogleFonts.latoTextTheme(),
-// );
-
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
 
@@ -81,10 +68,11 @@ final darkAppTheme = ThemeData(
     elevation: 0,
   ),
   textTheme: const TextTheme(
-    bodyLarge: TextStyle(color: AppColors.white),
     bodyMedium: TextStyle(color: AppColors.white),
-    titleLarge: TextStyle(color: AppColors.secondaryDark),
+    bodyLarge: TextStyle(color: AppColors.accentDark),
     titleSmall: TextStyle(color: AppColors.errorDarkRed),
+    titleMedium: TextStyle(color: AppColors.accentDark),
+    titleLarge: TextStyle(color: AppColors.white),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -94,7 +82,7 @@ final darkAppTheme = ThemeData(
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: Color.fromARGB(137, 47, 121, 211),
-    selectedItemColor: AppColors.black,
+    selectedItemColor: AppColors.backgroundDark,
     unselectedItemColor: AppColors.yellow,
   ),
   pageTransitionsTheme: const PageTransitionsTheme(

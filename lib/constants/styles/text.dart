@@ -5,9 +5,12 @@ import 'app_colors.dart';
 class AppTextStyles {
   // Home screen - buttons
   static TextStyle homeScreenYellowButtons(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 18 : 24;
+
     return GoogleFonts.poppins(
-      color: Theme.of(context).textTheme.bodyMedium?.color,
-      fontSize: 24,
+      color: Theme.of(context).textTheme.bodyLarge?.color,
+      fontSize: fontSize,
       fontWeight: FontWeight.w700,
       height: 1.5,
     );
@@ -15,7 +18,7 @@ class AppTextStyles {
 
 // --- GENERAL AND CATEGORIES SCREENS
 
-  // Naslovni tekstovi za kategorije v1
+  // Naslovni tekstovi za kategorije v1 - NE KORISTI SE
   static TextStyle placeHeadline(BuildContext context) {
     return TextStyle(
       fontFamily: GoogleFonts.poppins().fontFamily,
@@ -42,7 +45,7 @@ class AppTextStyles {
   // Opisni tekstovi
   static TextStyle description(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 11 : 15;
+    double fontSize = screenWidth < 420 ? 12 : 15;
 
     return TextStyle(
       fontFamily: GoogleFonts.poppins().fontFamily,
@@ -94,7 +97,49 @@ class AppTextStyles {
     );
   }
 
+// --- FAVORITES
+
+  // Favorites screen - headline
+  static TextStyle favoriteScreenSubcategoryHedaline(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 18 : 24;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium?.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w400,
+      height: 1.5,
+    );
+  }
+
 // --- PERFECT DAY SCREEN
+
+  //List View naslov - savrsen dan
+  static TextStyle pdListViewTitle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 13 : 18;
+
+    return TextStyle(
+      fontFamily: GoogleFonts.poppins().fontFamily,
+      color: Theme.of(context).textTheme.bodyLarge?.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w700,
+      height: 3,
+    );
+  }
+
+  //List view opis - savrsen dan
+  static TextStyle pdListViewDescriptions(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 11 : 15;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyLarge?.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w300,
+      height: 1.5,
+    );
+  }
 
   //Opći opis - savrsen dan
   static TextStyle pdGeneralDescription(BuildContext context) {

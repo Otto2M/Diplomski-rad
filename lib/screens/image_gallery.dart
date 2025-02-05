@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/assets.dart';
 
 class FullScreenImageGallery extends StatefulWidget {
   const FullScreenImageGallery({
@@ -47,10 +48,13 @@ class _FullScreenImageGalleryState extends State<FullScreenImageGallery> {
             },
           ),
           Positioned(
-            top: 80,
-            right: 10,
+            top: MediaQuery.devicePixelRatioOf(context) * 80,
+            right: MediaQuery.devicePixelRatioOf(context),
             child: IconButton(
-              icon: const Icon(Icons.close, color: Colors.black, size: 30),
+              icon: Image.asset(
+                Assets.iRedX,
+                scale: MediaQuery.devicePixelRatioOf(context) * 15,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },

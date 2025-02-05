@@ -43,7 +43,7 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
         weatherData = data;
       });
     } catch (e) {
-      print("Error fetching weather data: $e");
+      debugPrint("Error fetching weather data: $e");
     }
   }
 
@@ -184,7 +184,7 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
         child: Container(
           // padding: EdgeInsets.all(8.0),
           // decoration: BoxDecoration(
-          //   color: Colors.black.withOpacity(0.6),
+          //   color: AppColors.darkBlue.withOpacity(0.4),
           //   borderRadius: BorderRadius.circular(12),
           // ),
           child: Column(
@@ -194,11 +194,11 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.4),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    // padding: const EdgeInsets.all(8.0),
+                    // decoration: BoxDecoration(
+                    //   color: Colors.black.withOpacity(0.4),
+                    //   borderRadius: BorderRadius.circular(12),
+                    // ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

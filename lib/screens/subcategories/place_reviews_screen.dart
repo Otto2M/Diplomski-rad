@@ -125,6 +125,7 @@ class _PlaceReviewsScreenState extends State<PlaceReviewsScreen> {
                     const SizedBox(height: 20),
                     Image.asset(
                       Assets.iCorrect,
+                      color: Theme.of(context).textTheme.bodyMedium!.color,
                       scale: 8,
                     ),
                   ],

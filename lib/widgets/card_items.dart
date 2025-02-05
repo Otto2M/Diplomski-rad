@@ -67,7 +67,7 @@ class _CardItemsState extends ConsumerState<CardItems> {
           width: 160,
         ),
         Container(
-          width: 190,
+          width: 180,
           height: 160,
           padding: const EdgeInsets.symmetric(
             vertical: 10,

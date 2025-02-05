@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
 
 import 'package:povedi_me_app/providers/bottom_navigation_provider.dart';
@@ -20,20 +21,26 @@ class _CurvedBottomNavigationState
     final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
     return CurvedNavigationBar(
       items: [
-        Icon(
-          Icons.map,
+        Image.asset(
+          Assets.iMap,
+          width: 30,
+          height: 30,
           color: indexBottomNavbar == 0
               ? Theme.of(context).bottomNavigationBarTheme.selectedItemColor
               : Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
         ),
-        Icon(
-          Icons.home,
+        Image.asset(
+          Assets.iHome,
+          width: 25,
+          height: 25,
           color: indexBottomNavbar == 1
               ? Theme.of(context).bottomNavigationBarTheme.selectedItemColor
               : Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
         ),
-        Icon(
-          Icons.favorite,
+        Image.asset(
+          Assets.iFavorite,
+          width: 25,
+          height: 25,
           color: indexBottomNavbar == 2
               ? Theme.of(context).bottomNavigationBarTheme.selectedItemColor
               : Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,

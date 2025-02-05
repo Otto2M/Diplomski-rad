@@ -17,7 +17,7 @@ Future<String?> fetchPlaceIdFromPlaceName({
       if (data['results'] != null && data['results'].isNotEmpty) {
         final placeId = data['results'][0]['place_id'];
 
-        debugPrint("Dohvaćeni placeID : $placeId");
+        //debugPrint("Dohvaćeni placeID : $placeId");
         return placeId;
       } else {
         debugPrint('No results found for coordinates.');

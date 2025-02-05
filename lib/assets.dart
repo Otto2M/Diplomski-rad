@@ -14,4 +14,5 @@ class Assets {
   static const iStarHalf = 'assets/icons/star_half.png';
   static const iStarRounded = 'assets/icons/star_rounded.png';
   static const iCorrect = 'assets/icons/correct.png';
+  static const iRedX = 'assets/icons/red_x.png';
 }

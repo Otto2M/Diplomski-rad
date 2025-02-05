@@ -16,7 +16,7 @@ class _GeneralAiState extends State<GeneralAi> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 400,
+      height: MediaQuery.of(context).size.height * 0.4,
       child: Stack(
         children: [
           FadeInImage(
@@ -29,7 +29,6 @@ class _GeneralAiState extends State<GeneralAi> {
           Positioned(
             bottom: 15,
             left: 20,
-            //definirati globalni izgled za te buttone
             child: ElevatedButton(
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute(

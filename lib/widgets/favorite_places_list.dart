@@ -46,12 +46,16 @@ class FavoritePlacesList extends ConsumerWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      subcategoryByPlace == null
-                          ? ''
-                          : subcategoryByPlace.title,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0, top: 20),
+                      child: Text(
+                        subcategoryByPlace == null
+                            ? ''
+                            : subcategoryByPlace.title,
+                        style: AppTextStyles.favoriteScreenSubcategoryHedaline(
+                            context),
+                      ),
                     ),
-                    const SizedBox(height: 10),
                     CardItems(
                       place: favoritePlace,
                       isInteractive: true,

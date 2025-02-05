@@ -69,7 +69,7 @@ class AppDrawer extends ConsumerWidget {
                               subcategory.categoryId == category.id);
 
                       return ListTile(
-                        leading:
+                        leading: //Image.network(category.icon),
                             Icon(Icons.category), // Ikona može biti dinamična
                         title: Text(
                           category.title,

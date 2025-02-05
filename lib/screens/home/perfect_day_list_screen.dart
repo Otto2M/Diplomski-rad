@@ -87,7 +87,7 @@ class PerfectDayListScreen extends ConsumerWidget {
                                       // Naslov
                                       Text(
                                         perfectDay.title,
-                                        style: AppTextStyles.pdSectionTitle(
+                                        style: AppTextStyles.pdListViewTitle(
                                             context),
                                       ),
                                       // Opis
@@ -96,8 +96,8 @@ class PerfectDayListScreen extends ConsumerWidget {
                                         softWrap: true,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
-                                        style:
-                                            AppTextStyles.description(context),
+                                        style: AppTextStyles
+                                            .pdListViewDescriptions(context),
                                       ),
                                     ],
                                   ),

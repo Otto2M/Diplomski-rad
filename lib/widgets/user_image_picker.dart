@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 
@@ -23,51 +24,91 @@ class UserImagePicker extends StatefulWidget {
 class _UserImagePickerState extends State<UserImagePicker> {
   File? _pickedImageFile;
 
-  void _pickImage() async {
-    final pickedSource = await showDialog<ImageSource>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(
-          "Odaberi izvor slike",
-          style: AppTextStyles.description(context),
-        ),
-        content: Text(
-          "Odaberite želite li snimiti novu sliku ili odabrati iz galerije.",
-          style: AppTextStyles.description(context),
-        ),
-        actionsPadding: const EdgeInsets.all(12),
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.of(ctx).pop(ImageSource.camera);
-                  },
-                  child: Text(
-                    "Kamera",
-                    style: AppTextStyles.description(context),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.of(ctx).pop(ImageSource.gallery);
-                  },
-                  child: Text(
-                    "Galerija",
-                    style: AppTextStyles.description(context),
-                  ),
-                ),
-              ),
-            ],
+  Future<ImageSource?> _showImageSourceDialog() async {
+    if (Platform.isIOS) {
+      return await showCupertinoDialog<ImageSource>(
+        context: context,
+        builder: (ctx) => CupertinoAlertDialog(
+          title: Text(
+            "Odaberi izvor slike",
+            style: AppTextStyles.profileAlertBoxTitle(context),
           ),
-        ],
-      ),
-    );
+          content: Text(
+            "Odaberite želite li snimiti novu sliku ili odabrati iz galerije.",
+            style: AppTextStyles.profileAlertBoxDescription(context),
+          ),
+          actions: [
+            CupertinoDialogAction(
+              onPressed: () {
+                Navigator.of(ctx).pop(ImageSource.camera);
+              },
+              child: Text(
+                "Kamera",
+                style: AppTextStyles.profileAlertBoxButtons(context),
+              ),
+            ),
+            CupertinoDialogAction(
+              onPressed: () {
+                Navigator.of(ctx).pop(ImageSource.gallery);
+              },
+              child: Text(
+                "Galerija",
+                style: AppTextStyles.profileAlertBoxButtons(context),
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return await showDialog<ImageSource>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(
+            "Odaberi izvor slike",
+            style: AppTextStyles.profileAlertBoxTitle(context),
+          ),
+          content: Text(
+            "Odaberite želite li snimiti novu sliku ili odabrati iz galerije.",
+            style: AppTextStyles.profileAlertBoxDescription(context),
+          ),
+          actionsPadding: const EdgeInsets.all(12),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(ctx).pop(ImageSource.camera);
+                    },
+                    child: Text(
+                      "Kamera",
+                      style: AppTextStyles.profileAlertBoxButtons(context),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(ctx).pop(ImageSource.gallery);
+                    },
+                    child: Text(
+                      "Galerija",
+                      style: AppTextStyles.profileAlertBoxButtons(context),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+  void _pickImage() async {
+    final pickedSource = await _showImageSourceDialog();
 
     if (pickedSource == null) {
       return;

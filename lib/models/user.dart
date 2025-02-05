@@ -9,6 +9,7 @@ class User {
     required this.phoneNumber,
     required this.createdAt,
     this.imageUrl,
+    this.reviews,
   });
 
   final String id;
@@ -18,6 +19,7 @@ class User {
   final String phoneNumber;
   final DateTime createdAt;
   final String? imageUrl;
+  final Map<String, double>? reviews;
 
   factory User.fromFirestore(Map<String, dynamic> data) {
     return User(
@@ -28,6 +30,8 @@ class User {
       phoneNumber: data['phoneNumber'] as String? ?? '',
       createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
       imageUrl: data['image_url'] as String? ?? '',
+      reviews: (data['reviews'] as Map<String, dynamic>?)
+          ?.map((key, value) => MapEntry(key, value.toDouble())),
     );
   }
 
@@ -41,6 +45,7 @@ class User {
       'phoneNumber': phoneNumber,
       'createdAt': createdAt,
       'image_url': imageUrl,
+      'reviews': reviews,
     };
   }
 }

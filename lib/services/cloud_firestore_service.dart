@@ -101,6 +101,73 @@ class FirestoreDatabaseService {
     }
   }
 
+  Future<void> saveReview({
+    required String userId,
+    required String placeId,
+    required double rating,
+  }) async {
+    try {
+      final userRef = _firebaseFirestore
+          .collection(FirestoreCollections.userCollection)
+          .doc(userId);
+
+      await userRef.set(
+        {
+          'reviews': {
+            placeId: rating,
+          }
+        },
+        SetOptions(merge: true), // Spoji nove podatke s postojećima
+      );
+      print('Recenzija uspješno spremljena.');
+    } catch (e) {
+      print('Greška pri spremanju recenzije: $e');
+    }
+  }
+
+  Future<void> updateAverageRating({
+    required String placeId,
+    required Map<String, double> userReviews,
+  }) async {
+    try {
+      final totalReviews = userReviews.values.length;
+      final averageRating = totalReviews > 0
+          ? userReviews.values.reduce((a, b) => a + b) / totalReviews
+          : 0.0;
+
+      // Ažuriranje prosječne ocjene u Firestore-u
+      final placeRef = _firebaseFirestore
+          .collection(FirestoreCollections.placesCollection)
+          .doc(placeId);
+      await placeRef.update({'averageRating': averageRating});
+    } catch (e) {
+      print('Greška pri ažuriranju prosječne ocjene: $e');
+    }
+  }
+
+  /// Dohvaća sve recenzije za određeno mjesto iz kolekcije korisnika
+  Future<Map<String, double>> getAllReviewsForPlace(String placeId) async {
+    try {
+      final usersSnapshot = await _firebaseFirestore
+          .collection(FirestoreCollections.userCollection)
+          .get();
+
+      final Map<String, double> reviewsMap = {};
+
+      for (var userDoc in usersSnapshot.docs) {
+        final userReviews = userDoc.data()['reviews'] as Map<String, dynamic>?;
+
+        if (userReviews != null && userReviews.containsKey(placeId)) {
+          reviewsMap[userDoc.id] = userReviews[placeId].toDouble();
+        }
+      }
+      return reviewsMap;
+    } catch (e) {
+      print('Greška pri dohvaćanju recenzija: $e');
+      return {};
+    }
+  }
+
   Future<void> saveImageUrlsToPlace(
       String placeId, List<String> imageUrls) async {
     try {

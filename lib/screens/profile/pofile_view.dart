@@ -36,6 +36,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
   late String initialPhoneNumber;
   late ThemeMode lastThemeMode;
   File? _selectedImage;
+  late File? initialImage;
   late ThemeMode tempSelectedTheme;
 
   @override
@@ -51,6 +52,10 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
     initialUsername = widget.user.username;
     initialPhoneNumber = widget.user.phoneNumber;
     lastThemeMode = tempSelectedTheme;
+
+    // Spremi početnu sliku prije uređivanja
+    initialImage =
+        widget.user.imageUrl != null ? File(widget.user.imageUrl!) : null;
   }
 
   @override
@@ -67,6 +72,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
       usernameController.text = initialUsername;
       phoneNumberController.text = initialPhoneNumber;
       tempSelectedTheme = lastThemeMode;
+      _selectedImage = initialImage;
       isEditing = false;
     });
   }
@@ -109,6 +115,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
         phoneNumber: phoneNumberController.text,
         imageUrl: imageUrl,
         createdAt: widget.user.createdAt,
+        reviews: widget.user.reviews,
       );
       final authService = ref.read(authServiceProvider);
       await authService.updateUserProfile(widget.user.id, updatedUser);
@@ -118,7 +125,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
 
       ref.refresh(userProvider);
     } catch (error) {
-      //print('Greška pri ažuriranju profila: $error');
+      print('Greška pri ažuriranju profila: $error');
       setState(() {
         isUpdating = false;
       });
@@ -214,11 +221,17 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
                       ),
                     ),
                     onPressed: updateProfile,
-                    child: const Text('Spremi'),
+                    child: Text(
+                      'Spremi',
+                      style: AppTextStyles.profileSaveCancleButtons(context),
+                    ),
                   ),
                   OutlinedButton(
                     onPressed: cancelEditing,
-                    child: const Text('Odustani'),
+                    child: Text(
+                      'Odustani',
+                      style: AppTextStyles.profileSaveCancleButtons(context),
+                    ),
                   ),
                 ],
               ),

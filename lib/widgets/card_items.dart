@@ -4,6 +4,7 @@ import 'package:povedi_me_app/constants/styles/app_colors.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/screens/subcategories/place_item_details_screen.dart';
+import 'package:povedi_me_app/widgets/reviews/rating_star_bar.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class CardItems extends StatelessWidget {
@@ -82,34 +83,15 @@ class CardItems extends StatelessWidget {
                 'Recenzije:',
                 style: AppTextStyles.subcategoryDesc(context),
               ),
-              Row(
-                children: [
-                  Image.asset(
-                    Assets.iStar,
-                    width: 30,
-                    height: 30,
-                  ),
-                  Image.asset(
-                    Assets.iStar,
-                    width: 30,
-                    height: 30,
-                  ),
-                  Image.asset(
-                    Assets.iStar,
-                    width: 30,
-                    height: 30,
-                  ),
-                  Image.asset(
-                    Assets.iStar,
-                    width: 30,
-                    height: 30,
-                  ),
-                  Image.asset(
-                    Assets.iStarHalf,
-                    width: 30,
-                    height: 30,
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  bottom: 20,
+                ),
+                child: RatingStarBar(
+                  placeWithDetails: place,
+                  isCardItemBar: true,
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,

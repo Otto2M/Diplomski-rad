@@ -47,12 +47,14 @@ class PlaceWithDetails extends Place {
     required this.reviews,
     this.contactNumber,
     this.email,
+    this.averageRating,
   });
 
   final Map<String, String>? workingHours; // Npr. {"ponedjeljak": "8:00-16:00"}
   final List<String>? reviews;
   final String? contactNumber;
   final String? email;
+  final double? averageRating;
 }
 
 //klasa za kategoriju: trgovački centri

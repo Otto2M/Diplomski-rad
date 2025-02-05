@@ -345,10 +345,23 @@ class AppTextStyles {
 
 //MY PROFILE
 
+  //general profile data
+  static profileGeneralData(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 13 : 16;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w700,
+      height: 1.5,
+    );
+  }
+
   //Selected theme
   static profileSelectedTheme(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 12 : 15;
+    double fontSize = screenWidth < 420 ? 13 : 15;
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -367,6 +380,95 @@ class AppTextStyles {
       fontSize: fontSize,
       fontWeight: FontWeight.w700,
       height: 1.5,
+    );
+  }
+
+  //Profile buttons style
+  static profileSaveCancleButtons(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 14 : 18;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+    );
+  }
+
+  //Profile alert box image picker
+  static profileAlertBoxTitle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 18 : 22;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w700,
+      height: 1.5,
+    );
+  }
+
+  //Profile alert box image picker
+  static profileAlertBoxDescription(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 14 : 18;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w500,
+    );
+  }
+
+  //Profile alert box image picker
+  static profileAlertBoxButtons(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 16 : 20;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
+//REVIEW PLACE SCREEN
+
+  //Review message
+  static reviewMessage(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 26 : 30;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w700,
+      height: 1.5,
+    );
+  }
+
+  //Review status text
+  static reviewStatusText(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 14 : 18;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w500,
+    );
+  }
+
+  //Review status star
+  static reviewStatusStar(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = screenWidth < 420 ? 24 : 28;
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w700,
     );
   }
 

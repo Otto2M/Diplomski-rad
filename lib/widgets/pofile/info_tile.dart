@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 
 class InfoTile extends StatelessWidget {
   final String label;
@@ -19,7 +20,7 @@ class InfoTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            width: MediaQuery.sizeOf(context).width * 0.3,
+            width: MediaQuery.sizeOf(context).width * 0.35,
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary,
@@ -27,7 +28,7 @@ class InfoTile extends StatelessWidget {
             ),
             child: Text(
               label,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: AppTextStyles.profileGeneralData(context),
             ),
           ),
           const SizedBox(width: 50),
@@ -36,6 +37,7 @@ class InfoTile extends StatelessWidget {
               value,
               overflow: TextOverflow.ellipsis,
               softWrap: true,
+              style: AppTextStyles.profileSelectedTheme(context),
             ),
           ),
         ],

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
-import 'package:povedi_me_app/data/dummy_data.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/providers/places_provider.dart';
 import 'package:povedi_me_app/providers/user_provider.dart';
 import 'package:povedi_me_app/screens/subcategories/place_reviews_screen.dart';
 import 'package:povedi_me_app/services/cloud_firestore_service.dart';
+import 'package:povedi_me_app/services/place_details_service.dart';
 import 'package:povedi_me_app/widgets/custom_app_bar_with_favorite.dart';
 import 'package:povedi_me_app/widgets/image_slider.dart';
 import 'package:povedi_me_app/widgets/reviews/rating_star_bar.dart';
@@ -33,9 +32,42 @@ class _PlaceItemDetailsScreenState
     extends ConsumerState<PlaceItemDetailsScreen> {
   bool _isDialogVisible = false;
 
+  String? workingHours;
+  bool? openNow;
+  double? rating;
+  bool isLoadingWorkingHours = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchDetails();
+  }
+
   void _toggleDialog() {
     setState(() {
       _isDialogVisible = !_isDialogVisible;
+    });
+  }
+
+  void fetchDetails() async {
+    const apiKey = 'AIzaSyBE1s72xyeMR07GgEuz_TsGDX-a58KS-tY';
+    final String placeName = widget.placeWithDetails.title.trim();
+
+    setState(() {
+      isLoadingWorkingHours = true;
+    });
+
+    final details =
+        await ref.read(placeDetailsServiceProvider).fetchPlaceDetails(
+              placeName: placeName,
+              apiKey: apiKey,
+            );
+
+    setState(() {
+      workingHours = details['workingHours'];
+      openNow = details['openNow'];
+      rating = details['rating'];
+      isLoadingWorkingHours = false;
     });
   }
 
@@ -166,34 +198,61 @@ class _PlaceItemDetailsScreenState
                           ),
                           const SizedBox(height: 10),
 
-                          RatingStarBar(
-                            placeWithDetails: widget.placeWithDetails,
-                            isCardItemBar: false,
-                          ),
+                          if (isLoadingWorkingHours)
+                            const CircularProgressIndicator(
+                              strokeWidth: 2,
+                            )
+                          else ...[
+                            RatingStarBar(
+                              rating: rating ?? 0.0,
+                              isCardItemBar: false,
+                            ),
+                          ],
 
                           const SizedBox(height: 20),
 
                           // Adresa i radno vrijeme
                           Text(
-                            widget.placeWithDetails.address,
+                            "Adresa: ${widget.placeWithDetails.address}",
                             style: AppTextStyles.subcategoryPlaceDetailsStyle(
                                 context),
                           ),
                           const SizedBox(height: 10),
-                          Text(
-                            "Radno vrijeme:",
-                            style: AppTextStyles.subcategoryPlaceDetailsStyle(
-                                context),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Radno vrijeme:",
+                                style:
+                                    AppTextStyles.subcategoryPlaceDetailsStyle(
+                                        context),
+                              ),
+                              const SizedBox(height: 10),
+                              if (isLoadingWorkingHours)
+                                const CircularProgressIndicator()
+                              else ...[
+                                Text(
+                                  workingHours ??
+                                      'Nema dostupnih podataka o radnom vremenu.',
+                                  style: AppTextStyles.description(context),
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  openNow == true
+                                      ? "Trenutno otvoreno"
+                                      : "Trenutno zatvoreno",
+                                  style: AppTextStyles.description(context)
+                                      .copyWith(
+                                    color: openNow == true
+                                        ? Colors.green
+                                        : Colors.red,
+                                  ),
+                                ),
+                              ],
+                              const SizedBox(height: 20),
+                            ],
                           ),
-                          Text(
-                            widget.placeWithDetails.workingHours != null
-                                ? widget.placeWithDetails.workingHours!.entries
-                                    .map((entry) =>
-                                        '${entry.key}: ${entry.value}')
-                                    .join('\n') // Svaki dan u novom redu
-                                : 'No working hours available',
-                          ),
-                          const SizedBox(height: 20),
 
                           // Korisnička recenzija
                           Row(

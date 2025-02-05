@@ -7,11 +7,13 @@ import 'package:povedi_me_app/models/place.dart';
 class RatingStarBar extends StatefulWidget {
   const RatingStarBar({
     super.key,
-    required this.placeWithDetails,
+    this.placeWithDetails,
     required this.isCardItemBar,
+    required this.rating,
   });
 
-  final PlaceWithDetails placeWithDetails;
+  final double rating;
+  final PlaceWithDetails? placeWithDetails;
   final bool isCardItemBar;
 
   @override
@@ -30,7 +32,8 @@ class _RatingStarBarState extends State<RatingStarBar> {
           ),
         if (!widget.isCardItemBar) const SizedBox(width: 10),
         RatingBar(
-          initialRating: widget.placeWithDetails.averageRating ?? 0.0,
+          initialRating:
+              widget.rating, //widget.placeWithDetails.averageRating ?? 0.0,
           minRating: 0,
           direction: Axis.horizontal,
           allowHalfRating: true,
@@ -48,11 +51,15 @@ class _RatingStarBarState extends State<RatingStarBar> {
         const SizedBox(width: 10),
         if (!widget.isCardItemBar)
           Text(
-            widget.placeWithDetails.averageRating != null
-                ? "${widget.placeWithDetails.averageRating!.toStringAsFixed(1)} / 5"
-                : "Podatak nedostupan",
+            "${widget.rating.toStringAsFixed(1)} / 5",
             style: AppTextStyles.subcategoryPlaceDetailsStyle(context),
           ),
+        // Text(
+        //   widget.placeWithDetails.averageRating != null
+        //       ? "${widget.placeWithDetails.averageRating!.toStringAsFixed(1)} / 5"
+        //       : "Podatak nedostupan",
+        //   style: AppTextStyles.subcategoryPlaceDetailsStyle(context),
+        // ),
       ],
     );
   }

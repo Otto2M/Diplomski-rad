@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:povedi_me_app/assets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/screens/subcategories/place_item_details_screen.dart';
+import 'package:povedi_me_app/services/place_details_service.dart';
 import 'package:povedi_me_app/widgets/reviews/rating_star_bar.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class CardItems extends StatelessWidget {
+class CardItems extends ConsumerStatefulWidget {
   const CardItems({
     super.key,
     required this.place,
@@ -18,25 +19,30 @@ class CardItems extends StatelessWidget {
   final bool isInteractive;
 
   @override
+  ConsumerState<CardItems> createState() => _CardItemsState();
+}
+
+class _CardItemsState extends ConsumerState<CardItems> {
+  @override
   Widget build(BuildContext context) {
-    final List<String> imagesUrl = place.imageUrl;
+    final List<String> imagesUrl = widget.place.imageUrl;
 
     return Card(
       color: Theme.of(context).colorScheme.primary,
-      margin: isInteractive
+      margin: widget.isInteractive
           ? const EdgeInsets.all(20)
           : const EdgeInsets.only(top: 20, left: 3),
       shape: const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
       elevation: 10,
       child: SizedBox(
         width: 350,
-        child: isInteractive
+        child: widget.isInteractive
             ? InkWell(
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => PlaceItemDetailsScreen(
-                        placeWithDetails: place,
+                        placeWithDetails: widget.place,
                       ),
                     ),
                   );
@@ -72,7 +78,7 @@ class CardItems extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                place.title,
+                widget.place.title,
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 softWrap: true,
@@ -88,21 +94,52 @@ class CardItems extends StatelessWidget {
                   top: 10,
                   bottom: 20,
                 ),
-                child: RatingStarBar(
-                  placeWithDetails: place,
-                  isCardItemBar: true,
+                child: Consumer(
+                  builder: (context, ref, _) {
+                    return FutureBuilder<Map<String, dynamic>>(
+                      future: ref
+                          .read(placeDetailsServiceProvider)
+                          .fetchPlaceDetails(
+                            placeName: widget.place.title,
+                            apiKey: 'AIzaSyBE1s72xyeMR07GgEuz_TsGDX-a58KS-tY',
+                          ),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Text(
+                            'Error: ${snapshot.error}',
+                            style: AppTextStyles.errorText(context),
+                          );
+                        } else if (snapshot.hasData) {
+                          final rating = snapshot.data!['rating'] ?? 0.0;
+                          return RatingStarBar(
+                            rating: rating,
+                            placeWithDetails: widget.place,
+                            isCardItemBar: true,
+                          );
+                        } else {
+                          return Text(
+                            'Nema podataka za recenziju',
+                            style: AppTextStyles.description(context),
+                          );
+                        }
+                      },
+                    );
+                  },
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  isInteractive
+                  widget.isInteractive
                       ? ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => PlaceItemDetailsScreen(
-                                  placeWithDetails: place,
+                                  placeWithDetails: widget.place,
                                 ),
                               ),
                             );

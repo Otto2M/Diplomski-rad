@@ -33,11 +33,17 @@ class InfoTile extends StatelessWidget {
           ),
           const SizedBox(width: 50),
           Expanded(
-            child: Text(
-              value,
-              overflow: TextOverflow.ellipsis,
-              softWrap: true,
-              style: AppTextStyles.profileSelectedTheme(context),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                value,
+                overflow: TextOverflow.ellipsis,
+                softWrap: true,
+                style: AppTextStyles.profileSelectedTheme(context),
+              ),
             ),
           ),
         ],

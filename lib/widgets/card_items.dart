@@ -35,7 +35,7 @@ class _CardItemsState extends ConsumerState<CardItems> {
       shape: const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
       elevation: 10,
       child: SizedBox(
-        width: 350,
+        width: MediaQuery.of(context).size.width - 50,
         child: widget.isInteractive
             ? InkWell(
                 onTap: () {
@@ -55,112 +55,125 @@ class _CardItemsState extends ConsumerState<CardItems> {
   }
 
   Widget _buildCardContent(List<String> imagesUrl, BuildContext context) {
-    return Row(
-      children: [
-        FadeInImage(
-          placeholder: MemoryImage(kTransparentImage),
-          image: NetworkImage(
-            imagesUrl.isNotEmpty ? imagesUrl.first : '',
-          ),
-          fit: BoxFit.cover,
-          height: 160,
-          width: 160,
-        ),
-        Container(
-          width: 180,
-          height: 160,
-          padding: const EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 10,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.place.title,
-                maxLines: 2,
-                textAlign: TextAlign.center,
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.subcategoryCardPlaceHeadline(context),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double availableWidth = constraints.maxWidth;
+        double imageWidth = 160;
+        double textWidth = availableWidth - imageWidth - 10;
+
+        return Row(
+          children: [
+            FadeInImage(
+              placeholder: MemoryImage(kTransparentImage),
+              image: NetworkImage(
+                imagesUrl.isNotEmpty ? imagesUrl.first : '',
               ),
-              Text(
-                'Recenzije:',
-                style: AppTextStyles.subcategoryDesc(context),
+              fit: BoxFit.cover,
+              height: 160,
+              width: imageWidth,
+            ),
+            Container(
+              width: textWidth,
+              height: 155,
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 10,
-                  bottom: 20,
-                ),
-                child: Consumer(
-                  builder: (context, ref, _) {
-                    return FutureBuilder<Map<String, dynamic>>(
-                      future: ref
-                          .read(placeDetailsServiceProvider)
-                          .fetchPlaceDetails(
-                            placeName: widget.place.title,
-                            apiKey: 'AIzaSyBE1s72xyeMR07GgEuz_TsGDX-a58KS-tY',
-                          ),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const CircularProgressIndicator();
-                        } else if (snapshot.hasError) {
-                          return Text(
-                            'Error: ${snapshot.error}',
-                            style: AppTextStyles.errorText(context),
-                          );
-                        } else if (snapshot.hasData) {
-                          final rating = snapshot.data!['rating'] ?? 0.0;
-                          return RatingStarBar(
-                            rating: rating,
-                            placeWithDetails: widget.place,
-                            isCardItemBar: true,
-                          );
-                        } else {
-                          return Text(
-                            'Nema podataka za recenziju',
-                            style: AppTextStyles.description(context),
-                          );
-                        }
-                      },
-                    );
-                  },
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  widget.isInteractive
-                      ? ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => PlaceItemDetailsScreen(
-                                  placeWithDetails: widget.place,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.place.title,
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          AppTextStyles.subcategoryCardPlaceHeadline(context),
+                    ),
+                    Text(
+                      'Recenzije:',
+                      style: AppTextStyles.subcategoryDesc(context),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        bottom: 20,
+                      ),
+                      child: Consumer(
+                        builder: (context, ref, _) {
+                          return FutureBuilder<Map<String, dynamic>>(
+                            future: ref
+                                .read(placeDetailsServiceProvider)
+                                .fetchPlaceDetails(
+                                  placeName: widget.place.title,
+                                  apiKey:
+                                      'AIzaSyBE1s72xyeMR07GgEuz_TsGDX-a58KS-tY',
                                 ),
-                              ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.buttonRed,
-                            minimumSize: const Size(1, 30),
-                            elevation: 10,
-                          ),
-                          child: Text(
-                            "Više".toUpperCase(),
-                            style: AppTextStyles.cardButtonTitle(context),
-                          ),
-                        )
-                      : const SizedBox(),
-                ],
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text(
+                                  'Error: ${snapshot.error}',
+                                  style: AppTextStyles.errorText(context),
+                                );
+                              } else if (snapshot.hasData) {
+                                final rating = snapshot.data!['rating'] ?? 0.0;
+                                return RatingStarBar(
+                                  rating: rating,
+                                  placeWithDetails: widget.place,
+                                  isCardItemBar: true,
+                                );
+                              } else {
+                                return Text(
+                                  'Nema podataka za recenziju',
+                                  style: AppTextStyles.description(context),
+                                );
+                              }
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        widget.isInteractive
+                            ? ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          PlaceItemDetailsScreen(
+                                        placeWithDetails: widget.place,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.buttonRed,
+                                  minimumSize: const Size(1, 30),
+                                  elevation: 10,
+                                ),
+                                child: Text(
+                                  "Više".toUpperCase(),
+                                  style: AppTextStyles.cardButtonTitle(context),
+                                ),
+                              )
+                            : const SizedBox(),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
-      ],
+            ),
+          ],
+        );
+      },
     );
   }
 }

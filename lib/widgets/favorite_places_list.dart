@@ -17,60 +17,67 @@ class FavoritePlacesList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            bottom: 20,
-            left: 20,
-            right: 20,
-            top: 20,
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: 10,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 20,
+              left: 20,
+              right: 20,
+              top: 20,
+            ),
+            child: Text(
+              "Moji Favoriti".toUpperCase(),
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyles.categoryHeadline(context),
+            ),
           ),
-          child: Text(
-            "Moji Favoriti".toUpperCase(),
-            overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.categoryHeadline(context),
-          ),
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: favoritePlaces.length,
-            itemBuilder: (context, index) {
-              final favoritePlace = favoritePlaces[index];
-              final subcategoryByPlace =
-                  ref.watch(subcategoryForPlaceProvider(favoritePlace));
+          Expanded(
+            child: ListView.builder(
+              itemCount: favoritePlaces.length,
+              itemBuilder: (context, index) {
+                final favoritePlace = favoritePlaces[index];
+                final subcategoryByPlace =
+                    ref.watch(subcategoryForPlaceProvider(favoritePlace));
 
-              // Prikaži dizajn za PlaceWithDetails ili Place
-              if (favoritePlace is PlaceWithDetails) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0, top: 20),
-                      child: Text(
-                        subcategoryByPlace == null
-                            ? ''
-                            : subcategoryByPlace.title,
-                        style: AppTextStyles.favoriteScreenSubcategoryHedaline(
-                            context),
+                if (favoritePlace is PlaceWithDetails) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0, top: 20.0),
+                        child: Text(
+                          subcategoryByPlace == null
+                              ? ''
+                              : subcategoryByPlace.title,
+                          style:
+                              AppTextStyles.favoriteScreenSubcategoryHedaline(
+                                  context),
+                        ),
                       ),
-                    ),
-                    CardItems(
-                      place: favoritePlace,
-                      isInteractive: true,
-                    ),
-                  ],
-                );
-              } else {
-                return PlacesByCategory(
-                  place: favoritePlace,
-                );
-              }
-            },
+                      Center(
+                        child: CardItems(
+                          place: favoritePlace,
+                          isInteractive: true,
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return PlacesByCategory(
+                    place: favoritePlace,
+                  );
+                }
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

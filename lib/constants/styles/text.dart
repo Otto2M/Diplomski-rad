@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'app_colors.dart';
 
 class AppTextStyles {
+  static double getFontSize(double screenWidth,
+      {double smallSize = 16, double mediumSize = 20, double largeSize = 24}) {
+    if (screenWidth < 380) {
+      return smallSize;
+    } else if (screenWidth < 480) {
+      //ili 420 ?
+      return mediumSize; // Srednji uređaji (380px - 480px)
+    } else {
+      return largeSize;
+    }
+  }
+
   // Home screen - buttons
   static TextStyle homeScreenYellowButtons(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 18 : 24;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 18, mediumSize: 20, largeSize: 24);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyLarge?.color,
@@ -32,7 +44,8 @@ class AppTextStyles {
   // Naslovni tekstovi za kategroije v2 - razlika u bold-u
   static placeHeadline2(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 18 : 24;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 18, largeSize: 24);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium?.color,
@@ -45,7 +58,8 @@ class AppTextStyles {
   // Opisni tekstovi
   static TextStyle description(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 12 : 15;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
 
     return TextStyle(
       fontFamily: GoogleFonts.poppins().fontFamily,
@@ -59,9 +73,9 @@ class AppTextStyles {
   //Naslovi glavnih kategorija
   static TextStyle categoryHeadline(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 18 : 24;
-    // return TextStyle(
-    //   fontFamily: GoogleFonts.poppins().fontFamily,
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 18, mediumSize: 20, largeSize: 24);
+
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium?.color,
       fontSize: fontSize,
@@ -73,7 +87,8 @@ class AppTextStyles {
   //Tekst na buttonima
   static TextStyle placeButtonTitle(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 13 : 18;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 18);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.titleMedium?.color,
@@ -86,7 +101,8 @@ class AppTextStyles {
   // Opisni tekstovi
   static TextStyle categoryPlaceDescription(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 10 : 14;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 10, mediumSize: 12, largeSize: 14);
 
     return TextStyle(
       fontFamily: GoogleFonts.poppins().fontFamily,
@@ -102,7 +118,8 @@ class AppTextStyles {
   // Favorites screen - headline
   static TextStyle favoriteScreenSubcategoryHedaline(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 18 : 24;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 18, mediumSize: 20, largeSize: 24);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium?.color,
@@ -117,7 +134,8 @@ class AppTextStyles {
   //List View naslov - savrsen dan
   static TextStyle pdListViewTitle(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 13 : 18;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 14, mediumSize: 16, largeSize: 18);
 
     return TextStyle(
       fontFamily: GoogleFonts.poppins().fontFamily,
@@ -131,7 +149,8 @@ class AppTextStyles {
   //List view opis - savrsen dan
   static TextStyle pdListViewDescriptions(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 11 : 15;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 10, mediumSize: 13, largeSize: 16);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyLarge?.color,
@@ -144,7 +163,8 @@ class AppTextStyles {
   //Opći opis - savrsen dan
   static TextStyle pdGeneralDescription(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 13 : 18;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 14, mediumSize: 16, largeSize: 18);
 
     return TextStyle(
       fontFamily: GoogleFonts.poppins().fontFamily,
@@ -158,7 +178,8 @@ class AppTextStyles {
   //Naslovi sekcija - savrsen dan
   static TextStyle pdSectionTitle(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 15 : 18;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 14, mediumSize: 16, largeSize: 18);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium?.color,
@@ -172,9 +193,13 @@ class AppTextStyles {
 
   //Stil za naslov drawer menu-a
   static TextStyle drawerMenuHeadline(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 16, mediumSize: 20, largeSize: 24);
+
     return GoogleFonts.poppins(
       color: Theme.of(context).colorScheme.onPrimary,
-      fontSize: 24,
+      fontSize: fontSize,
       fontWeight: FontWeight.w600,
       height: 1.5,
     );
@@ -182,9 +207,13 @@ class AppTextStyles {
 
   //Stil za tekst unutar drawer menu-a
   static TextStyle drawerMenuStyle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 14, mediumSize: 16, largeSize: 18);
+
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium?.color,
-      fontSize: 17,
+      fontSize: fontSize,
       fontWeight: FontWeight.w400,
       height: 1.5,
     );
@@ -195,7 +224,8 @@ class AppTextStyles {
   //Upcoming events - card date style
   static TextStyle ueDateStyle(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 18 : 25;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 16, mediumSize: 20, largeSize: 24);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).colorScheme.onPrimary,
@@ -207,7 +237,8 @@ class AppTextStyles {
   //Upcoming events - card text style
   static TextStyle ueTitleStyle(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 10 : 15;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 10, mediumSize: 12, largeSize: 14);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).colorScheme.onPrimary,
@@ -221,7 +252,8 @@ class AppTextStyles {
   // Naslov unutar kartice za naziv mjesta
   static subcategoryCardPlaceHeadline(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 15 : 24;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 16, mediumSize: 20, largeSize: 24);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).colorScheme.onPrimary,
@@ -234,7 +266,8 @@ class AppTextStyles {
   // Opis unutar kartice
   static subcategoryDesc(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 11 : 16;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 10, mediumSize: 12, largeSize: 14);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).colorScheme.onPrimary,
@@ -247,7 +280,8 @@ class AppTextStyles {
   // Naslov button-a podkategorije
   static subcategoryButtonTitle(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 16 : 22;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 16, largeSize: 20);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).colorScheme.onPrimary,
@@ -260,7 +294,8 @@ class AppTextStyles {
   // Naslov za gumb unutar kartice
   static cardButtonTitle(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 10 : 16;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 10, mediumSize: 12, largeSize: 14);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).colorScheme.onPrimary,
@@ -272,7 +307,8 @@ class AppTextStyles {
   // Naslov mjesta podkategorije
   static subcategoryPlaceTitle(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 18 : 24;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 16, mediumSize: 20, largeSize: 24);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -287,7 +323,8 @@ class AppTextStyles {
   // Detaljni podaci o mjestu
   static subcategoryPlaceDetailsStyle(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 11 : 15;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -300,7 +337,8 @@ class AppTextStyles {
   //Vremenska prognoza - modal bottom sheet - naslov
   static wfBottomModalTitle(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 12 : 18;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 14, mediumSize: 16, largeSize: 18);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -313,7 +351,8 @@ class AppTextStyles {
   //Vremenska prognoza - modal bottom sheet - podaci
   static wfBottomModalData(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 10 : 16;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 10, mediumSize: 12, largeSize: 14);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.titleLarge!.color,
@@ -326,7 +365,8 @@ class AppTextStyles {
   //Vremenska prognoza - modal bottom sheet - podaci
   static wfBottomModalAdditionalData(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 10 : 16;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -339,7 +379,8 @@ class AppTextStyles {
   //Vremenska prognoza - naslov grad
   static wfHomeTitle(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 12 : 18;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 14, mediumSize: 16, largeSize: 18);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.titleLarge!.color,
@@ -352,7 +393,8 @@ class AppTextStyles {
   //Vremenska prognoza - temp.
   static wfHomeTemperature(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 24 : 32;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 24, mediumSize: 28, largeSize: 32);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.titleLarge!.color,
@@ -365,7 +407,8 @@ class AppTextStyles {
   //Vremenska prognoza - temp. min. max.
   static wfHomeTemperatureMinMax(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 11 : 15;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 10, mediumSize: 12, largeSize: 14);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.titleLarge!.color,
@@ -378,7 +421,8 @@ class AppTextStyles {
   //Vremenska prognoza - po satima
   static wfHomeHourly(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 10 : 13;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 8, mediumSize: 10, largeSize: 12);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.titleLarge!.color,
@@ -393,7 +437,8 @@ class AppTextStyles {
   //general profile data
   static profileGeneralData(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 13 : 16;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -406,7 +451,8 @@ class AppTextStyles {
   //Selected theme
   static profileSelectedTheme(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 13 : 15;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -418,7 +464,8 @@ class AppTextStyles {
   //Selected theme headline
   static profileSelectedThemeHeadline(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 14 : 18;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 18);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -431,7 +478,8 @@ class AppTextStyles {
   //Profile buttons style
   static profileSaveCancleButtons(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 14 : 18;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -444,7 +492,8 @@ class AppTextStyles {
   //Profile alert box image picker
   static profileAlertBoxTitle(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 18 : 22;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 16, mediumSize: 18, largeSize: 20);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -457,7 +506,8 @@ class AppTextStyles {
   //Profile alert box image picker
   static profileAlertBoxDescription(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 14 : 18;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -469,7 +519,8 @@ class AppTextStyles {
   //Profile alert box image picker
   static profileAlertBoxButtons(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 16 : 20;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 14, mediumSize: 16, largeSize: 18);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -483,7 +534,8 @@ class AppTextStyles {
   //Review message
   static reviewMessage(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 26 : 30;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 24, mediumSize: 26, largeSize: 28);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -496,7 +548,8 @@ class AppTextStyles {
   //Review status text
   static reviewStatusText(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 14 : 18;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 14, mediumSize: 16, largeSize: 18);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -508,7 +561,8 @@ class AppTextStyles {
   //Review status star
   static reviewStatusStar(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 24 : 28;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 24, mediumSize: 26, largeSize: 28);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -517,24 +571,10 @@ class AppTextStyles {
     );
   }
 
-  // Tekst za linkove
-  static final linkDescription = GoogleFonts.poppins(
-    color: AppColors.lightBlue, // Plava za linkove
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    decoration: TextDecoration.underline,
-  );
-
-  // Tekst za gumbe
-  static final buttonText = GoogleFonts.poppins(
-    color: AppColors.white, // Bijela boja za tekst gumba
-    fontSize: 18,
-    fontWeight: FontWeight.w600,
-  );
-
   static TextStyle errorText(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double fontSize = screenWidth < 420 ? 8 : 12;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 8, mediumSize: 12, largeSize: 14);
 
     return GoogleFonts.poppins(
       color: Theme.of(context).textTheme.titleSmall?.color,

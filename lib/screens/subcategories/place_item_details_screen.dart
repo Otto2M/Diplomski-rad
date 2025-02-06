@@ -264,7 +264,7 @@ class _PlaceItemDetailsScreenState
                                         context),
                               ),
                               const SizedBox(width: 10),
-                              userReviewWidget,
+                              Expanded(child: userReviewWidget),
                             ],
                           ),
 
@@ -273,8 +273,10 @@ class _PlaceItemDetailsScreenState
                           // Opis mjesta
                           Text(
                             "O nama:",
-                            style: AppTextStyles.description(context),
+                            style: AppTextStyles.subcategoryPlaceDetailsStyle(
+                                context),
                           ),
+                          const SizedBox(height: 10.0),
                           Text(
                             widget.placeWithDetails.description,
                             style: AppTextStyles.description(context),

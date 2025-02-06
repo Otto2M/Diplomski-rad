@@ -8,10 +8,12 @@ class FavoritePlacesService {
     required BuildContext context,
     required WidgetRef ref,
     required Place place,
-  }) {
-    final wasAdded = ref
+  }) async {
+    final wasAdded = await ref
         .read(favoritePlacesProvider.notifier)
         .togglePlaceFavoriteStatus(place);
+
+    if (!context.mounted) return;
 
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(

@@ -19,6 +19,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
+      minimum: const EdgeInsets.only(bottom: 10.0),
       child: GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());

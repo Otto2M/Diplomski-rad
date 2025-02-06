@@ -118,9 +118,13 @@ class _PlaceReviewsScreenState extends State<PlaceReviewsScreen> {
                       ),
                     ),
                   ] else ...[
-                    Text(
-                      "Hvala Vam na ocjeni!".toUpperCase(),
-                      style: AppTextStyles.reviewMessage(context),
+                    Center(
+                      child: Text(
+                        "Hvala Vam na ocjeni!".toUpperCase(),
+                        softWrap: true,
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.reviewMessage(context),
+                      ),
                     ),
                     const SizedBox(height: 20),
                     Image.asset(

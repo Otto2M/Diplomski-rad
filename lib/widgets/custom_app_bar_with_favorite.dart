@@ -19,7 +19,7 @@ class CustomAppBarWithFavorite extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final favoritePlaces = ref.watch(favoritePlacesProvider);
-    final isFavorite = favoritePlaces.contains(place);
+    final isFavorite = favoritePlaces.any((p) => p.id == place.id);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

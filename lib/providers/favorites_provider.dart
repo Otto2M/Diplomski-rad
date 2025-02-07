@@ -32,7 +32,7 @@ class FavoritePlacesNotifier extends StateNotifier<List<Place>> {
   }
 
   Future<bool> togglePlaceFavoriteStatus(Place place) async {
-    final placeIsFavorite = state.contains(place);
+    final placeIsFavorite = state.any((p) => p.id == place.id);
 
     if (placeIsFavorite) {
       state = state.where((p) => p.id != place.id).toList();

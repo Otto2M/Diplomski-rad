@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/screens/home/about_city_screen.dart';
+import 'package:povedi_me_app/widgets/home_screen_widgets/chatbot/chatbot_overlay.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class GeneralAi extends StatefulWidget {
@@ -14,7 +15,7 @@ class GeneralAi extends StatefulWidget {
 class _GeneralAiState extends State<GeneralAi> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.4,
       child: Stack(
@@ -89,22 +90,9 @@ class _GeneralAiState extends State<GeneralAi> {
               //backgroundImage: AssetImage(Assets.aiButton),
               child: IconButton(
                 onPressed: () {
-                  ScaffoldMessenger.of(context).clearSnackBars();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: const Text('ChatBot pressed'),
-                      backgroundColor: Colors.deepPurple,
-                      elevation: 5,
-                      duration: const Duration(seconds: 3),
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(20), // Manje zaobljeni rubovi
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 10,
-                      ), //Visina gumba
-                    ),
+                  showAdaptiveDialog(
+                    context: context,
+                    builder: (context) => const ChatBotOverlay(),
                   );
                 },
                 icon: const Icon(

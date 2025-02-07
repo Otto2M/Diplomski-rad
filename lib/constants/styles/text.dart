@@ -698,6 +698,64 @@ class AppTextStyles {
     );
   }
 
+//CHATBOT
+
+  //Chatbot - title
+  static chatHeadline(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 18, mediumSize: 20, largeSize: 22);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.titleLarge!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w600,
+      height: 2,
+    );
+  }
+
+  //Chatbot - messages
+  static chatMessages(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.titleLarge!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w400,
+      height: 1.5,
+    );
+  }
+
+  //Chatbot - request messages style
+  static chatResponseMessages(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.titleMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w400,
+      height: 1.5,
+    );
+  }
+
+  //Chatbot - text input messages field
+  static chatInputMessages(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).colorScheme.surface,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w400,
+      height: 1.5,
+    );
+  }
+
   static TextStyle errorText(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double fontSize =

@@ -22,6 +22,7 @@ class MyProfile extends ConsumerWidget {
                     child: Text(
                   'Korisnik nije prijavljen.',
                   style: AppTextStyles.description(context),
+                  textAlign: TextAlign.center,
                 ));
               }
               return ProfileView(user: user);

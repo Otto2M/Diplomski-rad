@@ -1,7 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:povedi_me_app/constants/styles/app_colors.dart';
+
+import 'package:povedi_me_app/assets.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/screens/home/home_screen.dart';
 
 class RegistrationScreenSuccess extends StatefulWidget {
@@ -27,22 +28,24 @@ class _RegistrationScreenSuccessState extends State<RegistrationScreenSuccess> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Registracija uspješna!",
-              style: TextStyle(
-                color: AppColors.darkBlue,
-                fontSize: 30,
+            Center(
+              child: Text(
+                "Registracija uspješna!".toUpperCase(),
+                softWrap: true,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.reviewMessage(context),
               ),
             ),
-            SizedBox(height: 20),
-            Icon(
-              Icons.check_rounded,
-              size: 50,
+            const SizedBox(height: 20),
+            Image.asset(
+              Assets.iCorrect,
+              color: Theme.of(context).textTheme.bodyMedium!.color,
+              scale: 8,
             ),
           ],
         ),

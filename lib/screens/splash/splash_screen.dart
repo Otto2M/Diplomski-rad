@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/providers/auth_user_state_provider.dart';
 import 'package:povedi_me_app/providers/onboarding_status_provider.dart';
 import 'package:povedi_me_app/screens/splash/onboarding_screen.dart';
@@ -58,11 +59,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(Assets.logo),
-            const SizedBox(height: 20),
-            const Text(
+            Image.asset(
+              Assets.logo,
+            ),
+            Text(
               'POVEDI.ME',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: AppTextStyles.splashLogoText(context),
             ),
             const SizedBox(height: 50),
             ElevatedButton(

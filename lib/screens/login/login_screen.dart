@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:povedi_me_app/constants/styles/app_colors.dart';
+import 'package:povedi_me_app/assets.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/providers/auth_user_state_provider.dart';
-import 'package:povedi_me_app/screens/home/demo/demo_home_screen.dart';
+import 'package:povedi_me_app/screens/login/password_field.dart';
 import 'package:povedi_me_app/screens/registration/registration_screen.dart';
 import 'package:povedi_me_app/widgets/tab_screen.dart';
 //import 'package:povedi_me_app/services/auth_service.dart';
@@ -22,6 +23,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   var _enteredEmail = '';
   var _enteredPassword = '';
   bool isLoading = false;
+  bool _obscureText = true;
 
   void _submit() async {
     final isValid = _loginFormKey.currentState!.validate();
@@ -41,16 +43,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
       // Ne treba ručno navigirati jer authStateProvider osluškuje promjene
     } catch (e) {
-      ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Prijava nije uspjela: $e')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Prijava nije uspjela: $e')),
+        );
+      }
     } finally {
-      setState(
-        () {
-          isLoading = false;
-        },
-      );
+      if (mounted) {
+        setState(
+          () {
+            isLoading = false;
+          },
+        );
+      }
     }
   }
 
@@ -59,10 +65,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final authState = ref.watch(authStateProvider).value;
 
     if (authState != null) {
-      Future.microtask(() {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const TabScreen()),
-        );
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const TabScreen()),
+          );
+        }
       });
     }
 
@@ -74,24 +82,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               )
             : SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(top: 30.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       //text i ikona na početku
-                      const Text(
+                      Text(
                         "PRIJAVA",
-                        style: TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: AppTextStyles.authHeadline(context),
                       ),
-                      const SizedBox(height: 10),
-                      const Icon(
-                        Icons.person,
-                        size: 200,
-                        color: AppColors.darkBlue,
+                      const SizedBox(height: 20),
+                      Image.asset(
+                        Assets.iPerson,
+                        scale: MediaQuery.of(context).size.aspectRatio * 10,
+                        color: Theme.of(context).textTheme.bodyMedium!.color,
                       ),
+
                       const SizedBox(height: 50),
 
                       //forma za prijavu
@@ -107,15 +113,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 TextFormField(
                                   //controller: ,
                                   decoration: InputDecoration(
-                                    prefixIcon: const Icon(Icons.email,
-                                        color: AppColors.darkBlue),
+                                    prefixIcon: Image.asset(
+                                      Assets.iEmail,
+                                      scale: 40,
+                                      width: 10,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .color,
+                                    ),
                                     labelText: 'Email',
-                                    labelStyle: const TextStyle(
-                                        color: AppColors.darkBlue),
+                                    labelStyle:
+                                        AppTextStyles.authLabelTextStyle(
+                                      context,
+                                    ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
-                                      borderSide: const BorderSide(
-                                          color: AppColors.darkBlue),
+                                      borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .color!,
+                                      ),
                                     ),
                                   ),
                                   keyboardType: TextInputType.emailAddress,
@@ -132,28 +151,70 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   onSaved: (value) {
                                     _enteredEmail = value!;
                                   },
+                                  style:
+                                      AppTextStyles.authInputTextStyle(context),
                                 ),
 
                                 const SizedBox(height: 20),
 
-                                //Password
                                 TextFormField(
-                                  obscureText: true,
+                                  obscureText: _obscureText,
+                                  style:
+                                      AppTextStyles.authInputTextStyle(context),
                                   decoration: InputDecoration(
-                                    prefixIcon: const Icon(Icons.lock,
-                                        color: AppColors.darkBlue),
+                                    prefixIcon: Icon(
+                                      Icons.lock,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.color,
+                                    ),
                                     labelText: 'Lozinka',
-                                    labelStyle: const TextStyle(
-                                        color: AppColors.darkBlue),
+                                    labelStyle: TextStyle(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.color),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
-                                      borderSide: const BorderSide(
-                                          color: AppColors.darkBlue),
+                                      borderSide: BorderSide(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium!
+                                              .color!),
                                     ),
-                                    // focusedBorder: const UnderlineInputBorder(
-                                    //   borderSide: BorderSide(
-                                    //       color: AppColors.accentLight, width: 3.0),
-                                    // ),
+                                    suffixIcon: IconButton(
+                                      icon: AnimatedSwitcher(
+                                        duration:
+                                            const Duration(milliseconds: 300),
+                                        child: _obscureText
+                                            ? Icon(
+                                                Icons.visibility_off,
+                                                key: ValueKey<bool>(
+                                                    _obscureText),
+                                                color: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.color,
+                                              )
+                                            : Icon(
+                                                Icons.visibility,
+                                                key: ValueKey<bool>(
+                                                    _obscureText),
+                                                color: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.color,
+                                              ),
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _obscureText = !_obscureText;
+                                        });
+                                      },
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.transparent,
                                   ),
                                   validator: (value) {
                                     if (value == null ||
@@ -165,7 +226,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   onSaved: (value) {
                                     _enteredPassword = value!;
                                   },
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -175,41 +236,43 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
                       //button za prijavu
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.7,
+                        width: MediaQuery.of(context).size.width * 0.6,
                         child: ElevatedButton(
                           onPressed: _submit,
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25),
                             ),
-                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            padding: const EdgeInsets.symmetric(vertical: 15),
                           ),
-                          child: const Text(
+                          child: Text(
                             'PRIJAVI SE',
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.darkBlue,
-                            ),
+                            style: AppTextStyles.authButtonTextStyle(context),
                           ),
                         ),
                       ),
 
                       //button za odlazak na registraciju
                       TextButton(
-                        //onPressed: () {},
                         onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => const RegistrationScreen(),
                           ),
                         ),
-                        child: const Text('Kreiraj novi korisnički račun'),
+                        child: Text(
+                          'Kreiraj novi korisnički račun',
+                          style: AppTextStyles.authTextBtnStyle(context),
+                        ),
                       ),
                       const SizedBox(height: 10),
 
-                      const Divider(
-                        color: AppColors.darkBlue,
+                      Divider(
+                        color: Theme.of(context).textTheme.bodyMedium!.color,
+                        indent: 20,
+                        endIndent: 20,
+                        thickness: 2,
                       ),
+                      const SizedBox(height: 20),
 
                       //google sign in button
                       isLoading
@@ -234,13 +297,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   //   (route) => false,
                                   // );
                                 } catch (e) {
-                                  ScaffoldMessenger.of(context)
-                                      .clearSnackBars();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context)
+                                        .clearSnackBars();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
                                         content:
-                                            Text('Google Sign-in failed: $e')),
-                                  );
+                                            Text('Google Sign-in failed: $e'),
+                                      ),
+                                    );
+                                  }
                                 }
                               },
                               shape: RoundedRectangleBorder(

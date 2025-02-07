@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/screens/login/login_screen.dart';
 import 'package:povedi_me_app/screens/registration/registration_screen.dart';
 import 'package:povedi_me_app/widgets/tab_screen.dart';
@@ -35,12 +36,12 @@ class WelcomeScreen extends StatelessWidget {
                             BorderRadius.circular(15), // Manje zaobljeni rubovi
                       ),
                       padding: const EdgeInsets.symmetric(
-                          vertical: 20), //Visina gumba
+                        vertical: 20,
+                      ), //Visina gumba
                     ),
-                    child: const Text(
+                    child: Text(
                       "PRIJAVA",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                      style: AppTextStyles.welcomeBtnTextStyle(context),
                     ),
                   ),
                 ),
@@ -62,10 +63,9 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 20),
                     ),
-                    child: const Text(
+                    child: Text(
                       "REGISTRACIJA",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                      style: AppTextStyles.welcomeBtnTextStyle(context),
                     ),
                   ),
                 ),

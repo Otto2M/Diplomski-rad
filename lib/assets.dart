@@ -5,6 +5,10 @@ class Assets {
   //--logo
   static const logo = 'assets/images/povedi_me_logo.png';
   //-icons
+  static const iPerson = 'assets/icons/person.png';
+  static const iEmail = 'assets/icons/email.png';
+  static const iPhone = 'assets/icons/phone.png';
+  static const iPersonBorder = 'assets/icons/person_rounded.png';
   static const iBorderRedHeart = 'assets/icons/border_red_heart.png';
   static const iRedHeart = 'assets/icons/red_heart.png';
   static const iHome = 'assets/icons/home.png';

@@ -52,7 +52,7 @@ final darkAppTheme = ThemeData(
     primary: AppColors.primaryDark,
     primaryContainer: AppColors.accentDark,
     secondary: AppColors.secondaryDark,
-    secondaryContainer: AppColors.primaryDark.withOpacity(0.2),
+    secondaryContainer: AppColors.primaryDark.withOpacity(0.8),
     surface: AppColors.backgroundDark,
     error: AppColors.errorDarkRed,
     onPrimary: AppColors.white,

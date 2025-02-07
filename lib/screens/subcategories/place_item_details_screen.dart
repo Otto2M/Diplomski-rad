@@ -13,6 +13,7 @@ import 'package:povedi_me_app/widgets/custom_app_bar_with_favorite.dart';
 import 'package:povedi_me_app/widgets/image_slider.dart';
 import 'package:povedi_me_app/widgets/reviews/rating_star_bar.dart';
 import 'package:povedi_me_app/widgets/side_dialog.dart';
+import 'package:povedi_me_app/widgets/working_hours_place.dart';
 
 class PlaceItemDetailsScreen extends ConsumerStatefulWidget {
   const PlaceItemDetailsScreen({
@@ -219,39 +220,12 @@ class _PlaceItemDetailsScreenState
                           ),
                           const SizedBox(height: 10),
 
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Radno vrijeme:",
-                                style:
-                                    AppTextStyles.subcategoryPlaceDetailsStyle(
-                                        context),
-                              ),
-                              const SizedBox(height: 10),
-                              if (isLoadingWorkingHours)
-                                const CircularProgressIndicator()
-                              else ...[
-                                Text(
-                                  workingHours ??
-                                      'Nema dostupnih podataka o radnom vremenu.',
-                                  style: AppTextStyles.description(context),
-                                ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  openNow == true
-                                      ? "Trenutno otvoreno"
-                                      : "Trenutno zatvoreno",
-                                  style: AppTextStyles.description(context)
-                                      .copyWith(
-                                    color: openNow == true
-                                        ? Colors.green
-                                        : Colors.red,
-                                  ),
-                                ),
-                              ],
-                              const SizedBox(height: 20),
-                            ],
+                          WorkingHoursPlace(
+                            workingHours: workingHours ??
+                                "Nema dostupnih podataka o radnom vremenu.",
+                            openNow: openNow ?? false,
+                            isLoadingWorkingHours: isLoadingWorkingHours,
+                            isShop: false,
                           ),
 
                           // Korisnička recenzija

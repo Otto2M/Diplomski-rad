@@ -30,17 +30,6 @@ class AppTextStyles {
 
 // --- GENERAL AND CATEGORIES SCREENS
 
-  // Naslovni tekstovi za kategorije v1 - NE KORISTI SE
-  static TextStyle placeHeadline(BuildContext context) {
-    return TextStyle(
-      fontFamily: GoogleFonts.poppins().fontFamily,
-      color: Theme.of(context).textTheme.bodyMedium?.color,
-      fontSize: 24,
-      fontWeight: FontWeight.w800,
-      height: 2,
-    );
-  }
-
   // Naslovni tekstovi za kategroije v2 - razlika u bold-u
   static placeHeadline2(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -441,7 +430,7 @@ class AppTextStyles {
         getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
 
     return GoogleFonts.poppins(
-      color: Theme.of(context).textTheme.bodyMedium!.color,
+      color: Theme.of(context).textTheme.bodyLarge!.color,
       fontSize: fontSize,
       fontWeight: FontWeight.w700,
       height: 1.5,
@@ -568,6 +557,144 @@ class AppTextStyles {
       color: Theme.of(context).textTheme.bodyMedium!.color,
       fontSize: fontSize,
       fontWeight: FontWeight.w700,
+    );
+  }
+
+//LOGIN/REGISTRATION SCREEN
+
+  //Headline
+  static authHeadline(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 30, mediumSize: 40, largeSize: 60);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w700,
+    );
+  }
+
+  //Label text style
+  static authLabelTextStyle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 14, mediumSize: 16, largeSize: 18);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w400,
+      height: 1.5,
+    );
+  }
+
+  //Input text style
+  static authInputTextStyle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 14, mediumSize: 16, largeSize: 18);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+    );
+  }
+
+  //Button text style
+  static authButtonTextStyle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 20, mediumSize: 22, largeSize: 24);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyMedium!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w700,
+      height: 1.5,
+    );
+  }
+
+  //Text button text style
+  static authTextBtnStyle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 10, mediumSize: 12, largeSize: 14);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).colorScheme.primary,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w500,
+      height: 2,
+    );
+  }
+
+  //Welcome screen - Button text style
+  static welcomeBtnTextStyle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 26, mediumSize: 28, largeSize: 30);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyLarge!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w700,
+    );
+  }
+
+  //Splash screen - Text style
+  static splashLogoText(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 46, mediumSize: 48, largeSize: 50);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).colorScheme.secondary,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
+//ONBOARDING SCREEN
+
+  //Title text style
+  static onBordScrTitle(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 22, mediumSize: 24, largeSize: 26);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).colorScheme.secondary,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w500,
+    );
+  }
+
+  //Description text style
+  static onBordScrDesc(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).textTheme.bodyLarge!.color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w400,
+    );
+  }
+
+  //Onboardin text button style - bottom row nav.
+  static onBordScrInputBtnRowNav(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).colorScheme.primary,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w500,
     );
   }
 

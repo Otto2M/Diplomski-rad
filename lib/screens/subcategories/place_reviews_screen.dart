@@ -39,9 +39,12 @@ class _PlaceReviewsScreenState extends State<PlaceReviewsScreen> {
         isReviewMode = false;
       });
 
-      Future.delayed(const Duration(seconds: 2), () {
-        Navigator.pop(context, true);
-      });
+      Future.delayed(
+        const Duration(seconds: 2),
+        () {
+          Navigator.pop(context, true);
+        },
+      );
     } catch (e) {
       print('Greška pri spremanju recenzije: $e');
     }

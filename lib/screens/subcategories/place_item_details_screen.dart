@@ -51,18 +51,15 @@ class _PlaceItemDetailsScreenState
   }
 
   void fetchDetails() async {
-    const apiKey = 'AIzaSyBE1s72xyeMR07GgEuz_TsGDX-a58KS-tY';
     final String placeName = widget.placeWithDetails.title.trim();
 
     setState(() {
       isLoadingWorkingHours = true;
     });
 
-    final details =
-        await ref.read(placeDetailsServiceProvider).fetchPlaceDetails(
-              placeName: placeName,
-              apiKey: apiKey,
-            );
+    final details = await ref
+        .read(placeDetailsServiceProvider)
+        .fetchPlaceDetails(placeName: placeName);
 
     setState(() {
       workingHours = details['workingHours'];

@@ -109,8 +109,6 @@ class _CardItemsState extends ConsumerState<CardItems> {
                                 .read(placeDetailsServiceProvider)
                                 .fetchPlaceDetails(
                                   placeName: widget.place.title,
-                                  apiKey:
-                                      'AIzaSyBE1s72xyeMR07GgEuz_TsGDX-a58KS-tY',
                                 ),
                             builder: (context, snapshot) {
                               if (snapshot.connectionState ==

@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:povedi_me_app/constants/keys.dart';
 
-Future<String?> fetchPlaceIdFromPlaceName({
-  required String placeName,
-  required String apiKey,
-}) async {
+Future<String?> fetchPlaceIdFromPlaceName({required String placeName}) async {
   final url = Uri.parse(
-      'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$placeName%20Koprivnica&key=$apiKey');
+      'https://maps.googleapis.com/maps/api/place/textsearch/json?query=$placeName%20Koprivnica&key=${Keys.googleApiKey}');
 
   try {
     final response = await http.get(url);
@@ -33,12 +31,10 @@ Future<String?> fetchPlaceIdFromPlaceName({
   }
 }
 
-Future<Map<String, dynamic>> fetchWorkingHours({
-  required String placeId,
-  required String apiKey,
-}) async {
+Future<Map<String, dynamic>> fetchWorkingHours(
+    {required String placeId}) async {
   final url = Uri.parse(
-      'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&fields=opening_hours,rating&key=$apiKey');
+      'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&fields=opening_hours,rating&key=${Keys.googleApiKey}');
 
   try {
     final response = await http.get(url);

@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:povedi_me_app/widgets/google_places_api.dart';
+import 'package:povedi_me_app/services/google_places_api.dart';
 
 final placeDetailsServiceProvider = Provider<PlaceDetailsService>((ref) {
   return PlaceDetailsService();
@@ -10,7 +10,6 @@ class PlaceDetailsService {
 
   Future<Map<String, dynamic>> fetchPlaceDetails({
     required String placeName,
-    required String apiKey,
   }) async {
     if (_cachedPlaceDetails.containsKey(placeName)) {
       return _cachedPlaceDetails[placeName]!;
@@ -18,7 +17,6 @@ class PlaceDetailsService {
 
     final details = await fetchPlaceDetailsFromAPI(
       placeName: placeName,
-      apiKey: apiKey,
     );
 
     // Pohrani podatke za buduće korištenje
@@ -28,17 +26,14 @@ class PlaceDetailsService {
 
   Future<Map<String, dynamic>> fetchPlaceDetailsFromAPI({
     required String placeName,
-    required String apiKey,
   }) async {
     final placeId = await fetchPlaceIdFromPlaceName(
       placeName: placeName,
-      apiKey: apiKey,
     );
 
     if (placeId != null) {
       final placeDetails = await fetchWorkingHours(
         placeId: placeId,
-        apiKey: apiKey,
       );
 
       return {

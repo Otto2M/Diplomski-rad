@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/providers/categories_provider.dart';
 import 'package:povedi_me_app/screens/image_gallery.dart';
+import 'package:povedi_me_app/utils/description_lenght_split.dart';
 import 'package:povedi_me_app/widgets/custom_app_bar.dart';
 
 class AboutCityScreen extends ConsumerWidget {
@@ -45,10 +46,9 @@ class AboutCityScreen extends ConsumerWidget {
                           style: AppTextStyles.categoryHeadline(context),
                         ),
                         const SizedBox(height: 20),
-                        Text(
-                          place.description,
-                          style: AppTextStyles.description(context),
-                          textAlign: TextAlign.justify,
+                        buildParagraphs(
+                          context,
+                          splitTextBySentences(place.description, 6),
                         ),
                         const SizedBox(height: 20),
                         GridView.builder(

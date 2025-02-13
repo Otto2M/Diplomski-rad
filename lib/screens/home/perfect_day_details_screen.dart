@@ -52,6 +52,7 @@ class PerfectDayDetailsScreen extends StatelessWidget {
                     // Opis
                     Text(
                       perfectDay.description,
+                      textAlign: TextAlign.justify,
                       style: AppTextStyles.pdGeneralDescription(context),
                     ),
                     const SizedBox(height: 16.0),
@@ -65,6 +66,7 @@ class PerfectDayDetailsScreen extends StatelessWidget {
                       const SizedBox(height: 4.0),
                       Text(
                         section.content,
+                        textAlign: TextAlign.justify,
                         style: AppTextStyles.description(context),
                       ),
                       const SizedBox(height: 16.0),

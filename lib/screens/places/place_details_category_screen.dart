@@ -5,6 +5,7 @@ import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/providers/image_storage_provider.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/screens/image_gallery.dart';
+import 'package:povedi_me_app/utils/description_lenght_split.dart';
 import 'package:povedi_me_app/widgets/custom_app_bar_with_favorite.dart';
 
 class PlaceDetailsCategoryScreen extends ConsumerWidget {
@@ -41,9 +42,9 @@ class PlaceDetailsCategoryScreen extends ConsumerWidget {
                   style: AppTextStyles.placeHeadline2(context),
                 ),
                 const SizedBox(height: 20),
-                Text(
-                  place.description,
-                  style: AppTextStyles.description(context),
+                buildParagraphs(
+                  context,
+                  splitTextBySentences(place.description, 4),
                 ),
                 const SizedBox(height: 20),
                 GridView.builder(

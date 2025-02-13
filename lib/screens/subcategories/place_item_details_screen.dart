@@ -250,6 +250,7 @@ class _PlaceItemDetailsScreenState
                           const SizedBox(height: 10.0),
                           Text(
                             widget.placeWithDetails.description,
+                            textAlign: TextAlign.justify,
                             style: AppTextStyles.description(context),
                           ),
 

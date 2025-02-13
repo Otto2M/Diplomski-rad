@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
+import 'package:povedi_me_app/services/flowise_service.dart';
 import 'package:povedi_me_app/widgets/home_screen_widgets/chatbot/body_message_chatbot.dart';
 import 'package:povedi_me_app/widgets/home_screen_widgets/chatbot/header_chatbot.dart';
 import 'package:povedi_me_app/widgets/home_screen_widgets/chatbot/input_chatbot.dart';
@@ -15,17 +16,44 @@ class _ChatBotOverlayState extends State<ChatBotOverlay> {
   final TextEditingController _controller = TextEditingController();
   final List<Map<String, String>> _messages = [];
 
-  void _sendMessage(String message) {
+  // void _sendMessage(String message) {
+  //   FocusScope.of(context).unfocus();
+  //   if (message.isNotEmpty) {
+  //     setState(() {
+  //       _messages.add({'user': message});
+  //       _messages.add({
+  //         'bot':
+  //             'Preporučujem Vam restoran Kraus. Kliknite za više informacija.'
+  //       });
+  //     });
+  //     _controller.clear();
+  //   }
+  // }
+
+  void _sendMessage(String message) async {
     FocusScope.of(context).unfocus();
-    if (message.isNotEmpty) {
+
+    if (message.isEmpty) return;
+
+    setState(() {
+      _messages.add({'user': message});
+    });
+
+    _controller.clear();
+
+    try {
+      final responseText = await FlowiseService().queryFlowise(message);
+
       setState(() {
-        _messages.add({'user': message});
+        _messages.add({'bot': responseText});
+      });
+    } catch (error) {
+      setState(() {
         _messages.add({
           'bot':
-              'Preporučujem Vam restoran Kraus. Kliknite za više informacija.'
+              'Došlo je do pogreške pri dohvaćanju odgovora. Pokušajte ponovo.'
         });
       });
-      _controller.clear();
     }
   }
 

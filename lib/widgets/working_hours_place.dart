@@ -23,7 +23,7 @@ class WorkingHoursPlace extends StatelessWidget {
       children: [
         Text(
           "Radno vrijeme:",
-          style: AppTextStyles.subcategoryPlaceDetailsStyle(context),
+          style: AppTextStyles.subcategoryDesc(context),
         ),
         const SizedBox(height: 10),
         if (isLoadingWorkingHours)

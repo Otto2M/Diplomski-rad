@@ -19,8 +19,7 @@ final upcomingEventsProvider = FutureProvider<List<dynamic>>((ref) async {
   // Filtriraj mjesta prema ID-u kategorije "manifestacije" i sortiraj silazno prema datumu
   final upcomingEvents = places
       .where((place) => place.categoryId == manifestationCategory.id)
-      .toList()
-    ..sort((a, b) => b.date!.compareTo(a.date!)); // Silazno sortiranje
+      .toList();
 
   return upcomingEvents;
 });

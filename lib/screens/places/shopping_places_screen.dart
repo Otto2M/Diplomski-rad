@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/constants/styles/app_colors.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/services/place_details_service.dart';
@@ -23,6 +24,8 @@ class _ShoppingPlacesScreenState extends ConsumerState<ShoppingPlacesScreen> {
   String? workingHours;
   bool? openNow;
   bool isLoadingWorkingHours = true;
+
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -78,35 +81,57 @@ class _ShoppingPlacesScreenState extends ConsumerState<ShoppingPlacesScreen> {
                   width: imageWidth,
                 ),
                 Container(
-                  //color: Colors.amber,
                   width: textWidth,
                   height: 155,
                   padding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: Scrollbar(
                     trackVisibility: true,
+                    // thumbVisibility: true,
                     child: SingleChildScrollView(
+                      controller: _scrollController,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            widget.place.title,
-                            maxLines: 2,
-                            textAlign: TextAlign.start,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                            style: AppTextStyles.subcategoryCardPlaceHeadline(
-                                context),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  widget.place.title,
+                                  maxLines: 2,
+                                  textAlign: TextAlign.start,
+                                  softWrap: true,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTextStyles
+                                      .subcategoryCardPlaceHeadline(context),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  _scrollController.jumpTo(
+                                    _scrollController.position.maxScrollExtent,
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.7),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.arrow_downward,
+                                    color: AppColors.lightBlue,
+                                    size: 18,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           Text(
                             widget.place.address,
                             textAlign: TextAlign.start,
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
-                            style: AppTextStyles.subcategoryDesc(context),
-                          ),
-                          Text(
-                            'Radno vrijeme:',
                             style: AppTextStyles.subcategoryDesc(context),
                           ),
                           WorkingHoursPlace(

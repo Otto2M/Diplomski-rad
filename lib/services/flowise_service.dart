@@ -14,7 +14,7 @@ class FlowiseService {
             headers: {"Content-Type": "application/json"},
             body: jsonEncode({"question": question}),
           )
-          .timeout(const Duration(seconds: 10));
+          .timeout(const Duration(seconds: 15));
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);

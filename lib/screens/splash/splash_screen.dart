@@ -6,6 +6,7 @@ import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/providers/auth_user_state_provider.dart';
+import 'package:povedi_me_app/providers/categories_provider.dart';
 import 'package:povedi_me_app/providers/onboarding_status_provider.dart';
 import 'package:povedi_me_app/screens/splash/onboarding_screen.dart';
 import 'package:povedi_me_app/screens/splash/welcome_screen.dart';
@@ -49,6 +50,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         );
       },
     );
+    ref.read(categoriesProvider.future);
+    ref.read(subcategoriesProvider.future);
   }
 
   @override

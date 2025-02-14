@@ -16,21 +16,10 @@ class _ChatBotOverlayState extends State<ChatBotOverlay> {
   final TextEditingController _controller = TextEditingController();
   final List<Map<String, String>> _messages = [];
 
-  // void _sendMessage(String message) {
-  //   FocusScope.of(context).unfocus();
-  //   if (message.isNotEmpty) {
-  //     setState(() {
-  //       _messages.add({'user': message});
-  //       _messages.add({
-  //         'bot':
-  //             'Preporučujem Vam restoran Kraus. Kliknite za više informacija.'
-  //       });
-  //     });
-  //     _controller.clear();
-  //   }
-  // }
-
   void _sendMessage(String message) async {
+    final messageHr =
+        "$message. Odgovaraj mi isključivo na hrvatskom jeziku i duljine oko 500 tokena.";
+
     FocusScope.of(context).unfocus();
 
     if (message.isEmpty) return;
@@ -42,7 +31,7 @@ class _ChatBotOverlayState extends State<ChatBotOverlay> {
     _controller.clear();
 
     try {
-      final responseText = await FlowiseService().queryFlowise(message);
+      final responseText = await FlowiseService().queryFlowise(messageHr);
 
       setState(() {
         _messages.add({'bot': responseText});

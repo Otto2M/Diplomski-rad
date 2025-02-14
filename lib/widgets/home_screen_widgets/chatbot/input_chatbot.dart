@@ -29,22 +29,17 @@ class InputChatbot extends StatelessWidget {
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                 ),
-                suffixIcon: Icon(
-                  Icons.send,
-                  color: Theme.of(context).colorScheme.onPrimary,
+                suffixIcon: IconButton(
+                  onPressed: () => onSendMessage(controller.text),
+                  icon: Icon(
+                    Icons.send,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
                 filled: true,
                 fillColor: Theme.of(context).colorScheme.onSurface,
               ),
               style: AppTextStyles.chatInputMessages(context),
-            ),
-          ),
-          const SizedBox(width: 8),
-          IconButton(
-            onPressed: () => onSendMessage(controller.text),
-            icon: Icon(
-              Icons.send,
-              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ],

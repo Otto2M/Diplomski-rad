@@ -5,11 +5,26 @@ import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/providers/upcoming_events_provider.dart';
 import 'package:povedi_me_app/widgets/home_screen_widgets/upcoming_events/event_card.dart';
 
-class UpcomingEvents extends ConsumerWidget {
+class UpcomingEvents extends ConsumerStatefulWidget {
   const UpcomingEvents({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<UpcomingEvents> createState() => _UpcomingEventsState();
+}
+
+class _UpcomingEventsState extends ConsumerState<UpcomingEvents> {
+  bool ascendingOrder = true;
+
+  void sortEvents(List<dynamic> events) {
+    if (ascendingOrder) {
+      events.sort((a, b) => a.date.compareTo(b.date));
+    } else {
+      events.sort((a, b) => b.date.compareTo(a.date));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final upcomingEventsAsync = ref.watch(upcomingEventsProvider);
 
     return Column(
@@ -17,9 +32,33 @@ class UpcomingEvents extends ConsumerWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text(
-            'Nadolazeće manifestacije',
-            style: AppTextStyles.placeHeadline2(context),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Nadolazeće manifestacije',
+                style: AppTextStyles.placeHeadline2(context),
+              ),
+              Row(
+                children: [
+                  IconButton(
+                      icon: const Icon(Icons.arrow_upward_rounded),
+                      onPressed: () {
+                        setState(() {
+                          ascendingOrder = true;
+                        });
+                      }),
+                  IconButton(
+                    icon: const Icon(Icons.arrow_downward_rounded),
+                    onPressed: () {
+                      setState(() {
+                        ascendingOrder = false;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
         upcomingEventsAsync.when(
@@ -35,6 +74,8 @@ class UpcomingEvents extends ConsumerWidget {
                 ),
               );
             }
+
+            sortEvents(events);
 
             return SizedBox(
               height: 200, // Visina horizontalnog prikaza

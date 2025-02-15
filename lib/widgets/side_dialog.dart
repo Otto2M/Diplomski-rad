@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
+import 'package:povedi_me_app/models/place.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SideDialog extends StatelessWidget {
@@ -6,10 +8,64 @@ class SideDialog extends StatelessWidget {
     super.key,
     required this.isDialogVisible,
     required this.onDismiss,
+    required this.place,
   });
 
+  final PlaceWithDetails place;
   final bool isDialogVisible;
   final VoidCallback onDismiss;
+
+  Future<void> _checkAndLaunchURL(
+      BuildContext context, String? url, String linkType) async {
+    if (url == null || url.isEmpty) {
+      String errorMessage = '';
+      if (linkType == 'facebook') {
+        errorMessage = 'Mjesto "${place.title}" nema Facebook profil.';
+      } else if (linkType == 'instagram') {
+        errorMessage = 'Mjesto "${place.title}" nema Instagram profil.';
+      } else if (linkType == 'web') {
+        errorMessage =
+            'Mjesto "${place.title}" ne sadrži poveznicu na web stranicu.';
+      }
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Text(errorMessage,
+                style: AppTextStyles.profileAlertBoxDescription(context),
+                textAlign: TextAlign.center),
+            actions: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(
+                      'Uredu',
+                      style: AppTextStyles.profileAlertBoxButtons(context),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      );
+      // ScaffoldMessenger.of(context).clearSnackBars();
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text(
+      //       errorMessage,
+      //       style: AppTextStyles.chatInputMessages(context),
+      //     ),
+      //     duration: const Duration(seconds: 3),
+      //   ),
+      // );
+    } else {
+      await _launchURL(url);
+    }
+  }
 
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
@@ -68,7 +124,8 @@ class SideDialog extends StatelessWidget {
                       vertical: 10,
                     ),
                     icon: Icon(Icons.facebook, size: 50, color: Colors.white),
-                    onPressed: () => _launchURL('https://www.facebook.com'),
+                    onPressed: () => _checkAndLaunchURL(
+                        context, place.facebookProfile, 'facebook'),
                   ),
                   IconButton(
                     padding: const EdgeInsets.symmetric(
@@ -77,8 +134,8 @@ class SideDialog extends StatelessWidget {
                     ),
                     icon: const Icon(Icons.camera_alt,
                         size: 50, color: Colors.white),
-                    onPressed: () => _launchURL(
-                        'https://podravka-ugostiteljstvo.hr/pivnica-kralus/'),
+                    onPressed: () => _checkAndLaunchURL(
+                        context, place.instagramProfile, 'instagram'),
                   ),
                   IconButton(
                     padding: const EdgeInsets.symmetric(
@@ -86,7 +143,8 @@ class SideDialog extends StatelessWidget {
                       vertical: 10,
                     ),
                     icon: Icon(Icons.public, size: 50, color: Colors.white),
-                    onPressed: () => _launchURL('https://www.google.com'),
+                    onPressed: () =>
+                        _checkAndLaunchURL(context, place.webLink, 'web'),
                   ),
                 ],
               ),

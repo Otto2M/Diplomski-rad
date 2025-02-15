@@ -19,11 +19,16 @@ class MyProfile extends ConsumerWidget {
             data: (user) {
               if (user == null) {
                 return Center(
-                    child: Text(
-                  'Korisnik nije prijavljen.',
-                  style: AppTextStyles.description(context),
-                  textAlign: TextAlign.center,
-                ));
+                  child: Column(
+                    children: [
+                      Text(
+                        'Korisnik nije prijavljen.',
+                        style: AppTextStyles.description(context),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                );
               }
               return ProfileView(user: user);
             },

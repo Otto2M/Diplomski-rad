@@ -38,11 +38,12 @@ class WorkingHoursPlace extends StatelessWidget {
           const SizedBox(height: 10),
           isShop
               ? Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 8.0),
                   padding: const EdgeInsets.all(4.0),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: AppColors.white,
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(8.0),
                     shape: BoxShape.rectangle,
                   ),
                   child: Text(

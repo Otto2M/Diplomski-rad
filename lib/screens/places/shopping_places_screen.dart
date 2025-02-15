@@ -87,7 +87,7 @@ class _ShoppingPlacesScreenState extends ConsumerState<ShoppingPlacesScreen> {
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: Scrollbar(
                     trackVisibility: true,
-                    // thumbVisibility: true,
+                    thumbVisibility: true,
                     child: SingleChildScrollView(
                       controller: _scrollController,
                       child: Column(
@@ -106,25 +106,25 @@ class _ShoppingPlacesScreenState extends ConsumerState<ShoppingPlacesScreen> {
                                       .subcategoryCardPlaceHeadline(context),
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  _scrollController.jumpTo(
-                                    _scrollController.position.maxScrollExtent,
-                                  );
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.7),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: const Icon(
-                                    Icons.arrow_downward,
-                                    color: AppColors.lightBlue,
-                                    size: 18,
-                                  ),
-                                ),
-                              ),
+                              // GestureDetector(
+                              //   onTap: () {
+                              //     _scrollController.jumpTo(
+                              //       _scrollController.position.maxScrollExtent,
+                              //     );
+                              //   },
+                              //   child: Container(
+                              //     padding: const EdgeInsets.all(4),
+                              //     decoration: BoxDecoration(
+                              //       color: Colors.white.withOpacity(0.7),
+                              //       shape: BoxShape.circle,
+                              //     ),
+                              //     child: const Icon(
+                              //       Icons.arrow_downward,
+                              //       color: AppColors.lightBlue,
+                              //       size: 18,
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                           Text(

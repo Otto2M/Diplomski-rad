@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/constants/instances.dart';
+import 'package:povedi_me_app/constants/styles/app_colors.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 
 import 'package:povedi_me_app/providers/categories_provider.dart';
 import 'package:povedi_me_app/screens/places/places_list_category_screen.dart';
 import 'package:povedi_me_app/screens/profile/my_profile.dart';
+import 'package:povedi_me_app/screens/splash/welcome_screen.dart';
 import 'package:povedi_me_app/screens/subcategories/subcategories_screen.dart';
 
 class AppDrawer extends ConsumerWidget {
@@ -27,30 +29,41 @@ class AppDrawer extends ConsumerWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Kategorije',
                   style: AppTextStyles.drawerMenuHeadline(context),
                 ),
-                IconButton(
-                  onPressed: () {
-                    firebaseAuth.signOut();
-                  },
-                  icon: const Icon(Icons.exit_to_app),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const MyProfile(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const MyProfile(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Moj profil",
+                        style: AppTextStyles.drawerHeaderProfileTxt(context),
                       ),
-                    );
-                  },
-                  child: Text(
-                    "Moj profil",
-                    style: AppTextStyles.drawerMenuStyle(context),
-                  ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        firebaseAuth.signOut();
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => const WelcomeScreen()),
+                        );
+                      },
+                      icon: const Icon(Icons.exit_to_app),
+                      color: AppColors.white,
+                    ),
+                  ],
                 ),
               ],
             ),

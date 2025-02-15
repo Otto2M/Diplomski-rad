@@ -186,12 +186,20 @@ class _PlaceItemDetailsScreenState
                           // Naziv mjesta
                           GestureDetector(
                             onTap: _toggleDialog,
-                            child: Text(
-                              widget.placeWithDetails.title.toUpperCase(),
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
-                              style:
-                                  AppTextStyles.subcategoryPlaceTitle(context),
+                            child: Row(
+                              children: [
+                                Text(
+                                  widget.placeWithDetails.title.toUpperCase(),
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                  style: AppTextStyles.subcategoryPlaceTitle(
+                                      context),
+                                ),
+                                const Icon(
+                                  Icons.keyboard_arrow_right_rounded,
+                                  size: 30,
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(height: 10),
@@ -283,6 +291,7 @@ class _PlaceItemDetailsScreenState
               ),
             ),
             SideDialog(
+              place: widget.placeWithDetails,
               isDialogVisible: _isDialogVisible,
               onDismiss: _toggleDialog,
             ),

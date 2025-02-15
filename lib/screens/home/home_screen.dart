@@ -11,10 +11,10 @@ import 'package:povedi_me_app/widgets/home_screen_widgets/weather_forecast_v2.da
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({
     super.key,
-    this.scaffoldKey,
+    // this.scaffoldKey,
   });
 
-  final GlobalKey<ScaffoldState>? scaffoldKey;
+  // final GlobalKey<ScaffoldState>? scaffoldKey;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -46,7 +46,8 @@ class HomeScreen extends ConsumerWidget {
                         ),
                         padding: const EdgeInsets.all(12.0),
                         onPressed: () {
-                          scaffoldKey!.currentState?.openDrawer();
+                          Scaffold.of(context).openDrawer();
+                          // scaffoldKey!.currentState?.openDrawer();
                         },
                       ),
                       const Expanded(

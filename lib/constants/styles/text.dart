@@ -208,6 +208,20 @@ class AppTextStyles {
     );
   }
 
+  //Stil za tekst unutar drawer menu-a
+  static TextStyle drawerHeaderProfileTxt(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 14, mediumSize: 16, largeSize: 18);
+
+    return GoogleFonts.poppins(
+      color: Theme.of(context).colorScheme.onPrimary,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+    );
+  }
+
 // --- UPCOMING EVENTS
 
   //Upcoming events - card date style

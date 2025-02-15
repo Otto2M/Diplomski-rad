@@ -9,6 +9,7 @@ import 'package:povedi_me_app/constants/styles/app_colors.dart';
 import 'package:povedi_me_app/providers/auth_user_state_provider.dart';
 import 'package:povedi_me_app/providers/categories_provider.dart';
 import 'package:povedi_me_app/providers/onboarding_status_provider.dart';
+import 'package:povedi_me_app/screens/splash/loading_screen.dart';
 
 import 'package:povedi_me_app/screens/splash/onboarding_screen.dart';
 import 'package:povedi_me_app/screens/splash/welcome_screen.dart';
@@ -59,15 +60,12 @@ class _AuthGateState extends ConsumerState<AuthGate> {
       );
     }
 
-    // Nakon splash-a, osluškuj auth stanje
     final authStateAsync = ref.watch(authStateProvider);
     return authStateAsync.when(
       data: (User? user) {
-        // Ako je korisnik prijavljen, prikaži TabScreen
         if (user != null) {
           return const TabScreen();
         } else {
-          // Ako nije prijavljen, provjeri status onboardinga
           final onboardingAsync = ref.watch(onboardingStatusProvider);
           return onboardingAsync.when(
             data: (bool isOnboardingSeen) {
@@ -78,7 +76,7 @@ class _AuthGateState extends ConsumerState<AuthGate> {
               }
             },
             loading: () => const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
+              body: Center(child: LoadingScreen()),
             ),
             error: (error, stack) => Scaffold(
               body: Center(child: Text('Došlo je do pogreške: $error')),
@@ -87,7 +85,7 @@ class _AuthGateState extends ConsumerState<AuthGate> {
         }
       },
       loading: () => const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
+        body: Center(child: LoadingScreen()),
       ),
       error: (error, stack) => Scaffold(
         body: Center(child: Text('Došlo je do pogreške: $error')),

@@ -40,6 +40,9 @@ final placesProvider = StreamProvider<List<dynamic>>((ref) async* {
             averageRating: (data['averageRating'] is int
                 ? (data['averageRating'] as int).toDouble()
                 : data['averageRating']) as double?,
+            webLink: data['webLink'] ?? '',
+            facebookProfile: data['facebookProfile'] ?? '',
+            instagramProfile: data['instagramProfile'] ?? '',
           );
 
         case 'shop':

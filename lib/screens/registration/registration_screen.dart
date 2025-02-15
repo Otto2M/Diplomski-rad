@@ -21,6 +21,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   var _enteredPhoneNumber = '';
   var _enteredEmail = '';
   var _enteredPassword = '';
+  bool isLoading = false;
 
   void _submit() async {
     final isValid = _registrationFormKey.currentState!.validate();
@@ -31,20 +32,39 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     _registrationFormKey.currentState!.save();
 
-    firebaseAuth.signUp(
-      email: _enteredEmail,
-      password: _enteredPassword,
-      username: _enteredUsername,
-      name: _enteredName,
-      phoneNumber: _enteredPhoneNumber,
-    );
+    setState(() {
+      isLoading = true;
+    });
 
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(
-        builder: (context) => const RegistrationScreenSuccess(),
-      ),
-      (route) => false,
-    );
+    try {
+      await firebaseAuth.signUp(
+        email: _enteredEmail,
+        password: _enteredPassword,
+        username: _enteredUsername,
+        name: _enteredName,
+        phoneNumber: _enteredPhoneNumber,
+      );
+
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const RegistrationScreenSuccess(),
+          ),
+        );
+      }
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.toString())),
+      );
+    } finally {
+      if (mounted) {
+        setState(
+          () {
+            isLoading = false;
+          },
+        );
+      }
+    }
   }
 
   @override
@@ -273,10 +293,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                         .color!,
                                   ),
                                 ),
-                                // focusedBorder: const UnderlineInputBorder(
-                                //   borderSide: BorderSide(
-                                //       color: AppColors.accentLight, width: 3.0),
-                                // ),
                               ),
                               style: AppTextStyles.authInputTextStyle(context),
                               validator: (value) {
@@ -300,17 +316,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.7,
                     child: ElevatedButton(
-                      onPressed: _submit,
+                      onPressed: isLoading ? null : _submit,
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25),
                         ),
                         padding: const EdgeInsets.symmetric(vertical: 15),
                       ),
-                      child: Text(
-                        'REGISTRIRAJ SE',
-                        style: AppTextStyles.authButtonTextStyle(context),
-                      ),
+                      child: isLoading
+                          ? const SizedBox(
+                              height: 16,
+                              width: 16,
+                              child: CircularProgressIndicator(),
+                            )
+                          : Text(
+                              'REGISTRIRAJ SE',
+                              style: AppTextStyles.authButtonTextStyle(context),
+                            ),
                     ),
                   ),
                   TextButton(
@@ -338,17 +360,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     Buttons.google,
                     onPressed: () async {
                       try {
-                        // setState(() {
-                        //   isLoading = true;
-                        // });
+                        setState(() {
+                          isLoading = true;
+                        });
                         await firebaseAuth.signInWithGoogle();
-                        // setState(() {
-                        //   isLoading = false;
-                        // });
+                        setState(() {
+                          isLoading = false;
+                        });
                         ScaffoldMessenger.of(context).clearSnackBars();
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                              content: Text('Uspješno prijavljeno!')),
+                            content:
+                                Text('Uspješna prijava Vašim Google računom!'),
+                          ),
                         );
                       } catch (e) {
                         ScaffoldMessenger.of(context).clearSnackBars();
@@ -364,38 +388,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
 
                   const SizedBox(height: 10),
-
-                  // SignInButtonBuilder(
-                  //   text: 'Prijavi se putem Google',
-                  //   elevation: 5,
-                  //   icon: Icons.email,
-                  //   onPressed: () async {
-                  //     try {
-                  //       // setState(() {
-                  //       //   isLoading = true;
-                  //       // });
-                  //       await firebaseAuth.signInWithGoogle();
-                  //       // setState(() {
-                  //       //   isLoading = false;
-                  //       // });
-                  //       ScaffoldMessenger.of(context).clearSnackBars();
-                  //       ScaffoldMessenger.of(context).showSnackBar(
-                  //         const SnackBar(
-                  //             content: Text('Uspješno prijavljeno!')),
-                  //       );
-                  //     } catch (e) {
-                  //       ScaffoldMessenger.of(context).clearSnackBars();
-                  //       ScaffoldMessenger.of(context).showSnackBar(
-                  //         SnackBar(content: Text('Google Sign-in failed: $e')),
-                  //       );
-                  //     }
-                  //   },
-                  //   backgroundColor: AppColors.darkBlue,
-                  //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(20),
-                  //   ),
-                  //   padding: const EdgeInsets.symmetric(vertical: 15),
-                  // )
                 ],
               ),
             ),

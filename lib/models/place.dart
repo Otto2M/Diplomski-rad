@@ -48,6 +48,9 @@ class PlaceWithDetails extends Place {
     this.contactNumber,
     this.email,
     this.averageRating,
+    this.webLink,
+    this.facebookProfile,
+    this.instagramProfile,
   });
 
   final Map<String, String>? workingHours; // Npr. {"ponedjeljak": "8:00-16:00"}
@@ -55,6 +58,9 @@ class PlaceWithDetails extends Place {
   final String? contactNumber;
   final String? email;
   final double? averageRating;
+  final String? webLink;
+  final String? facebookProfile;
+  final String? instagramProfile;
 }
 
 //klasa za kategoriju: trgovački centri

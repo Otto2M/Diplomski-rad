@@ -2,10 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:povedi_me_app/constants/firestore_collections.dart';
 import 'package:povedi_me_app/models/category.dart';
 import 'package:povedi_me_app/models/city.dart';
+import 'package:povedi_me_app/services/shared_preferences_service.dart';
 
 class FirestoreDatabaseService {
   final _firebaseFirestore = FirebaseFirestore
       .instance; //for "talking" to remote database (upload/fetch data)
+  final sharedPreferencesService = SharedPreferencesService();
 
   // Get all categories
   Future<List<Category>> getCategories() async {
@@ -14,17 +16,24 @@ class FirestoreDatabaseService {
           .collection(FirestoreCollections.categoriesCollection)
           .get();
 
-      return categoriesSnapshot.docs
+      final categories = categoriesSnapshot.docs
           .map((doc) => Category(
                 id: doc['id'],
                 title: doc['title'],
                 icon: doc['icon'],
               ))
           .toList();
+
+      await sharedPreferencesService.saveCategoriesToCache(categories);
+      return categories;
     } catch (e) {
       print('Error fetching categories: $e');
       rethrow;
     }
+  }
+
+  Future<List<Category>> loadCategoriesFromCache() async {
+    return await sharedPreferencesService.loadCategoriesFromCache();
   }
 
   // Get all subcategories

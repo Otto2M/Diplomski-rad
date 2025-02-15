@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/providers/auth_user_state_provider.dart';
-import 'package:povedi_me_app/screens/login/password_field.dart';
 import 'package:povedi_me_app/screens/registration/registration_screen.dart';
 import 'package:povedi_me_app/widgets/tab_screen.dart';
 //import 'package:povedi_me_app/services/auth_service.dart';
@@ -40,8 +39,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     try {
       await firebaseAuth.signInUser(_enteredEmail, _enteredPassword);
-
-      // Ne treba ručno navigirati jer authStateProvider osluškuje promjene
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).clearSnackBars();
@@ -245,10 +242,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             ),
                             padding: const EdgeInsets.symmetric(vertical: 15),
                           ),
-                          child: Text(
-                            'PRIJAVI SE',
-                            style: AppTextStyles.authButtonTextStyle(context),
-                          ),
+                          child: isLoading
+                              ? const SizedBox(
+                                  height: 16,
+                                  width: 16,
+                                  child: CircularProgressIndicator(),
+                                )
+                              : Text(
+                                  'PRIJAVI SE',
+                                  style: AppTextStyles.authButtonTextStyle(
+                                      context),
+                                ),
                         ),
                       ),
 
@@ -288,9 +292,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   setState(() {
                                     isLoading = false;
                                   });
-                                  // Navigator.of(context).pushReplacement(
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) => HomeScreen()));
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const TabScreen()));
                                   // Navigator.of(context).pushAndRemoveUntil(
                                   //   MaterialPageRoute(
                                   //       builder: (context) => const HomeScreen()),

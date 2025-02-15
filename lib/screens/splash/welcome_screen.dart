@@ -17,8 +17,7 @@ class WelcomeScreen extends StatelessWidget {
       body: Center(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            double buttonWidth =
-                constraints.maxWidth * 0.8; // 80% širine dostupnog prostora
+            double buttonWidth = constraints.maxWidth * 0.8;
 
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -32,8 +31,7 @@ class WelcomeScreen extends StatelessWidget {
                             builder: (context) => const LoginScreen())),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(15), // Manje zaobljeni rubovi
+                        borderRadius: BorderRadius.circular(15),
                       ),
                       padding: const EdgeInsets.symmetric(
                         vertical: 20,
@@ -58,8 +56,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(15), // Manje zaobljeni rubovi
+                        borderRadius: BorderRadius.circular(15),
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 20),
                     ),
@@ -69,7 +66,6 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 40),
 
                 //additional button
@@ -83,8 +79,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(15), // Manje zaobljeni rubovi
+                        borderRadius: BorderRadius.circular(15),
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 20),
                     ),

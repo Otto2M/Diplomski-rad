@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
-import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/providers/auth_user_state_provider.dart';
 import 'package:povedi_me_app/providers/categories_provider.dart';
 import 'package:povedi_me_app/providers/onboarding_status_provider.dart';
@@ -23,12 +22,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    ref.read(categoriesProvider.future);
+    ref.read(subcategoriesProvider.future);
     Timer(
       const Duration(seconds: 3),
       () async {
         final isOnboardingSeen =
             await ref.read(onboardingStatusProvider.future);
-        final authState = ref.read(authStateProvider).value;
+        final authState = await ref.read(authStateProvider.future);
 
         WidgetsBinding.instance.addPostFrameCallback(
           (_) {
@@ -50,8 +51,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         );
       },
     );
-    ref.read(categoriesProvider.future);
-    ref.read(subcategoriesProvider.future);
   }
 
   @override
@@ -65,22 +64,27 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             Image.asset(
               Assets.logo,
             ),
-            Text(
-              'POVEDI.ME',
-              style: AppTextStyles.splashLogoText(context),
+            Image.asset(
+              Assets.povediMeTxt,
+              fit: BoxFit.contain,
+              scale: 6,
             ),
+            // Text(
+            //   'POVEDI.ME',
+            //   style: AppTextStyles.splashLogoText(context),
+            // ),
             const SizedBox(height: 50),
-            ElevatedButton(
-              onPressed: () {},
-              // Navigator.pushReplacement(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) => const OnboardingScreen()),
-              // ),
-              style:
-                  ElevatedButton.styleFrom(backgroundColor: AppColors.yellow),
-              child: const Icon(Icons.navigate_next_rounded),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {},
+            //   // Navigator.pushReplacement(
+            //   //   context,
+            //   //   MaterialPageRoute(
+            //   //       builder: (context) => const OnboardingScreen()),
+            //   // ),
+            //   style:
+            //       ElevatedButton.styleFrom(backgroundColor: AppColors.yellow),
+            //   child: const Icon(Icons.navigate_next_rounded),
+            // ),
           ],
         ),
       ),

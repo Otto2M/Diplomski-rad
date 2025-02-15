@@ -9,6 +9,14 @@ final firestoreDatabaseService =
 // Categories Provider
 final categoriesProvider = FutureProvider<List<Category>>((ref) async {
   final firebaseFirestoreService = ref.watch(firestoreDatabaseService);
+
+  final cachedCategories =
+      await firebaseFirestoreService.loadCategoriesFromCache();
+
+  if (cachedCategories.isNotEmpty) {
+    return cachedCategories;
+  }
+
   return await firebaseFirestoreService.getCategories();
 });
 

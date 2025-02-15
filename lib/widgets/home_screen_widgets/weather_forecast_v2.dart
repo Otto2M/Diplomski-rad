@@ -49,7 +49,7 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
 
   String getBackgroundImage(String weatherCondition) {
     if (weatherCondition.contains('clear')) {
-      return 'assets/images/sunny_background.jpg';
+      return 'assets/images/sunny_background_flip.jpg';
     } else if (weatherCondition.contains('clouds')) {
       return 'assets/images/cloudy_background.jpg';
     } else if (weatherCondition.contains('rain')) {

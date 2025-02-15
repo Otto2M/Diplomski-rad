@@ -4,6 +4,7 @@ class Assets {
   static const homeScreenBackgroundImage = 'assets/images/home_screen_img.jpg';
   //--logo
   static const logo = 'assets/images/povedi_me_logo.png';
+  static const povediMeTxt = 'assets/images/povedi_me_text.jpeg';
   //-icons
   static const iPerson = 'assets/icons/person.png';
   static const iEmail = 'assets/icons/email.png';

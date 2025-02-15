@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:povedi_me_app/providers/theme_mode_option_provider.dart';
 import 'package:povedi_me_app/screens/home/demo/demo_home_screen.dart';
 import 'package:povedi_me_app/screens/home/home_screen.dart';
+import 'package:povedi_me_app/screens/splash/auth_gate.dart';
 import 'package:povedi_me_app/screens/splash/initial_screen.dart';
 import 'package:povedi_me_app/screens/splash/loading_screen.dart';
 import 'package:povedi_me_app/screens/splash/splash_screen.dart';
@@ -43,7 +44,8 @@ class App extends ConsumerWidget {
       darkTheme: darkAppTheme,
       themeMode: themeMode,
       //home: const TabScreen(),
-      home: const SplashScreen(),
+      // home: const SplashScreen(),
+      home: const AuthGate(),
       // home: StreamBuilder(
       //     stream: FirebaseAuth.instance.authStateChanges(),
       //     builder: (ctx, snapshot) {

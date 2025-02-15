@@ -14,8 +14,9 @@ class AuthService {
   Future<void> signInUser(String email, String password) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
-      print('------ KORISNIK $email USPJEŠNO PRIJAVLJEN -----');
+        email: email,
+        password: password,
+      );
     } on FirebaseAuthException catch (error) {
       if (error.code == Errors.emailAlreadyInUse) {
         //TODO error message print

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
+import 'package:povedi_me_app/widgets/social_media_side_dialog/platform_specific_dialog.dart';
+import 'package:povedi_me_app/widgets/social_media_side_dialog/side_dialog_clipper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SideDialog extends StatelessWidget {
@@ -18,53 +19,31 @@ class SideDialog extends StatelessWidget {
   Future<void> _checkAndLaunchURL(
       BuildContext context, String? url, String linkType) async {
     if (url == null || url.isEmpty) {
-      String errorMessage = '';
-      if (linkType == 'facebook') {
-        errorMessage = 'Mjesto "${place.title}" nema Facebook profil.';
-      } else if (linkType == 'instagram') {
-        errorMessage = 'Mjesto "${place.title}" nema Instagram profil.';
-      } else if (linkType == 'web') {
-        errorMessage =
-            'Mjesto "${place.title}" ne sadrži poveznicu na web stranicu.';
-      }
-
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Text(errorMessage,
-                style: AppTextStyles.profileAlertBoxDescription(context),
-                textAlign: TextAlign.center),
-            actions: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text(
-                      'Uredu',
-                      style: AppTextStyles.profileAlertBoxButtons(context),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          );
-        },
-      );
-      // ScaffoldMessenger.of(context).clearSnackBars();
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text(
-      //       errorMessage,
-      //       style: AppTextStyles.chatInputMessages(context),
-      //     ),
-      //     duration: const Duration(seconds: 3),
-      //   ),
-      // );
+      final errorMessage = _generateErrorMessage(linkType);
+      showErrorDialog(context, errorMessage);
     } else {
       await _launchURL(url);
     }
+  }
+
+  String _generateErrorMessage(String linkType) {
+    switch (linkType) {
+      case 'facebook':
+        return 'Mjesto "${place.title}" nema Facebook profil.';
+      case 'instagram':
+        return 'Mjesto "${place.title}" nema Instagram profil.';
+      case 'web':
+        return 'Mjesto "${place.title}" ne sadrži poveznicu na web stranicu.';
+      default:
+        return 'Poveznica nije dostupna.';
+    }
+  }
+
+  void showErrorDialog(BuildContext context, String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) => PlatformSpecificDialog(errorMessage: errorMessage),
+    );
   }
 
   Future<void> _launchURL(String url) async {
@@ -120,18 +99,15 @@ class SideDialog extends StatelessWidget {
                 children: [
                   IconButton(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
-                    icon: Icon(Icons.facebook, size: 50, color: Colors.white),
+                        horizontal: 20, vertical: 10),
+                    icon: const Icon(Icons.facebook,
+                        size: 50, color: Colors.white),
                     onPressed: () => _checkAndLaunchURL(
                         context, place.facebookProfile, 'facebook'),
                   ),
                   IconButton(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
+                        horizontal: 20, vertical: 10),
                     icon: const Icon(Icons.camera_alt,
                         size: 50, color: Colors.white),
                     onPressed: () => _checkAndLaunchURL(
@@ -139,10 +115,9 @@ class SideDialog extends StatelessWidget {
                   ),
                   IconButton(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
-                    icon: Icon(Icons.public, size: 50, color: Colors.white),
+                        horizontal: 20, vertical: 10),
+                    icon:
+                        const Icon(Icons.public, size: 50, color: Colors.white),
                     onPressed: () =>
                         _checkAndLaunchURL(context, place.webLink, 'web'),
                   ),
@@ -153,58 +128,5 @@ class SideDialog extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-class SideDialogClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final Path path = Path();
-
-    path.lineTo(size.width, 0);
-
-    // Gornja zakrivljenost prema sredini
-    path.quadraticBezierTo(
-      size.width * 0.95, // !
-      size.height * 0.2, // -
-      size.width * 0.3, // +
-      size.height * 0.4, // ?
-    );
-
-    // // Zaobljeni prijelaz u ravni dio
-    // path.arcToPoint(
-    //   Offset(
-    //     size.width * 0.6,
-    //     size.height * 0.6,
-    //   ), // Krajnja točka luka
-    //   radius: const Radius.circular(30.0), // Polumjer za zaobljenje
-    //   clockwise: false, // Smjer
-    // );
-
-    // Srednji ravni dio
-    path.lineTo(
-      size.width * 0.3, // +
-      size.height * 0.6, // ?
-    );
-
-    // Donja zakrivljenost prema desnom donjem kutu
-    path.quadraticBezierTo(
-      size.width * 0.95, // !
-      size.height * 0.8, // -
-      size.width,
-      size.height,
-    );
-
-    path.lineTo(size.width, 0);
-
-    // // Zatvaranje puta
-    path.close();
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return true;
   }
 }

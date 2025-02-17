@@ -5,6 +5,7 @@ import 'package:povedi_me_app/providers/categories_provider.dart';
 import 'package:povedi_me_app/screens/image_gallery.dart';
 import 'package:povedi_me_app/utils/description_lenght_split.dart';
 import 'package:povedi_me_app/widgets/custom_app_bar.dart';
+import 'package:povedi_me_app/widgets/image_with_error_handling.dart';
 
 class AboutCityScreen extends ConsumerWidget {
   const AboutCityScreen({super.key});
@@ -78,14 +79,11 @@ class AboutCityScreen extends ConsumerWidget {
                               },
                               child: Hero(
                                 tag: place.imageUrl[index],
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.network(
-                                    imageUrl,
-                                    fit: BoxFit.cover,
-                                    height: 120,
-                                    width: 150,
-                                  ),
+                                child: ImageWithErrorHandling(
+                                  imageUrl: imageUrl,
+                                  fit: BoxFit.cover,
+                                  height: 120,
+                                  width: 150,
                                 ),
                               ),
                             );

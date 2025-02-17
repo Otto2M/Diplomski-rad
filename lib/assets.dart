@@ -2,6 +2,7 @@ class Assets {
   //-images
   static const aiButton = 'assets/images/ai_button.png';
   static const homeScreenBackgroundImage = 'assets/images/home_screen_img.jpg';
+  static const homeScreenPerfectdayImage = 'assets/images/perfect_day.jpg';
   //--logo
   static const logo = 'assets/images/povedi_me_logo.png';
   static const povediMeTxt = 'assets/images/povedi_me_text.jpeg';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/screens/places/place_details_category_screen.dart';
+import 'package:povedi_me_app/widgets/image_with_error_handling.dart';
 
 class EventCard extends StatefulWidget {
   const EventCard({
@@ -45,22 +45,12 @@ class _EventCardState extends State<EventCard> {
         onExit: (_) => setState(() => isHovered = false),
         child: Stack(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                widget.event.imageUrl.isNotEmpty
-                    ? widget.event.imageUrl.first
-                    : Assets.logo,
-
-                //
-                // ----------- POSTAVITI SLIKU Assets.logo NA FIREBASE STORAGE DA SE OD TAMO DOHVAĆA,
-                //OVAKO NE RADI ZBOG METODE IMAGE.NETWORK ------------------
-                //
-
-                width: 180,
-                height: 200,
-                fit: BoxFit.cover,
-              ),
+            ImageWithErrorHandling(
+              imageUrl: widget.event.imageUrl.first,
+              width: 180,
+              height: 200,
+              fit: BoxFit.cover,
+              isEventCard: true,
             ),
             Align(
               alignment: Alignment.bottomCenter,

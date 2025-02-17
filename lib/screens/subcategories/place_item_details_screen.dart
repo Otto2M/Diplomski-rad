@@ -11,6 +11,7 @@ import 'package:povedi_me_app/services/cloud_firestore_service.dart';
 import 'package:povedi_me_app/services/place_details_service.dart';
 import 'package:povedi_me_app/widgets/custom_app_bar_with_favorite.dart';
 import 'package:povedi_me_app/widgets/image_slider.dart';
+import 'package:povedi_me_app/widgets/image_with_error_handling.dart';
 import 'package:povedi_me_app/widgets/reviews/rating_star_bar.dart';
 import 'package:povedi_me_app/widgets/social_media_side_dialog/side_dialog.dart';
 import 'package:povedi_me_app/widgets/working_hours_place.dart';
@@ -169,8 +170,8 @@ class _PlaceItemDetailsScreenState
                     widget.placeWithDetails.imageUrl.length > 1
                         ? ImageSlider(
                             imagesUrl: widget.placeWithDetails.imageUrl)
-                        : Image.network(
-                            widget.placeWithDetails.imageUrl.first,
+                        : ImageWithErrorHandling(
+                            imageUrl: widget.placeWithDetails.imageUrl.first,
                             width: double.infinity,
                             height: 250,
                             fit: BoxFit.cover,

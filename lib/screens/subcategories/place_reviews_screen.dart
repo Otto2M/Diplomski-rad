@@ -46,7 +46,7 @@ class _PlaceReviewsScreenState extends State<PlaceReviewsScreen> {
         },
       );
     } catch (e) {
-      print('Greška pri spremanju recenzije: $e');
+      debugPrint('Greška pri spremanju recenzije: $e');
     }
   }
 

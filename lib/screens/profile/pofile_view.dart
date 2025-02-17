@@ -125,7 +125,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
 
       ref.refresh(userProvider);
     } catch (error) {
-      print('Greška pri ažuriranju profila: $error');
+      debugPrint('Greška pri ažuriranju profila: $error');
       setState(() {
         isUpdating = false;
       });

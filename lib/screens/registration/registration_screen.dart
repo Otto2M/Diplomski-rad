@@ -4,6 +4,7 @@ import 'package:povedi_me_app/constants/instances.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/screens/login/login_screen.dart';
 import 'package:povedi_me_app/screens/registration/registration_screen_success.dart';
+import 'package:povedi_me_app/screens/registration/registration_text_field.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -54,7 +55,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       }
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(error.toString())),
+        SnackBar(
+          content: Center(child: Text(error.toString())),
+          backgroundColor: Theme.of(context).colorScheme.error,
+        ),
       );
     } finally {
       if (mounted) {
@@ -65,6 +69,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         );
       }
     }
+  }
+
+  bool _isValidName(String name) {
+    final nameRegex = RegExp(r'^[A-Za-zČčĆćŠšŽžĐđ ]+$');
+    return nameRegex.hasMatch(name);
+  }
+
+  bool _isValidEmail(String email) {
+    final emailRegex =
+        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  bool _isValidPhoneNumber(String phoneNumber) {
+    final phoneRegex = RegExp(r'^\d{10}$');
+    return phoneRegex.hasMatch(phoneNumber);
   }
 
   @override
@@ -107,204 +127,76 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             //Name
-                            TextFormField(
-                              decoration: InputDecoration(
-                                prefixIcon: Image.asset(
-                                  Assets.iPerson,
-                                  scale: 50,
-                                  width: 10,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .color,
-                                ),
-                                labelText: 'Ime i prezime',
-                                labelStyle:
-                                    AppTextStyles.authLabelTextStyle(context),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .color!,
-                                  ),
-                                ),
-                              ),
-                              style: AppTextStyles.authInputTextStyle(context),
-                              autocorrect: false,
+                            CustomTextField(
+                              label: 'Ime i prezime',
+                              imgAssets: Assets.iPerson,
                               validator: (value) {
                                 if (value == null || value.trim().isEmpty) {
-                                  return 'Molimo Vas da unesete ispravni format imena i prezimena';
+                                  return 'Ovo polje je obavezno!';
+                                }
+                                if (!_isValidName(value)) {
+                                  return 'Neispravan format imena!';
                                 }
                                 return null;
                               },
-                              onSaved: (value) {
-                                _enteredName = value!;
-                              },
+                              onSaved: (value) => _enteredName = value!,
                             ),
                             const SizedBox(height: 20),
-
-                            //Username
-                            TextFormField(
-                              decoration: InputDecoration(
-                                prefixIcon: Image.asset(
-                                  Assets.iPersonBorder,
-                                  scale: 50,
-                                  width: 10,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .color,
-                                ),
-                                labelText: 'Korisničko ime',
-                                labelStyle:
-                                    AppTextStyles.authLabelTextStyle(context),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .color!,
-                                  ),
-                                ),
-                              ),
-                              style: AppTextStyles.authInputTextStyle(context),
-                              autocorrect: false,
+                            CustomTextField(
+                              label: 'Korisničko ime',
+                              imgAssets: Assets.iPersonBorder,
                               validator: (value) {
                                 if (value == null || value.trim().isEmpty) {
                                   return 'Molimo Vas da unesete željeno korisničko ime';
                                 }
                                 return null;
                               },
-                              onSaved: (value) {
-                                _enteredUsername = value!;
-                              },
+                              onSaved: (value) => _enteredUsername = value!,
                             ),
                             const SizedBox(height: 20),
-
-                            //Phone number
-                            TextFormField(
-                              decoration: InputDecoration(
-                                prefixIcon: Image.asset(
-                                  Assets.iPhone,
-                                  scale: 50,
-                                  width: 10,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .color,
-                                ),
-                                labelText: 'Broj mobitela',
-                                labelStyle:
-                                    AppTextStyles.authLabelTextStyle(context),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .color!,
-                                  ),
-                                ),
-                              ),
-                              style: AppTextStyles.authInputTextStyle(context),
+                            CustomTextField(
+                              label: 'Broj mobitela',
+                              imgAssets: Assets.iPhone,
                               keyboardType: TextInputType.number,
-                              autocorrect: false,
                               validator: (value) {
-                                if (value == null ||
-                                    value.trim().isEmpty ||
-                                    value.contains(RegExp(','))) {
-                                  return 'Molimo Vas da unesete broj mobitela';
+                                if (value == null || value.trim().isEmpty) {
+                                  return 'Molimo Vas da unesete broj mobitela.';
+                                }
+                                if (!_isValidPhoneNumber(value)) {
+                                  return 'Neispravan format broja mobitela.';
                                 }
                                 return null;
                               },
-                              onSaved: (value) {
-                                _enteredPhoneNumber = value!;
-                              },
+                              onSaved: (value) => _enteredPhoneNumber = value!,
                             ),
                             const SizedBox(height: 20),
-
-                            //E-mail
-                            TextFormField(
-                              decoration: InputDecoration(
-                                prefixIcon: Image.asset(
-                                  Assets.iEmail,
-                                  scale: 50,
-                                  width: 10,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .color,
-                                ),
-                                labelText: 'Email',
-                                labelStyle:
-                                    AppTextStyles.authLabelTextStyle(context),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .color!,
-                                  ),
-                                ),
-                              ),
-                              style: AppTextStyles.authInputTextStyle(context),
+                            CustomTextField(
+                              label: 'Email',
+                              imgAssets: Assets.iEmail,
                               keyboardType: TextInputType.emailAddress,
-                              autocorrect: false,
-                              textCapitalization: TextCapitalization.none,
                               validator: (value) {
                                 if (value == null ||
                                     value.trim().isEmpty ||
-                                    !value.contains('@')) {
-                                  return 'Please enter a valid email address';
+                                    !value.contains('@') ||
+                                    !_isValidEmail(value)) {
+                                  return 'Neispravan format email adrese.';
                                 }
                                 return null;
                               },
-                              onSaved: (value) {
-                                _enteredEmail = value!;
-                              },
+                              onSaved: (value) => _enteredEmail = value!,
                             ),
-
                             const SizedBox(height: 20),
-
-                            //Password
-                            TextFormField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                prefixIcon: Icon(
-                                  Icons.lock,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .color,
-                                ),
-                                labelText: 'Lozinka',
-                                labelStyle:
-                                    AppTextStyles.authLabelTextStyle(context),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .color!,
-                                  ),
-                                ),
-                              ),
-                              style: AppTextStyles.authInputTextStyle(context),
+                            CustomTextField(
+                              label: 'Lozinka',
+                              isPassword: true,
                               validator: (value) {
                                 if (value == null || value.trim().length < 6) {
                                   return 'Lozinka mora sadržavati najmanje 6 znakova';
                                 }
                                 return null;
                               },
-                              onSaved: (value) {
-                                _enteredPassword = value!;
-                              },
-                            )
+                              onSaved: (value) => _enteredPassword = value!,
+                            ),
                           ],
                         ),
                       ),

@@ -5,6 +5,7 @@ import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/providers/perfect_day_provider.dart';
 import 'package:povedi_me_app/screens/home/perfect_day_details_screen.dart';
 import 'package:povedi_me_app/widgets/custom_app_bar.dart';
+import 'package:povedi_me_app/widgets/image_with_error_handling.dart';
 
 class PerfectDayListScreen extends ConsumerWidget {
   const PerfectDayListScreen({super.key});
@@ -62,17 +63,11 @@ class PerfectDayListScreen extends ConsumerWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(10.0),
-                                    topRight: Radius.circular(10.0),
-                                  ),
-                                  child: Image.network(
-                                    perfectDay.imageUrl,
-                                    width: double.infinity,
-                                    height: 150,
-                                    fit: BoxFit.cover,
-                                  ),
+                                ImageWithErrorHandling(
+                                  imageUrl: perfectDay.imageUrl,
+                                  width: double.infinity,
+                                  height: 150,
+                                  fit: BoxFit.cover,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(

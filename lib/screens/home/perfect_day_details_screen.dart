@@ -3,6 +3,7 @@ import 'package:povedi_me_app/constants/styles/text.dart';
 
 import 'package:povedi_me_app/models/city.dart';
 import 'package:povedi_me_app/widgets/custom_app_bar.dart';
+import 'package:povedi_me_app/widgets/image_with_error_handling.dart';
 
 class PerfectDayDetailsScreen extends StatelessWidget {
   const PerfectDayDetailsScreen({
@@ -27,14 +28,20 @@ class PerfectDayDetailsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               // Slika
-              ClipRRect(
-                child: Image.network(
-                  perfectDay.imageUrl,
-                  width: double.infinity,
-                  height: 250,
-                  fit: BoxFit.cover,
-                ),
+              ImageWithErrorHandling(
+                imageUrl: perfectDay.imageUrl,
+                width: double.infinity,
+                height: 250,
+                fit: BoxFit.cover,
               ),
+              // ClipRRect(
+              //   child: Image.network(
+              //     perfectDay.imageUrl,
+              //     width: double.infinity,
+              //     height: 250,
+              //     fit: BoxFit.cover,
+              //   ),
+              // ),
               const SizedBox(height: 16.0),
 
               Padding(

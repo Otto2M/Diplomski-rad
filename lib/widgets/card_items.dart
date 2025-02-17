@@ -5,6 +5,7 @@ import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/screens/subcategories/place_item_details_screen.dart';
 import 'package:povedi_me_app/services/place_details_service.dart';
+import 'package:povedi_me_app/widgets/image_with_error_handling.dart';
 import 'package:povedi_me_app/widgets/reviews/rating_star_bar.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -63,14 +64,12 @@ class _CardItemsState extends ConsumerState<CardItems> {
 
         return Row(
           children: [
-            FadeInImage(
-              placeholder: MemoryImage(kTransparentImage),
-              image: NetworkImage(
-                imagesUrl.isNotEmpty ? imagesUrl.first : '',
-              ),
+            ImageWithErrorHandling(
+              imageUrl: imagesUrl.isNotEmpty ? imagesUrl.first : '',
               fit: BoxFit.cover,
               height: 160,
               width: imageWidth,
+              isCard: true,
             ),
             Container(
               width: textWidth,

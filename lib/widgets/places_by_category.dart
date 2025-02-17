@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/screens/places/place_details_category_screen.dart';
+import 'package:povedi_me_app/widgets/image_with_error_handling.dart';
 
 class PlacesByCategory extends StatelessWidget {
   const PlacesByCategory({
@@ -56,18 +57,14 @@ class PlacesByCategory extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final imagesUrl = place.imageUrl[index];
                   return Padding(
-                    padding:
-                        const EdgeInsets.only(right: 10), // Razmak između slika
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.network(
-                        imagesUrl,
+                      padding: const EdgeInsets.only(
+                          right: 10), // Razmak između slika
+                      child: ImageWithErrorHandling(
+                        imageUrl: imagesUrl,
+                        width: 150,
+                        height: 150,
                         fit: BoxFit.cover,
-                        width: 150, // Širina slike
-                        height: 150, // Visina slike
-                      ),
-                    ),
-                  );
+                      ));
                 },
               ),
             ),

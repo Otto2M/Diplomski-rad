@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:povedi_me_app/assets.dart';
+import 'package:povedi_me_app/widgets/image_with_error_handling.dart';
 
 class FullScreenImageGallery extends StatefulWidget {
   const FullScreenImageGallery({
@@ -39,8 +40,8 @@ class _FullScreenImageGalleryState extends State<FullScreenImageGallery> {
                 minScale: 1.0,
                 maxScale: 4.0,
                 child: Center(
-                  child: Image.network(
-                    widget.imageUrls[index],
+                  child: ImageWithErrorHandling(
+                    imageUrl: widget.imageUrls[index],
                     fit: BoxFit.contain,
                   ),
                 ),

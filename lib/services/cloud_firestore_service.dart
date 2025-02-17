@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:povedi_me_app/constants/firestore_collections.dart';
 import 'package:povedi_me_app/models/category.dart';
 import 'package:povedi_me_app/models/city.dart';
@@ -27,7 +28,7 @@ class FirestoreDatabaseService {
       await sharedPreferencesService.saveCategoriesToCache(categories);
       return categories;
     } catch (e) {
-      print('Error fetching categories: $e');
+      debugPrint('Error fetching categories: $e');
       rethrow;
     }
   }
@@ -51,7 +52,7 @@ class FirestoreDatabaseService {
               ))
           .toList();
     } catch (e) {
-      print('Error fetching subcategories: $e');
+      debugPrint('Error fetching subcategories: $e');
       rethrow;
     }
   }
@@ -75,7 +76,7 @@ class FirestoreDatabaseService {
               ))
           .toList();
     } catch (e) {
-      print('Error fetching data about city: $e');
+      debugPrint('Error fetching data about city: $e');
       rethrow;
     }
   }
@@ -105,7 +106,7 @@ class FirestoreDatabaseService {
           )
           .toList();
     } catch (e) {
-      print('Error fetching data about perfect day in city: $e');
+      debugPrint('Error fetching data about perfect day in city: $e');
       rethrow;
     }
   }
@@ -126,11 +127,11 @@ class FirestoreDatabaseService {
             placeId: rating,
           }
         },
-        SetOptions(merge: true), // Spoji nove podatke s postojećima
+        SetOptions(merge: true),
       );
-      print('Recenzija uspješno spremljena.');
+      debugPrint('Recenzija uspješno spremljena.');
     } catch (e) {
-      print('Greška pri spremanju recenzije: $e');
+      debugPrint('Greška pri spremanju recenzije: $e');
     }
   }
 
@@ -150,7 +151,7 @@ class FirestoreDatabaseService {
           .doc(placeId);
       await placeRef.update({'averageRating': averageRating});
     } catch (e) {
-      print('Greška pri ažuriranju prosječne ocjene: $e');
+      debugPrint('Greška pri ažuriranju prosječne ocjene: $e');
     }
   }
 
@@ -172,7 +173,7 @@ class FirestoreDatabaseService {
       }
       return reviewsMap;
     } catch (e) {
-      print('Greška pri dohvaćanju recenzija: $e');
+      debugPrint('Greška pri dohvaćanju recenzija: $e');
       return {};
     }
   }

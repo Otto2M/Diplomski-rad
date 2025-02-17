@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 
 class ImageSlider extends StatelessWidget {
   const ImageSlider({
@@ -10,12 +11,23 @@ class ImageSlider extends StatelessWidget {
   final List<String> imagesUrl;
 
   List<Image> convertToNetworkImage(List<String> imagesUrl) {
-    final List<Image> images = [];
-    for (var imageUrl in imagesUrl) {
-      final image = Image.network(imageUrl);
-      images.add(image);
-    }
-    return images;
+    return imagesUrl.map((imageUrl) {
+      return Image.network(
+        imageUrl,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return Container(
+            color: Colors.grey[300],
+            child: Center(
+              child: Text(
+                "Slika nije dostupna",
+                style: AppTextStyles.description(context),
+              ),
+            ),
+          );
+        },
+      );
+    }).toList();
   }
 
   @override

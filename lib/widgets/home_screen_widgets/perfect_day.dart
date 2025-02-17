@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -17,11 +18,21 @@ class PerfectDay extends StatelessWidget {
         children: [
           FadeInImage(
             placeholder: MemoryImage(kTransparentImage),
-            image: const NetworkImage(
-                "https://drava.info/wp-content/uploads/2023/04/343318975_2395768270604311_7363034214388749621_n.jpg"),
+            image: const AssetImage(Assets.homeScreenPerfectdayImage),
             fit: BoxFit.cover,
             height: double.infinity,
             width: double.infinity,
+            imageErrorBuilder: (context, error, stackTrace) {
+              return Container(
+                color: Colors.grey[300],
+                child: Center(
+                  child: Text(
+                    'Slika nije dostupna',
+                    style: AppTextStyles.description(context),
+                  ),
+                ),
+              );
+            },
           ),
           Positioned(
             bottom: 15,

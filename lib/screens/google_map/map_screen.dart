@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+// import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
@@ -27,17 +27,18 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
-    _getCurrentLocation().then(
-      (_) => {
-        getPolylinePoints().then(
-          (coordinates) => {
-            generatePolyLineFromPoints(
-              coordinates,
-            )
-          },
-        )
-      },
-    );
+    _getCurrentLocation();
+    // .then(
+    //   (_) => {
+    //     getPolylinePoints().then(
+    //       (coordinates) => {
+    //         generatePolyLineFromPoints(
+    //           coordinates,
+    //         )
+    //       },
+    //     )
+    //   },
+    // );
   }
 
   @override
@@ -75,7 +76,8 @@ class _MapScreenState extends State<MapScreen> {
                           title: 'Trenutna lokacija',
                           snippet: 'Detalji o trenutnoj lokaciji',
                           onTap: () {
-                            print('Trenutna lokacija info prozor kliknut!');
+                            debugPrint(
+                                'Trenutna lokacija info prozor kliknut!');
                           },
                         ),
                       ),
@@ -122,12 +124,12 @@ class _MapScreenState extends State<MapScreen> {
 
   Future<void> _cameraToPosition(LatLng pos) async {
     final GoogleMapController controller = await _googleMapController.future;
-    CameraPosition _newCameraPosition = CameraPosition(
+    CameraPosition newCameraPosition = CameraPosition(
       target: pos,
       zoom: 13,
     );
     await controller.animateCamera(
-      CameraUpdate.newCameraPosition(_newCameraPosition),
+      CameraUpdate.newCameraPosition(newCameraPosition),
     );
   }
 
@@ -155,53 +157,55 @@ class _MapScreenState extends State<MapScreen> {
     _locationController.onLocationChanged.listen(
       (LocationData locationData) {
         if (locationData.latitude != null && locationData.longitude != null) {
-          setState(
-            () {
-              _currentPosition =
-                  LatLng(locationData.latitude!, locationData.longitude!);
-              _cameraToPosition(_currentPosition!);
-            },
-          );
+          if (mounted) {
+            setState(
+              () {
+                _currentPosition =
+                    LatLng(locationData.latitude!, locationData.longitude!);
+                _cameraToPosition(_currentPosition!);
+              },
+            );
+          }
         }
       },
     );
   }
 
-  Future<List<LatLng>> getPolylinePoints() async {
-    List<LatLng> polylineCoordinates = [];
-    PolylinePoints polylinePoints = PolylinePoints();
-    final request = PolylineRequest(
-      origin: PointLatLng(
-        _currentPosition!.latitude,
-        _currentPosition!.longitude,
-      ),
-      destination: PointLatLng(
-        _pickedLocation!.latitude,
-        _pickedLocation!.longitude,
-      ),
-      mode: TravelMode.driving,
-    );
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      request: request,
-      googleApiKey: "AIzaSyBE1s72xyeMR07GgEuz_TsGDX-a58KS-tY",
-    );
-    if (result.points.isNotEmpty) {
-      result.points.forEach(
-        (PointLatLng point) {
-          polylineCoordinates.add(
-            LatLng(
-              point.latitude,
-              point.longitude,
-            ),
-          );
-        },
-      );
-    } else {
-      print(result.errorMessage);
-    }
+  // Future<List<LatLng>> getPolylinePoints() async {
+  //   List<LatLng> polylineCoordinates = [];
+  //   PolylinePoints polylinePoints = PolylinePoints();
+  //   final request = PolylineRequest(
+  //     origin: PointLatLng(
+  //       _currentPosition!.latitude,
+  //       _currentPosition!.longitude,
+  //     ),
+  //     destination: PointLatLng(
+  //       _pickedLocation!.latitude,
+  //       _pickedLocation!.longitude,
+  //     ),
+  //     mode: TravelMode.driving,
+  //   );
+  //   PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+  //     request: request,
+  //     googleApiKey: "AIzaSyBE1s72xyeMR07GgEuz_TsGDX-a58KS-tY",
+  //   );
+  //   if (result.points.isNotEmpty) {
+  //     result.points.forEach(
+  //       (PointLatLng point) {
+  //         polylineCoordinates.add(
+  //           LatLng(
+  //             point.latitude,
+  //             point.longitude,
+  //           ),
+  //         );
+  //       },
+  //     );
+  //   } else {
+  //     print(result.errorMessage);
+  //   }
 
-    return polylineCoordinates;
-  }
+  //   return polylineCoordinates;
+  // }
 
   void generatePolyLineFromPoints(List<LatLng> polylineCoordinates) async {
     PolylineId id = const PolylineId("poly");

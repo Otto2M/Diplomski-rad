@@ -17,6 +17,7 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
   final WeatherService _weatherService = WeatherService();
   Weather? weatherData;
   Timer? _timer;
+  String? errorMessage;
   final String city = "Koprivnica";
 
   @override
@@ -37,12 +38,19 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
   }
 
   Future<void> fetchWeatherData() async {
+    setState(() {
+      errorMessage = null;
+    });
+
     try {
       final data = await _weatherService.fetchWeather(city);
       setState(() {
         weatherData = data;
       });
     } catch (e) {
+      setState(() {
+        errorMessage = e.toString();
+      });
       debugPrint("Error fetching weather data: $e");
     }
   }
@@ -63,6 +71,32 @@ class _WeatherForecastVersion2State extends State<WeatherForecastVersion2> {
 
   @override
   Widget build(BuildContext context) {
+    if (errorMessage != null) {
+      return Center(
+        child: Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                errorMessage!,
+                style: AppTextStyles.description(context),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: fetchWeatherData,
+                child: Text(
+                  'Pokušaj ponovo',
+                  style: AppTextStyles.placeButtonTitle(context),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     if (weatherData == null) {
       return const Center(child: CircularProgressIndicator());
     }

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:povedi_me_app/constants/errors.dart';
 import 'package:povedi_me_app/constants/firestore_collections.dart';
 import 'package:povedi_me_app/models/user.dart' as user;
 
@@ -50,8 +50,14 @@ class AuthService {
     required String phoneNumber,
   }) async {
     try {
+      if (await _isUsernameTaken(username)) {
+        throw 'Korisničko ime je već zauzeto.';
+      }
+
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
 
       _firebaseFirestore
           .collection(FirestoreCollections.userCollection)
@@ -68,12 +74,36 @@ class AuthService {
         'reviews': null
       });
     } on FirebaseAuthException catch (error) {
-      if (error.code == Errors.emailAlreadyInUse) {
-        throw Exception('Email već postoji!');
-      } else {
-        throw Exception(
-            'Došlo je do greške pri registraciji: ${error.message}');
-      }
+      throw FirebaseAuthException(
+        code: error.code,
+        message: _handleFirebaseAuthError(error),
+      );
+    }
+  }
+
+  // Provjera korisničkog imena u bazi
+  Future<bool> _isUsernameTaken(String username) async {
+    final snapshot = await _firebaseFirestore
+        .collection(FirestoreCollections.userCollection)
+        .where('username', isEqualTo: username)
+        .get();
+    return snapshot.docs.isNotEmpty;
+  }
+
+  String _handleFirebaseAuthError(FirebaseAuthException error) {
+    switch (error.code) {
+      case 'email-already-in-use':
+        return 'Email već postoji!';
+      case 'weak-password':
+        return 'Lozinka je previše slaba. Koristite barem 6 znakova.';
+      case 'too-many-requests':
+        return 'Previše pokušaja. Pokušajte ponovno kasnije.';
+      case 'invalid-email':
+        return 'Email adresa nije ispravna.';
+      case 'network-request-failed':
+        return 'Problem sa internet vezom.';
+      default:
+        return 'Došlo je do greške prilikom registracije. Pokušajte ponovo.';
     }
   }
 
@@ -87,22 +117,19 @@ class AuthService {
         return;
       }
 
-      // Dohvati autentifikacijski objekt
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
-      // Stvori Firebase autentifikacijske vjerodajnice
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      // Prijavi korisnika u Firebase pomoću Google vjerodajnica
       await _firebaseAuth.signInWithCredential(credential);
 
-      print('Google sign-in successful!');
+      debugPrint('Google sign-in successful!');
     } catch (e) {
-      print(e.toString());
+      debugPrint("Greška prilikom prijave: ${e.toString()}");
     }
   }
 
@@ -110,9 +137,8 @@ class AuthService {
   Future<void> signOut() async {
     try {
       await _firebaseAuth.signOut();
-      print('---- KORISNIK ODJAVLJEN! -----');
     } catch (e) {
-      print('Odjava nije uspjela: $e');
+      debugPrint('Odjava nije uspjela: $e');
     }
   }
 
@@ -128,7 +154,7 @@ class AuthService {
         //print("Dokument za korisnika ne postoji.");
       }
     } catch (e) {
-      print('Error fetching user profile data: $e');
+      debugPrint('Error fetching user profile data: $e');
     }
     return null;
   }
@@ -140,7 +166,7 @@ class AuthService {
           .doc(userId)
           .update(updatedUser.toFirestore());
     } catch (e) {
-      print('Error updating user profile data: $e');
+      debugPrint('Error updating user profile data: $e');
     }
   }
 

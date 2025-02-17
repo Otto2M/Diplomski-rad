@@ -12,7 +12,7 @@ import 'package:povedi_me_app/services/place_details_service.dart';
 import 'package:povedi_me_app/widgets/custom_app_bar_with_favorite.dart';
 import 'package:povedi_me_app/widgets/image_slider.dart';
 import 'package:povedi_me_app/widgets/reviews/rating_star_bar.dart';
-import 'package:povedi_me_app/widgets/side_dialog.dart';
+import 'package:povedi_me_app/widgets/social_media_side_dialog/side_dialog.dart';
 import 'package:povedi_me_app/widgets/working_hours_place.dart';
 
 class PlaceItemDetailsScreen extends ConsumerStatefulWidget {

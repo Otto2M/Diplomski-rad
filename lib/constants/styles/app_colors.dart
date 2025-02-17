@@ -8,6 +8,7 @@ class AppColors {
   static const Color darkBlue = Color(0xFF122C4F); // 2767 C
   static const Color buttonRed = Color(0xFFAA0919); // 7621 CP - Red for buttons
   static const Color errorLightRed = Color(0xFFD32F2F);
+  static const Color lightRed = Color(0xFFFFCDCD);
   static const Color transparencyBlue = Color(0xA22F7ED3);
 
   // Dark theme colors

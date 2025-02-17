@@ -10,7 +10,6 @@ class AuthService {
   final _firebaseFirestore = FirebaseFirestore
       .instance; //for "talking" to remote database (upload/fetch data)
 
-  //Log in user
   Future<void> signInUser(String email, String password) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
@@ -18,9 +17,27 @@ class AuthService {
         password: password,
       );
     } on FirebaseAuthException catch (error) {
-      if (error.code == Errors.emailAlreadyInUse) {
-        //TODO error message print
-      }
+      throw FirebaseAuthException(
+        code: error.code,
+        message: getErrorMessage(error),
+      );
+    }
+  }
+
+  String getErrorMessage(FirebaseAuthException error) {
+    switch (error.code) {
+      case 'user-not-found':
+        return 'Korisnik s tim emailom nije pronađen.';
+      case 'wrong-password':
+        return 'Pogrešna lozinka.';
+      case 'too-many-requests':
+        return 'Previše pokušaja. Pokušajte ponovno kasnije.';
+      case 'invalid-email':
+        return 'Neispravan format email adrese.';
+      case 'invalid-credential':
+        return 'Pogrešna lozinka ili neispravan korisnički račun.';
+      default:
+        return 'Dogodila se pogreška. Pokušajte ponovo.';
     }
   }
 

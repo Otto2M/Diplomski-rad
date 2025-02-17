@@ -79,7 +79,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             child: Padding(
               padding: const EdgeInsets.only(
                 top: 15.0,
-                bottom: 15.0,
+                bottom: 30.0,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

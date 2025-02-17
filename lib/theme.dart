@@ -24,7 +24,7 @@ final lightAppTheme = ThemeData(
   textTheme: const TextTheme(
     bodyMedium: TextStyle(color: AppColors.darkBlue),
     bodyLarge: TextStyle(color: AppColors.darkBlue),
-    titleSmall: TextStyle(color: AppColors.errorLightRed),
+    titleSmall: TextStyle(color: AppColors.lightRed),
     titleMedium: TextStyle(color: AppColors.darkBlue),
     titleLarge: TextStyle(color: AppColors.white),
   ),

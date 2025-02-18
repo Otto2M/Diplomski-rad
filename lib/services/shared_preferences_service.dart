@@ -12,13 +12,13 @@ class SharedPreferencesService {
     await prefs.setString('categories', categoriesString);
   }
 
-  Future<List<Category>> loadCategoriesFromCache() async {
+  Future<List<Category>> loadCategoriesFromCache(String lang) async {
     final prefs = await SharedPreferences.getInstance();
     final categoriesString = prefs.getString('categories');
 
     if (categoriesString != null) {
       final List<dynamic> categoriesList = json.decode(categoriesString);
-      return categoriesList.map((e) => Category.fromMap(e)).toList();
+      return categoriesList.map((e) => Category.fromMap(e, lang)).toList();
     }
     return [];
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/models/category.dart';
-import 'package:povedi_me_app/providers/categories_notifier.dart';
+// import 'package:povedi_me_app/providers/categories_notifier.dart';
 import 'package:povedi_me_app/screens/places/places_list_category_screen.dart';
 import 'package:povedi_me_app/screens/subcategories/subcategories_screen.dart';
 
@@ -118,15 +118,13 @@ class CustomHamburgerMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoriesNotifierState = ref.watch(categoriesNotifierProvider);
+    // final categoriesNotifierState = ref.watch(categoriesNotifierProvider);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        IconButton(
-          icon: const Icon(Icons.menu, size: 40),
-          onPressed: () =>
-              showCustomMenu(context, ref, categoriesNotifierState),
-        ),
+        IconButton(icon: const Icon(Icons.menu, size: 40), onPressed: () => {}
+            // showCustomMenu(context, ref, categoriesNotifierState),
+            ),
       ],
     );
   }

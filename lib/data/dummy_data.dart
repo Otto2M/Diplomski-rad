@@ -6,36 +6,43 @@ const availableCategories = [
     id: 'c1',
     title: 'Kulturne i povijesne znamenitosti',
     icon: 'icon',
+    translated: {},
   ),
   Category(
     id: 'c2',
     title: 'Mainfestacije',
     icon: 'icon',
+    translated: {},
   ),
   Category(
     id: 'c3',
     title: 'Gastronomija',
     icon: 'icon',
+    translated: {},
   ),
   Category(
     id: 'c4',
     title: 'Smještaj',
     icon: 'icon',
+    translated: {},
   ),
   Category(
     id: 'c5',
     title: 'Sport i rekreacija',
     icon: 'icon',
+    translated: {},
   ),
   Category(
     id: 'c6',
     title: 'Prirodne atrakcije',
     icon: 'icon',
+    translated: {},
   ),
   Category(
     id: 'c7',
     title: 'OPG-ovi',
     icon: 'icon',
+    translated: {},
   ),
 ];
 

@@ -7,7 +7,6 @@ import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
 
 import 'package:povedi_me_app/providers/auth_user_state_provider.dart';
-import 'package:povedi_me_app/providers/categories_provider.dart';
 import 'package:povedi_me_app/providers/onboarding_status_provider.dart';
 import 'package:povedi_me_app/screens/splash/loading_screen.dart';
 
@@ -28,9 +27,6 @@ class _AuthGateState extends ConsumerState<AuthGate> {
   @override
   void initState() {
     super.initState();
-
-    ref.read(categoriesProvider.future);
-    ref.read(subcategoriesProvider.future);
 
     Timer(const Duration(seconds: 3), () {
       setState(() {

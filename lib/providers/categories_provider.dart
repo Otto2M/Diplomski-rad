@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/models/category.dart';
 import 'package:povedi_me_app/models/city.dart';
 import 'package:povedi_me_app/services/cloud_firestore_service.dart';
+import 'package:povedi_me_app/services/language_service.dart';
 
 final firestoreDatabaseService =
     Provider<FirestoreDatabaseService>((ref) => FirestoreDatabaseService());
@@ -9,15 +10,17 @@ final firestoreDatabaseService =
 // Categories Provider
 final categoriesProvider = FutureProvider<List<Category>>((ref) async {
   final firebaseFirestoreService = ref.watch(firestoreDatabaseService);
+  final lang = ref.watch(languageProvider);
 
+  final language = await LanguageService().getLanguage();
   final cachedCategories =
-      await firebaseFirestoreService.loadCategoriesFromCache();
+      await firebaseFirestoreService.loadCategoriesFromCache(language);
 
   if (cachedCategories.isNotEmpty) {
     return cachedCategories;
   }
 
-  return await firebaseFirestoreService.getCategories();
+  return await firebaseFirestoreService.getCategories(lang);
 });
 
 // Subcategories Provider

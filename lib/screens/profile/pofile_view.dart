@@ -9,6 +9,7 @@ import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/user.dart';
 import 'package:povedi_me_app/providers/theme_mode_option_provider.dart';
 import 'package:povedi_me_app/providers/user_provider.dart';
+import 'package:povedi_me_app/widgets/language_dropdown_menu.dart';
 import 'package:povedi_me_app/widgets/pofile/info_tile.dart';
 import 'package:povedi_me_app/widgets/user_image_picker.dart';
 import 'package:povedi_me_app/widgets/theme_mode_option.dart';
@@ -245,6 +246,8 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
               selectedTheme: tempSelectedTheme,
               onThemeChanged: (_) {},
             ),
+            const SizedBox(height: 16),
+            const LanguageDropdownMenu(),
             const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(

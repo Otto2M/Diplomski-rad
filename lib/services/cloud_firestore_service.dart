@@ -11,18 +11,14 @@ class FirestoreDatabaseService {
   final sharedPreferencesService = SharedPreferencesService();
 
   // Get all categories
-  Future<List<Category>> getCategories() async {
+  Future<List<Category>> getCategories(String lang) async {
     try {
       final categoriesSnapshot = await _firebaseFirestore
           .collection(FirestoreCollections.categoriesCollection)
           .get();
 
       final categories = categoriesSnapshot.docs
-          .map((doc) => Category(
-                id: doc['id'],
-                title: doc['title'],
-                icon: doc['icon'],
-              ))
+          .map((doc) => Category.fromMap(doc.data(), lang))
           .toList();
 
       await sharedPreferencesService.saveCategoriesToCache(categories);
@@ -33,8 +29,8 @@ class FirestoreDatabaseService {
     }
   }
 
-  Future<List<Category>> loadCategoriesFromCache() async {
-    return await sharedPreferencesService.loadCategoriesFromCache();
+  Future<List<Category>> loadCategoriesFromCache(String lang) async {
+    return await sharedPreferencesService.loadCategoriesFromCache(lang);
   }
 
   // Get all subcategories

@@ -13,12 +13,13 @@ final lightAppTheme = ThemeData(
     onSecondary: AppColors.darkBlue,
     onSurface: AppColors.darkBlue,
     onError: AppColors.white,
+    tertiary: AppColors.lightGrey,
     brightness: Brightness.light,
   ),
   scaffoldBackgroundColor: AppColors.backgroundLight,
   appBarTheme: const AppBarTheme(
     backgroundColor: AppColors.darkBlue,
-    foregroundColor: AppColors.white,
+    foregroundColor: AppColors.backgroundLight,
     elevation: 0,
   ),
   textTheme: const TextTheme(
@@ -59,6 +60,7 @@ final darkAppTheme = ThemeData(
     onSecondary: AppColors.accentDark,
     onSurface: AppColors.white,
     onError: AppColors.white,
+    tertiary: AppColors.darkGrey,
     brightness: Brightness.dark,
   ),
   scaffoldBackgroundColor: AppColors.backgroundDark,

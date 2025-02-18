@@ -33,7 +33,7 @@ class InputChatbot extends StatelessWidget {
                   onPressed: () => onSendMessage(controller.text),
                   icon: Icon(
                     Icons.send,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
                 filled: true,

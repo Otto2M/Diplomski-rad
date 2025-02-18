@@ -28,14 +28,6 @@ class BottomNavigation extends ConsumerWidget {
           backgroundColor:
               Theme.of(context).bottomNavigationBarTheme.backgroundColor,
         ),
-        // BottomNavigationBarItem(
-        //   icon: Icon(
-        //     Icons.home,
-        //     size: 40,
-        //   ),
-        //   label: 'Map',
-        //   backgroundColor: Theme.of(context).colorScheme.primary,
-        // ),
         BottomNavigationBarItem(
           icon: Image.asset(
             Assets.iHome,

@@ -5,6 +5,7 @@ import 'package:povedi_me_app/providers/favorites_provider.dart';
 import 'package:povedi_me_app/screens/home/home_screen.dart';
 import 'package:povedi_me_app/screens/favorite_places/favorite_places_screen.dart';
 import 'package:povedi_me_app/screens/google_map/map_screen.dart';
+import 'package:povedi_me_app/screens/search_bar/search_bar.dart';
 import 'package:povedi_me_app/widgets/bottom_navigation/curved_bottom_navigation.dart';
 import 'package:povedi_me_app/widgets/menu/app_drawer_menu.dart';
 
@@ -22,13 +23,11 @@ class _TabScreenState extends ConsumerState<TabScreen> {
   Widget build(BuildContext context) {
     final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
 
-    // Odabir aktivne stranice prema indeksu (prilagodi indekse prema svojoj logici)
     Widget activePage;
     if (indexBottomNavbar == 0) {
       activePage = const MapScreen();
     } else if (indexBottomNavbar == 1) {
-      activePage =
-          const HomeScreen(); // HomeScreen više neće primati scaffoldKey
+      activePage = const HomeScreen();
     } else if (indexBottomNavbar == 2) {
       final favoritePlaces = ref.watch(favoritePlacesProvider);
       activePage = FavoritePlacesTabScreen(
@@ -42,6 +41,30 @@ class _TabScreenState extends ConsumerState<TabScreen> {
       canPop: false,
       child: Scaffold(
         key: _scaffoldKey,
+        appBar: AppBar(
+          toolbarHeight: 65,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          leading: IconButton(
+            icon: Icon(
+              Icons.menu_rounded,
+              size: 40,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            padding: const EdgeInsets.all(12.0),
+            onPressed: () {
+              _scaffoldKey.currentState?.openDrawer();
+            },
+          ),
+          actions: [
+            Container(
+              margin: const EdgeInsets.only(top: 6.0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.75,
+                child: const CustomSearchBar(),
+              ),
+            ),
+          ],
+        ),
         body: activePage,
         drawer: const AppDrawer(),
         bottomNavigationBar: const CurvedBottomNavigation(),

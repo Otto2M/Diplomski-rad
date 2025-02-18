@@ -4,7 +4,6 @@ import 'package:povedi_me_app/constants/styles/text.dart';
 
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/widgets/favorite_places_list.dart';
-import 'package:povedi_me_app/widgets/menu/app_drawer_menu.dart';
 
 class FavoritePlacesTabScreen extends ConsumerWidget {
   const FavoritePlacesTabScreen({
@@ -40,8 +39,6 @@ class FavoritePlacesTabScreen extends ConsumerWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(),
-      drawer: const AppDrawer(),
       body: SafeArea(
         child: content,
       ),

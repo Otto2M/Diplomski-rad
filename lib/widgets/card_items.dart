@@ -7,7 +7,6 @@ import 'package:povedi_me_app/screens/subcategories/place_item_details_screen.da
 import 'package:povedi_me_app/services/place_details_service.dart';
 import 'package:povedi_me_app/widgets/image_with_error_handling.dart';
 import 'package:povedi_me_app/widgets/reviews/rating_star_bar.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class CardItems extends ConsumerStatefulWidget {
   const CardItems({

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/constants/styles/app_colors.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/screens/places/place_details_category_screen.dart';
 import 'package:povedi_me_app/screens/places/shopping_places_screen.dart';
@@ -22,9 +24,11 @@ class FilteredPlacesList extends ConsumerWidget {
 
     if (query.isNotEmpty && filteredPlaces.isNotEmpty) {
       return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 6.0),
+        padding: const EdgeInsets.all(8.0),
         width: 250,
         decoration: BoxDecoration(
-          color: Colors.blue[900], // Tamno plava pozadina
+          color: AppColors.darkBlue,
           borderRadius: BorderRadius.circular(20),
         ),
         child: ListView.builder(
@@ -61,15 +65,22 @@ class FilteredPlacesList extends ConsumerWidget {
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Text(
-                  place.title,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                  ),
+                padding: const EdgeInsets.only(top: 8),
+                child: Column(
+                  children: [
+                    Text(
+                      place.title,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.drawerHeaderProfileTxt(context),
+                      textAlign: TextAlign.left,
+                    ),
+                    const SizedBox(height: 6),
+                    const Divider(
+                      color: AppColors.white,
+                      indent: 8,
+                      endIndent: 8,
+                    ),
+                  ],
                 ),
               ),
             );

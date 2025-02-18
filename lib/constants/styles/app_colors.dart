@@ -10,6 +10,7 @@ class AppColors {
   static const Color errorLightRed = Color(0xFFD32F2F);
   static const Color lightRed = Color(0xFFFFCDCD);
   static const Color transparencyBlue = Color(0xA22F7ED3);
+  static const Color lightGrey = Color(0xFFD6D6D6);
 
   // Dark theme colors
   static const Color primaryDark = Color(0xFF065186);
@@ -19,6 +20,8 @@ class AppColors {
   static const Color accentDark = Color(0xFF122C4F);
   static const Color buttonRedDark = Color(0xFF930311);
   static const Color errorDarkRed = Color(0xFFBA1F14);
+  static const Color darkGrey = Color(0xFF757575);
+  // Color darkGrey = Colors.grey[600] as Color;
 
   // General colors (can be used across themes)
   static const Color white = Color(0xFFFFFFFF);

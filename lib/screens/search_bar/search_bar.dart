@@ -23,7 +23,7 @@ class _CustomSearchBarState extends ConsumerState<CustomSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       child: TextField(
         controller: _searchController,
         onChanged: (value) {
@@ -35,7 +35,7 @@ class _CustomSearchBarState extends ConsumerState<CustomSearchBar> {
             color: Theme.of(context).colorScheme.primaryContainer,
           ),
           hintText: 'Pretraživanje',
-          hintStyle: AppTextStyles.drawerMenuStyle(context),
+          hintStyle: AppTextStyles.placeButtonTitle(context),
           enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(30),
@@ -54,7 +54,7 @@ class _CustomSearchBarState extends ConsumerState<CustomSearchBar> {
               width: 2.0,
             ),
           ),
-          fillColor: Colors.grey[350],
+          fillColor: Theme.of(context).colorScheme.tertiary,
           filled: true,
           contentPadding: const EdgeInsets.all(10),
         ),

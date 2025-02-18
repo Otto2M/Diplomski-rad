@@ -5,7 +5,6 @@ import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/services/place_details_service.dart';
 import 'package:povedi_me_app/widgets/image_with_error_handling.dart';
 import 'package:povedi_me_app/widgets/working_hours_place.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class ShoppingPlacesScreen extends ConsumerStatefulWidget {
   const ShoppingPlacesScreen({
@@ -80,13 +79,6 @@ class _ShoppingPlacesScreenState extends ConsumerState<ShoppingPlacesScreen> {
                   fit: BoxFit.cover,
                   isCard: true,
                 ),
-                // FadeInImage(
-                //   placeholder: MemoryImage(kTransparentImage),
-                //   image: NetworkImage(widget.place.imageUrl.first),
-                //   fit: BoxFit.cover,
-                //   height: 160,
-                //   width: imageWidth,
-                // ),
                 Container(
                   width: textWidth,
                   height: 155,

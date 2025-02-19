@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
+import 'package:povedi_me_app/screens/google_map/map_screen.dart';
 import 'package:povedi_me_app/screens/places/place_details_category_screen.dart';
 import 'package:povedi_me_app/widgets/image_with_error_handling.dart';
 
@@ -33,13 +35,46 @@ class PlacesByCategory extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ElevatedButton.icon(
-              onPressed: () => goToDetailScreen(context, place),
-              label: Text(
-                place.title,
-                style: AppTextStyles.placeButtonTitle(context),
-              ),
-              icon: const Icon(Icons.keyboard_arrow_right_rounded),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () => goToDetailScreen(context, place),
+                  label: Text(
+                    place.title,
+                    style: AppTextStyles.placeButtonTitle(context),
+                  ),
+                  icon: const Icon(Icons.keyboard_arrow_right_rounded),
+                ),
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.onSurface,
+                    shape: BoxShape.circle,
+                  ),
+                  child: SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => MapScreen(
+                                placeLatitude: place.coordinates['latitude'],
+                                placeLongitude: place.coordinates['longitude'],
+                                isFromPlace: true,
+                                place: place,
+                              ),
+                            ),
+                          );
+                        },
+                        icon: Image.asset(
+                          Assets.iMap,
+                          height: 22,
+                          width: 22,
+                        )),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 10),
             Text(

@@ -9,21 +9,26 @@ class WorkingHoursPlace extends StatelessWidget {
     required this.openNow,
     required this.isLoadingWorkingHours,
     required this.isShop,
+    this.isMap = false,
   });
 
   final String workingHours;
   final bool openNow;
   final bool isLoadingWorkingHours;
   final bool isShop;
+  final bool isMap;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment:
+          isMap ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         Text(
           "Radno vrijeme:",
-          style: AppTextStyles.subcategoryDesc(context),
+          style: isShop
+              ? AppTextStyles.subcategoryDesc(context)
+              : AppTextStyles.description(context),
         ),
         const SizedBox(height: 10),
         if (isLoadingWorkingHours)
@@ -34,6 +39,7 @@ class WorkingHoursPlace extends StatelessWidget {
             style: isShop
                 ? AppTextStyles.subcategoryDesc(context)
                 : AppTextStyles.description(context),
+            textAlign: isMap ? TextAlign.center : TextAlign.start,
           ),
           const SizedBox(height: 10),
           isShop

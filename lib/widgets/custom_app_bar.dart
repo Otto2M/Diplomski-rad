@@ -20,7 +20,7 @@ class CustomAppBar extends StatelessWidget {
           icon: const Icon(
             Icons.keyboard_arrow_left_rounded,
           ),
-          iconSize: 50,
+          iconSize: 40,
         ),
         Text(
           title ?? "",

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/assets.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
+import 'package:povedi_me_app/screens/google_map/map_screen.dart';
 import 'package:povedi_me_app/screens/subcategories/place_item_details_screen.dart';
 import 'package:povedi_me_app/services/place_details_service.dart';
 import 'package:povedi_me_app/widgets/image_with_error_handling.dart';
@@ -135,6 +137,38 @@ class _CardItemsState extends ConsumerState<CardItems> {
                         },
                       ),
                     ),
+                    widget.isInteractive
+                        ? const SizedBox()
+                        : DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.onSurface,
+                              shape: BoxShape.circle,
+                            ),
+                            child: SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => MapScreen(
+                                          placeLatitude: widget
+                                              .place.coordinates['latitude'],
+                                          placeLongitude: widget
+                                              .place.coordinates['longitude'],
+                                          isFromPlace: true,
+                                          place: widget.place,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  icon: Image.asset(
+                                    Assets.iMap,
+                                    height: 22,
+                                    width: 22,
+                                  )),
+                            ),
+                          ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [

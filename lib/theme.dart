@@ -31,8 +31,8 @@ final lightAppTheme = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: AppColors.yellow, // Dodamo crvenu za gumbe
-      foregroundColor: AppColors.darkBlue, // Tekst na gumbima
+      backgroundColor: AppColors.yellow,
+      foregroundColor: AppColors.darkBlue,
     ),
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(

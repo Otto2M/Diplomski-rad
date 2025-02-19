@@ -248,7 +248,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
             ),
             const SizedBox(height: 16),
             const LanguageDropdownMenu(),
-            const SizedBox(height: 16),
+            const SizedBox(height: 30),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.buttonRed,

@@ -14,6 +14,7 @@ class MyProfile extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
+        minimum: const EdgeInsets.only(bottom: 20),
         child: SingleChildScrollView(
           child: userAsyncValue.when(
             data: (user) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/providers/favorites_provider.dart';
 
@@ -22,6 +23,8 @@ class FavoritePlacesService {
           wasAdded
               ? 'Mjesto dodano u omiljeno'
               : 'Mjesto uklonjeno iz omiljenog.',
+          style: AppTextStyles.scaffoldMessage(context),
+          textAlign: TextAlign.center,
         ),
       ),
     );

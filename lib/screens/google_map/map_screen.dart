@@ -8,6 +8,7 @@ import 'package:location/location.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
+import 'package:povedi_me_app/screens/search_bar/filtered_places_list.dart';
 import 'package:povedi_me_app/services/place_details_service.dart';
 import 'package:povedi_me_app/widgets/custom_app_bar.dart';
 import 'package:povedi_me_app/widgets/working_hours_place.dart';
@@ -137,6 +138,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
               },
             ),
           ),
+          const FilteredPlacesList(),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,

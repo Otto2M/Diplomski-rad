@@ -87,6 +87,7 @@ class _ShoppingPlacesScreenState extends ConsumerState<ShoppingPlacesScreen> {
                   child: Scrollbar(
                     trackVisibility: true,
                     thumbVisibility: true,
+                    controller: _scrollController,
                     child: SingleChildScrollView(
                       controller: _scrollController,
                       child: Column(

@@ -22,6 +22,7 @@ class _TabScreenState extends ConsumerState<TabScreen> {
   @override
   Widget build(BuildContext context) {
     final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
+    final paddingTop = MediaQuery.of(context).padding.top;
 
     Widget activePage;
     if (indexBottomNavbar == 0) {
@@ -42,7 +43,7 @@ class _TabScreenState extends ConsumerState<TabScreen> {
       child: Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          toolbarHeight: 65,
+          toolbarHeight: 80 + paddingTop,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           leading: IconButton(
             icon: Icon(

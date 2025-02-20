@@ -770,6 +770,21 @@ class AppTextStyles {
     );
   }
 
+  // Scaffold message
+  static TextStyle scaffoldMessage(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        getFontSize(screenWidth, smallSize: 12, mediumSize: 14, largeSize: 16);
+
+    return TextStyle(
+      fontFamily: GoogleFonts.poppins().fontFamily,
+      color: Theme.of(context).colorScheme.onTertiary,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w300,
+      height: 1.5,
+    );
+  }
+
   static TextStyle errorText(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double fontSize =

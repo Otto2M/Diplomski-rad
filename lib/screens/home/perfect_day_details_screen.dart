@@ -18,6 +18,7 @@ class PerfectDayDetailsScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(vertical: 20),
           child: Column(
             children: [
               CustomAppBar(
@@ -33,6 +34,7 @@ class PerfectDayDetailsScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 250,
                 fit: BoxFit.cover,
+                isCard: true,
               ),
               // ClipRRect(
               //   child: Image.network(

@@ -16,10 +16,10 @@ class PerfectDayListScreen extends ConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
+        minimum: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
             CustomAppBar(
-              title: "Savršen dan u KC",
               onBack: () {
                 Navigator.pop(context);
               },

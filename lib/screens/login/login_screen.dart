@@ -84,6 +84,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(height: 20),
                 //text i ikona na početku
                 Text("PRIJAVA", style: AppTextStyles.authHeadline(context)),
                 const SizedBox(height: 20),
@@ -180,19 +181,38 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             setState(() {
                               isLoading = true;
                             });
+
                             await firebaseAuth.signInWithGoogle();
+                            final currentUser =
+                                await firebaseAuth.getCurrentUser();
+
+                            if (currentUser != null) {
+                              setState(() {
+                                isLoading = false;
+                              });
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => const TabScreen(),
+                                ),
+                              );
+                            } else {
+                              setState(() {
+                                isLoading = false;
+                              });
+                            }
+                          } catch (e) {
                             setState(() {
                               isLoading = false;
                             });
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => const TabScreen()));
-                          } catch (e) {
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).clearSnackBars();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text('Google Sign-in failed: $e'),
+                                  content: Text(
+                                    'Google Sign-in failed!',
+                                    style:
+                                        AppTextStyles.scaffoldMessage(context),
+                                  ),
                                 ),
                               );
                             }

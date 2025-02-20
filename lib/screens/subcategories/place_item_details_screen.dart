@@ -175,6 +175,7 @@ class _PlaceItemDetailsScreenState
                             width: double.infinity,
                             height: 250,
                             fit: BoxFit.cover,
+                            isCard: true,
                           ),
 
                     // Opis mjesta i korisničke recenzije

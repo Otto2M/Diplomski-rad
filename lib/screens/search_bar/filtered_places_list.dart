@@ -49,7 +49,10 @@ class FilteredPlacesList extends ConsumerWidget {
                 } else if (place is ShoppingPlace) {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => ShoppingPlacesScreen(place: place),
+                      builder: (context) => ShoppingPlacesScreen(
+                        place: place,
+                        isFiltered: true,
+                      ),
                     ),
                   );
                 } else {

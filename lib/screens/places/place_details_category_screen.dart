@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:povedi_me_app/constants/styles/text.dart';
-import 'package:povedi_me_app/providers/image_storage_provider.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/screens/image_gallery.dart';
 import 'package:povedi_me_app/utils/description_lenght_split.dart';
@@ -19,8 +18,6 @@ class PlaceDetailsCategoryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imagesAsyncValue = ref.watch(folder1ImagesProvider);
-
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.symmetric(

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:povedi_me_app/constants/keys.dart';
@@ -44,7 +45,7 @@ Future<Map<String, dynamic>> fetchWorkingHours(
       final openingHours = data['result']?['opening_hours'];
       final weekdayText = openingHours?['weekday_text'];
       final openNow = openingHours?['open_now'];
-      final rating = data['result']?['rating'];
+      final rating = (data['result']?['rating'] as num?)?.toDouble();
 
       final translatedHours = weekdayText != null
           ? (weekdayText as List).map((day) {

@@ -119,7 +119,8 @@ class _CardItemsState extends ConsumerState<CardItems> {
                                   style: AppTextStyles.errorText(context),
                                 );
                               } else if (snapshot.hasData) {
-                                final rating = snapshot.data!['rating'] ?? 0.0;
+                                final double rating =
+                                    snapshot.data!['rating'] ?? 0.0;
                                 return RatingStarBar(
                                   rating: rating,
                                   placeWithDetails: widget.place,
@@ -140,7 +141,7 @@ class _CardItemsState extends ConsumerState<CardItems> {
                         ? const SizedBox()
                         : DecoratedBox(
                             decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.onSurface,
+                              color: Theme.of(context).colorScheme.onSecondary,
                               shape: BoxShape.circle,
                             ),
                             child: SizedBox(

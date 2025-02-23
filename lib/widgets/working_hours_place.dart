@@ -42,31 +42,35 @@ class WorkingHoursPlace extends StatelessWidget {
             textAlign: isMap ? TextAlign.center : TextAlign.start,
           ),
           const SizedBox(height: 10),
-          isShop
-              ? Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                  padding: const EdgeInsets.all(4.0),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(8.0),
-                    shape: BoxShape.rectangle,
-                  ),
-                  child: Text(
+          if (workingHours != "Radno vrijeme nije dostupno.")
+            (isShop
+                ? Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.all(4.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(8.0),
+                      shape: BoxShape.rectangle,
+                    ),
+                    child: Text(
+                      openNow == true
+                          ? "Trenutno otvoreno"
+                          : "Trenutno zatvoreno",
+                      style: AppTextStyles.description(context).copyWith(
+                        color: openNow == true ? Colors.green : Colors.red,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                : Text(
                     openNow == true
                         ? "Trenutno otvoreno"
                         : "Trenutno zatvoreno",
                     style: AppTextStyles.description(context).copyWith(
                       color: openNow == true ? Colors.green : Colors.red,
                     ),
-                  ),
-                )
-              : Text(
-                  openNow == true ? "Trenutno otvoreno" : "Trenutno zatvoreno",
-                  style: AppTextStyles.description(context).copyWith(
-                    color: openNow == true ? Colors.green : Colors.red,
-                  ),
-                ),
+                  )),
         ],
         const SizedBox(height: 20),
       ],

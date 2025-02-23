@@ -48,7 +48,7 @@ class PlacesByCategory extends StatelessWidget {
                 ),
                 DecoratedBox(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: Theme.of(context).colorScheme.onTertiaryContainer,
                     shape: BoxShape.circle,
                   ),
                   child: SizedBox(
@@ -71,6 +71,8 @@ class PlacesByCategory extends StatelessWidget {
                           Assets.iMap,
                           height: 22,
                           width: 22,
+                          color:
+                              Theme.of(context).colorScheme.tertiaryContainer,
                         )),
                   ),
                 ),

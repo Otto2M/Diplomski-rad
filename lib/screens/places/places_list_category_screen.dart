@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/models/place.dart';
 import 'package:povedi_me_app/providers/places_provider.dart';
+import 'package:povedi_me_app/screens/places/opg_places_screen.dart';
 import 'package:povedi_me_app/screens/places/shopping_places_screen.dart';
 import 'package:povedi_me_app/widgets/places_by_category.dart';
 
@@ -20,11 +21,8 @@ class PlacesListCategoryScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final placesAsyncValue = ref.watch(placesProvider);
 
-    //final manifestacije = ref.watch(folder1ImagesProvider);
-
     return Scaffold(
       appBar: AppBar(),
-      //drawer: const AppDrawer(),
       body: placesAsyncValue.when(
         data: (places) {
           final filteredPlaces =
@@ -78,10 +76,11 @@ class PlacesListCategoryScreen extends ConsumerWidget {
 
                     if (place is ShoppingPlace) {
                       return ShoppingPlacesScreen(place: place);
+                    } else if (place is PlaceWithDetails) {
+                      return OpgPlacesScreen(place: place);
+                    } else {
+                      return PlacesByCategory(place: place);
                     }
-                    return PlacesByCategory(
-                      place: place,
-                    );
                   },
                 ),
               ),

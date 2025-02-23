@@ -34,12 +34,13 @@ final placesProvider = StreamProvider<List<dynamic>>((ref) async* {
                 ? Map<String, String>.from(data['workingHours'])
                 : null,
             reviews: List<String>.from(data['reviews'] ?? []),
-            contactNumber: data['contactNumber'],
-            email: data['email'],
+            contactNumber: data['contactNumber'] ?? '',
+            email: data['email'] ?? '',
             type: data['type'],
             averageRating: (data['averageRating'] is int
-                ? (data['averageRating'] as int).toDouble()
-                : data['averageRating']) as double?,
+                    ? (data['averageRating'] as int).toDouble()
+                    : data['averageRating']) as double? ??
+                0.0,
             webLink: data['webLink'] ?? '',
             facebookProfile: data['facebookProfile'] ?? '',
             instagramProfile: data['instagramProfile'] ?? '',

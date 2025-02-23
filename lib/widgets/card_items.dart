@@ -86,8 +86,7 @@ class _CardItemsState extends ConsumerState<CardItems> {
                   children: [
                     Text(
                       widget.place.title,
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.left,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
                       style:

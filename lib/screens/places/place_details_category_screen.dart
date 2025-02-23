@@ -48,41 +48,49 @@ class PlaceDetailsCategoryScreen extends ConsumerWidget {
                   splitTextBySentences(place.description, 4),
                 ),
                 const SizedBox(height: 20),
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                  ),
-                  itemCount: place.imageUrl.length, // Broj slika
-                  itemBuilder: (context, index) {
-                    final imagesUrl = place.imageUrl[index];
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => FullScreenImageGallery(
-                              imageUrls: place.imageUrl,
-                              initialIndex: index,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Hero(
-                        tag: place.imageUrl[index],
-                        child: ImageWithErrorHandling(
-                          imageUrl: imagesUrl,
-                          fit: BoxFit.cover,
-                          height: 120,
-                          width: 150,
+                place.imageUrl.isEmpty
+                    ? Center(
+                        child: Text(
+                          "Ova lokacija ne sadrži slike",
+                          style: AppTextStyles.description(context),
                         ),
+                      )
+                    : GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                        ),
+                        itemCount: place.imageUrl.length, // Broj slika
+                        itemBuilder: (context, index) {
+                          final imagesUrl = place.imageUrl[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => FullScreenImageGallery(
+                                    imageUrls: place.imageUrl,
+                                    initialIndex: index,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Hero(
+                              tag: place.imageUrl[index],
+                              child: ImageWithErrorHandling(
+                                imageUrl: imagesUrl,
+                                fit: BoxFit.cover,
+                                height: 120,
+                                width: 150,
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               ],
             ),
           ),

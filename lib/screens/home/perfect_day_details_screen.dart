@@ -18,7 +18,7 @@ class PerfectDayDetailsScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 20),
+          padding: const EdgeInsets.symmetric(vertical: 20),
           child: Column(
             children: [
               CustomAppBar(

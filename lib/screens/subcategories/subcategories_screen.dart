@@ -7,7 +7,6 @@ import 'package:povedi_me_app/models/category.dart';
 import 'package:povedi_me_app/providers/filer_places_provider.dart';
 import 'package:povedi_me_app/providers/filter_subcategories_provider.dart';
 import 'package:povedi_me_app/screens/subcategories/subcategories_list_items_screen.dart';
-import 'package:povedi_me_app/widgets/bottom_navigation/curved_bottom_navigation.dart';
 import 'package:povedi_me_app/widgets/card_items.dart';
 
 class SubcategoriesScreen extends ConsumerWidget {
@@ -25,106 +24,110 @@ class SubcategoriesScreen extends ConsumerWidget {
 
     return Scaffold(
         appBar: AppBar(),
-        bottomNavigationBar: const CurvedBottomNavigation(),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(
-                top: 30,
-                left: 20,
-                bottom: 10,
-                right: 20,
+        body: SafeArea(
+          minimum: const EdgeInsets.only(bottom: 30.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(
+                  top: 20,
+                  left: 20,
+                  bottom: 10,
+                  right: 20,
+                ),
+                child: Text(
+                  category.title.toUpperCase(),
+                  style: AppTextStyles.categoryHeadline(context),
+                ),
               ),
-              child: Text(
-                category.title.toUpperCase(),
-                style: AppTextStyles.categoryHeadline(context),
-              ),
-            ),
-            Expanded(
-              child: filteredSubcategories.isEmpty
-                  ? Center(
-                      child: Text(
-                        'Nema podkategorija za ovu kategoriju',
-                        style: AppTextStyles.description(context),
-                      ),
-                    )
-                  : ListView.builder(
-                      itemCount: filteredSubcategories.length,
-                      itemBuilder: (context, index) {
-                        final subcategory = filteredSubcategories[index];
+              Expanded(
+                child: filteredSubcategories.isEmpty
+                    ? Center(
+                        child: Text(
+                          'Nema podkategorija za ovu kategoriju',
+                          style: AppTextStyles.description(context),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: filteredSubcategories.length,
+                        itemBuilder: (context, index) {
+                          final subcategory = filteredSubcategories[index];
 
-                        // Filtriraj mjesta prema subcategoryId
-                        final filteredPlaces = ref.watch(
-                            filteredPlacesBySubcategoriesProvider(
-                                subcategory.id));
+                          // Filtriraj mjesta prema subcategoryId
+                          final filteredPlaces = ref.watch(
+                              filteredPlacesBySubcategoriesProvider(
+                                  subcategory.id));
 
-                        return SingleChildScrollView(
-                          child: Container(
-                            margin: const EdgeInsets.only(left: 10, top: 20),
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ElevatedButton.icon(
-                                  icon: Icon(
-                                    Icons.keyboard_arrow_right_rounded,
-                                    size: 40,
-                                    color:
-                                        Theme.of(context).colorScheme.onPrimary,
+                          return SingleChildScrollView(
+                            child: Container(
+                              margin: const EdgeInsets.only(left: 10, top: 20),
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ElevatedButton.icon(
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_right_rounded,
+                                      size: 40,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary,
+                                    ),
+                                    iconAlignment: IconAlignment.end,
+                                    label: Text(
+                                      subcategory.title.toUpperCase(),
+                                      style:
+                                          AppTextStyles.subcategoryButtonTitle(
+                                              context),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColors.buttonRed,
+                                      elevation: 10,
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 30.0,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              SubcategoriesListItemsScreen(
+                                            subcategory: subcategory,
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
-                                  iconAlignment: IconAlignment.end,
-                                  label: Text(
-                                    subcategory.title.toUpperCase(),
-                                    style: AppTextStyles.subcategoryButtonTitle(
-                                        context),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.buttonRed,
-                                    elevation: 10,
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 30.0,
+
+                                  // Prikaz filtriranih mjesta za tu podkategoriju
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: filteredPlaces.map(
+                                        (place) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: 10.0,
+                                            ), // Razmak između kartica
+                                            child: CardItems(
+                                              place: place,
+                                              isInteractive: false,
+                                            ),
+                                          );
+                                        },
+                                      ).toList(),
                                     ),
                                   ),
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            SubcategoriesListItemsScreen(
-                                          subcategory: subcategory,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-
-                                // Prikaz filtriranih mjesta za tu podkategoriju
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: filteredPlaces.map(
-                                      (place) {
-                                        return Padding(
-                                          padding: const EdgeInsets.only(
-                                            right: 10.0,
-                                          ), // Razmak između kartica
-                                          child: CardItems(
-                                            place: place,
-                                            isInteractive: false,
-                                          ),
-                                        );
-                                      },
-                                    ).toList(),
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-            ),
-          ],
+                          );
+                        },
+                      ),
+              ),
+            ],
+          ),
         ));
   }
 }

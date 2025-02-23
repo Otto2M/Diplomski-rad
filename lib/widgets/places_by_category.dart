@@ -84,25 +84,32 @@ class PlacesByCategory extends StatelessWidget {
               style: AppTextStyles.categoryPlaceDescription(context),
             ),
             const SizedBox(height: 20),
-            SizedBox(
-              height: 130,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: place.imageUrl.length,
-                itemBuilder: (context, index) {
-                  final imagesUrl = place.imageUrl[index];
-                  return Padding(
-                      padding: const EdgeInsets.only(
-                          right: 10), // Razmak između slika
-                      child: ImageWithErrorHandling(
-                        imageUrl: imagesUrl,
-                        width: 150,
-                        height: 150,
-                        fit: BoxFit.cover,
-                      ));
-                },
-              ),
-            ),
+            place.imageUrl.isEmpty
+                ? Center(
+                    child: Text(
+                      "Ova lokacija ne sadrži slike",
+                      style: AppTextStyles.description(context),
+                    ),
+                  )
+                : SizedBox(
+                    height: 130,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: place.imageUrl.length,
+                      itemBuilder: (context, index) {
+                        final imagesUrl = place.imageUrl[index];
+                        return Padding(
+                            padding: const EdgeInsets.only(
+                                right: 10), // Razmak između slika
+                            child: ImageWithErrorHandling(
+                              imageUrl: imagesUrl,
+                              width: 150,
+                              height: 150,
+                              fit: BoxFit.cover,
+                            ));
+                      },
+                    ),
+                  ),
           ],
         ),
       ),

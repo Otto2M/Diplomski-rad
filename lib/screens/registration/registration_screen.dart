@@ -5,6 +5,7 @@ import 'package:povedi_me_app/constants/styles/text.dart';
 import 'package:povedi_me_app/screens/login/login_screen.dart';
 import 'package:povedi_me_app/screens/registration/registration_screen_success.dart';
 import 'package:povedi_me_app/screens/registration/registration_text_field.dart';
+import 'package:povedi_me_app/widgets/tab_screen.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -256,6 +257,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           isLoading = true;
                         });
                         await firebaseAuth.signInWithGoogle();
+                        final currentUser = await firebaseAuth.getCurrentUser();
+
+                        if (currentUser != null) {
+                          setState(() {
+                            isLoading = false;
+                          });
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => const TabScreen(),
+                            ),
+                          );
+                        } else {
+                          setState(() {
+                            isLoading = false;
+                          });
+                        }
                         setState(() {
                           isLoading = false;
                         });
@@ -269,7 +286,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       } catch (e) {
                         ScaffoldMessenger.of(context).clearSnackBars();
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Google Sign-in failed: $e')),
+                          const SnackBar(
+                            content:
+                                Text('Prijava Google računom nije uspjela'),
+                          ),
                         );
                       }
                     },

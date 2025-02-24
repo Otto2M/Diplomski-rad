@@ -125,9 +125,36 @@ class AuthService {
         idToken: googleAuth.idToken,
       );
 
-      await _firebaseAuth.signInWithCredential(credential);
+      final userCredential =
+          await _firebaseAuth.signInWithCredential(credential);
 
       debugPrint('Google sign-in successful!');
+
+      final userDoc = await _firebaseFirestore
+          .collection(FirestoreCollections.userCollection)
+          .doc(userCredential.user!.uid)
+          .get();
+
+      if (!userDoc.exists) {
+        // Ako korisnik ne postoji, dodaj ga u bazu
+        await _firebaseFirestore
+            .collection(FirestoreCollections.userCollection)
+            .doc(userCredential.user!.uid)
+            .set({
+          'id': userCredential.user!.uid,
+          'name': googleUser.displayName ?? 'Nepoznato ime',
+          'username': userCredential.user!.email,
+          'phoneNumber': 'Nepoznati broj',
+          'email': googleUser.email,
+          'image_url': userCredential.user!.photoURL ??
+              "https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png", // Slika profila
+          'createdAt': Timestamp.now(),
+          'reviews': null
+        });
+        debugPrint('Korisnik je dodan u bazu!');
+      } else {
+        debugPrint('Korisnik već postoji u bazi.');
+      }
     } catch (e) {
       debugPrint("Greška prilikom prijave: ${e.toString()}");
     }

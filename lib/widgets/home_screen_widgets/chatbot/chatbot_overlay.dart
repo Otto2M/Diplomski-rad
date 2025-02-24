@@ -17,6 +17,8 @@ class _ChatBotOverlayState extends State<ChatBotOverlay> {
   final List<Map<String, String>> _messages = [];
 
   void _sendMessage(String message) async {
+    if (message.isEmpty) return;
+
     final messageHr =
         "$message. Odgovaraj mi isključivo na hrvatskom jeziku i duljine oko 500 tokena.";
 
@@ -26,6 +28,7 @@ class _ChatBotOverlayState extends State<ChatBotOverlay> {
 
     setState(() {
       _messages.add({'user': message});
+      _messages.add({'bot': 'loading'});
     });
 
     _controller.clear();
@@ -34,10 +37,12 @@ class _ChatBotOverlayState extends State<ChatBotOverlay> {
       final responseText = await FlowiseService().queryFlowise(messageHr);
 
       setState(() {
+        _messages.removeLast();
         _messages.add({'bot': responseText});
       });
     } catch (error) {
       setState(() {
+        _messages.removeLast();
         _messages.add({
           'bot':
               'Došlo je do pogreške pri dohvaćanju odgovora. Pokušajte ponovo.'
@@ -77,7 +82,7 @@ class _ChatBotOverlayState extends State<ChatBotOverlay> {
                       // Header
                       const HeaderChatbot(),
 
-                      // Messages
+                      // // Messages
                       BodyMessageListChatbot(
                         messages: _messages,
                       ),

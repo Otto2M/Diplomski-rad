@@ -167,15 +167,26 @@ class _PlaceItemDetailsScreenState
                     ),
 
                     // Slike
-                    widget.placeWithDetails.imageUrl.length > 1
-                        ? ImageSlider(
-                            imagesUrl: widget.placeWithDetails.imageUrl)
-                        : ImageWithErrorHandling(
-                            imageUrl: widget.placeWithDetails.imageUrl.first,
+                    widget.placeWithDetails.imageUrl.isNotEmpty
+                        ? (widget.placeWithDetails.imageUrl.length > 1
+                            ? ImageSlider(
+                                imagesUrl: widget.placeWithDetails.imageUrl)
+                            : ImageWithErrorHandling(
+                                imageUrl:
+                                    widget.placeWithDetails.imageUrl.first,
+                                width: double.infinity,
+                                height: 250,
+                                fit: BoxFit.cover,
+                                isCard: true,
+                              ))
+                        : Container(
                             width: double.infinity,
                             height: 250,
-                            fit: BoxFit.cover,
-                            isCard: true,
+                            color: Theme.of(context).colorScheme.tertiary,
+                            child: const Center(
+                              child: Icon(Icons.image_not_supported,
+                                  size: 50, color: Colors.grey),
+                            ),
                           ),
 
                     // Opis mjesta i korisničke recenzije

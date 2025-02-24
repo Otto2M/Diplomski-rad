@@ -39,6 +39,7 @@ class InputChatbot extends StatelessWidget {
                 filled: true,
                 fillColor: Theme.of(context).colorScheme.onSurface,
               ),
+              autocorrect: false,
               style: AppTextStyles.chatInputMessages(context),
             ),
           ),

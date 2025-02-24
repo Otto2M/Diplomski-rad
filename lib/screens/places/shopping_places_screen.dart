@@ -37,6 +37,7 @@ class _ShoppingPlacesScreenState extends ConsumerState<ShoppingPlacesScreen> {
   void fetchDetails() async {
     final String placeName = widget.place.title.trim();
 
+    if (!mounted) return;
     setState(() {
       isLoadingWorkingHours = true;
     });
@@ -45,6 +46,7 @@ class _ShoppingPlacesScreenState extends ConsumerState<ShoppingPlacesScreen> {
         .read(placeDetailsServiceProvider)
         .fetchPlaceDetails(placeName: placeName);
 
+    if (!mounted) return;
     setState(() {
       workingHours = details['workingHours'];
       openNow = details['openNow'];
@@ -97,13 +99,21 @@ class _ShoppingPlacesScreenState extends ConsumerState<ShoppingPlacesScreen> {
   }
 
   Widget _buildImage(double width, double height, bool isCard) {
-    return ImageWithErrorHandling(
-      imageUrl: widget.place.imageUrl.first,
-      width: width,
-      height: height,
-      fit: BoxFit.cover,
-      isCard: isCard,
-    );
+    return widget.place.imageUrl.isNotEmpty
+        ? ImageWithErrorHandling(
+            imageUrl: widget.place.imageUrl.first,
+            width: width,
+            height: height,
+            fit: BoxFit.cover,
+            isCard: isCard,
+          )
+        : Container(
+            width: width,
+            height: height,
+            color: Theme.of(context).colorScheme.tertiary,
+            child: const Icon(Icons.image_not_supported,
+                size: 50, color: Colors.grey),
+          );
   }
 
   Widget _buildTextContent(double width, {double? height}) {

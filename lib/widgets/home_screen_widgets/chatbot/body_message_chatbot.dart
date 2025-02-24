@@ -18,6 +18,8 @@ class BodyMessageListChatbot extends StatelessWidget {
         itemBuilder: (context, index) {
           final message = messages[index];
           final isUser = message.containsKey('user');
+          final messageText = message.values.first;
+
           return Align(
             alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
             child: Container(
@@ -29,10 +31,21 @@ class BodyMessageListChatbot extends StatelessWidget {
                     : Colors.grey[200],
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Text(message.values.first,
-                  style: isUser
-                      ? AppTextStyles.chatMessages(context)
-                      : AppTextStyles.chatResponseMessages(context)),
+              child: messageText == 'loading'
+                  ? const SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.amber,
+                      ),
+                    )
+                  : Text(
+                      messageText,
+                      style: isUser
+                          ? AppTextStyles.chatMessages(context)
+                          : AppTextStyles.chatResponseMessages(context),
+                    ),
             ),
           );
         },

@@ -21,13 +21,13 @@ class PerfectDayDetailsScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Column(
             children: [
-              CustomAppBar(
-                title: perfectDay.title,
-                onBack: () {
-                  Navigator.pop(context);
-                },
-              ),
-              const SizedBox(height: 16),
+              // CustomAppBar(
+              //   title: perfectDay.title,
+              //   onBack: () {
+              //     Navigator.pop(context);
+              //   },
+              // ),
+              //const SizedBox(height: 16),
               // Slika
               ImageWithErrorHandling(
                 imageUrl: perfectDay.imageUrl,

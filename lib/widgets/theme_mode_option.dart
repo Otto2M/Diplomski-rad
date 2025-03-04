@@ -40,15 +40,15 @@ class _ThemeModeCustomState extends ConsumerState<ThemeModeCustom> {
               style: AppTextStyles.profileSelectedThemeHeadline(context),
             ),
             _buildRadioOption(
-              title: 'Automatic',
+              title: 'Automatski',
               value: ThemeMode.system,
             ),
             _buildRadioOption(
-              title: 'Light Mode',
+              title: 'Svijetlo',
               value: ThemeMode.light,
             ),
             _buildRadioOption(
-              title: 'Dark Mode',
+              title: 'Tamno',
               value: ThemeMode.dark,
             ),
           ] else ...[
@@ -58,17 +58,17 @@ class _ThemeModeCustomState extends ConsumerState<ThemeModeCustom> {
             ),
             const SizedBox(height: 16),
             _buildRadioOption(
-              title: 'Automatic',
+              title: 'Automatski',
               value: ThemeMode.system,
               isDisabled: true,
             ),
             _buildRadioOption(
-              title: 'Light Mode',
+              title: 'Svijetlo',
               value: ThemeMode.light,
               isDisabled: true,
             ),
             _buildRadioOption(
-              title: 'Dark Mode',
+              title: 'Tamno',
               value: ThemeMode.dark,
               isDisabled: true,
             ),

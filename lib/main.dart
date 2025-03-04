@@ -19,7 +19,7 @@ void main() async {
     ),
   );
   SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.manual,
+    SystemUiMode.immersiveSticky,
     overlays: [SystemUiOverlay.top],
   ); //ili SystemUiMode.edgeToEdge ili SystemUiMode.immersiveSticky
 }
@@ -31,12 +31,14 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeProvider);
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    });
+
     return MaterialApp(
       theme: lightAppTheme,
       darkTheme: darkAppTheme,
       themeMode: themeMode,
-      //home: const TabScreen(),
-      // home: const SplashScreen(),
       home: const AuthGate(),
       debugShowCheckedModeBanner: false,
     );

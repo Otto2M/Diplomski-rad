@@ -1,9 +1,3 @@
-//
-//
-//za odabir jezika i objasnjena nekih dijelova aplikacije
-//
-//
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:povedi_me_app/constants/styles/app_colors.dart';

@@ -20,6 +20,7 @@ class PerfectDayListScreen extends ConsumerWidget {
         child: Column(
           children: [
             CustomAppBar(
+              title: "Savršen dan",
               onBack: () {
                 Navigator.pop(context);
               },

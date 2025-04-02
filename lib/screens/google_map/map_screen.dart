@@ -267,42 +267,6 @@ class _MapScreenState extends ConsumerState<MapScreen> {
     );
   }
 
-  // Future<List<LatLng>> getPolylinePoints() async {
-  //   List<LatLng> polylineCoordinates = [];
-  //   PolylinePoints polylinePoints = PolylinePoints();
-  //   final request = PolylineRequest(
-  //     origin: PointLatLng(
-  //       _currentPosition!.latitude,
-  //       _currentPosition!.longitude,
-  //     ),
-  //     destination: PointLatLng(
-  //       _pickedLocation!.latitude,
-  //       _pickedLocation!.longitude,
-  //     ),
-  //     mode: TravelMode.driving,
-  //   );
-  //   PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-  //     request: request,
-  //     googleApiKey: "AIzaSyBE1s72xyeMR07GgEuz_TsGDX-a58KS-tY",
-  //   );
-  //   if (result.points.isNotEmpty) {
-  //     result.points.forEach(
-  //       (PointLatLng point) {
-  //         polylineCoordinates.add(
-  //           LatLng(
-  //             point.latitude,
-  //             point.longitude,
-  //           ),
-  //         );
-  //       },
-  //     );
-  //   } else {
-  //     print(result.errorMessage);
-  //   }
-
-  //   return polylineCoordinates;
-  // }
-
   void generatePolyLineFromPoints(List<LatLng> polylineCoordinates) async {
     PolylineId id = const PolylineId("poly");
     Polyline polyline = Polyline(

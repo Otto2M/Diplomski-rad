@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:povedi_me_app/constants/keys.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -49,21 +50,20 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCL_MCEteGtpV1P7htI3RmMe64ruZB-Yko',
+  static FirebaseOptions android = FirebaseOptions(
+    apiKey: Keys.androidApiKey,
     appId: '1:28876351137:android:424fee6af1c9a9682472e0',
     messagingSenderId: '28876351137',
     projectId: 'flutter-povedi-me-app',
     storageBucket: 'flutter-povedi-me-app.firebasestorage.app',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCNSgfgydDcti4rKtvcooZUYqFEtBD26uE',
+  static FirebaseOptions ios = FirebaseOptions(
+    apiKey: Keys.iosApiKey,
     appId: '1:28876351137:ios:cd4bcef3daff084d2472e0',
     messagingSenderId: '28876351137',
     projectId: 'flutter-povedi-me-app',
     storageBucket: 'flutter-povedi-me-app.firebasestorage.app',
     iosBundleId: 'com.example.povediMeApp',
   );
-
 }

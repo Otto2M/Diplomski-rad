@@ -3,6 +3,7 @@ import 'firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:povedi_me_app/providers/theme_mode_option_provider.dart';
 import 'package:povedi_me_app/screens/splash/auth_gate.dart';
@@ -10,9 +11,11 @@ import 'package:povedi_me_app/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(
     const ProviderScope(
       child: App(),

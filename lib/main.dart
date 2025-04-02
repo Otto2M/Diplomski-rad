@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +13,14 @@ import 'package:povedi_me_app/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load();
+
+  try {
+    await dotenv.load();
+    debugPrint("Učitana .env datoteka.");
+  } catch (e) {
+    debugPrint("Greška prilikom učitavanja .env datoteke: $e");
+  }
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
